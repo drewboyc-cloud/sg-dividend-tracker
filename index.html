@@ -649,25 +649,53 @@ function toDate(str) {
 }
 
 // ─────────────────────────────────────────
-// YAHOO FINANCE FETCH
+// YAHOO FINANCE FETCH  (3-method fallback)
 // ─────────────────────────────────────────
-async function fetchYFDividends(ticker) {
-  const period1 = Math.floor((Date.now() / 1000) - 6 * 365.25 * 86400);
-  const period2 = Math.floor(Date.now() / 1000) + 365 * 86400; // 1yr ahead
-  const url = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?events=dividends&interval=3mo&period1=${period1}&period2=${period2}`;
-
-  const resp = await fetch(url, { headers: { 'Accept': 'application/json' } });
-  if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-  const json = await resp.json();
-
+function parseYFJson(json) {
   const raw = json?.chart?.result?.[0]?.events?.dividends || {};
   const divs = Object.values(raw).map(d => ({
     exDate: dateStr(new Date(d.date * 1000)),
     amount: Number(d.amount),
     source: 'api'
   })).sort((a, b) => a.exDate.localeCompare(b.exDate));
-
   return divs;
+}
+
+async function tryFetch(url, parseJson) {
+  const resp = await fetch(url, { headers: { 'Accept': 'application/json' } });
+  if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
+  const json = parseJson ? await resp.json().then(parseJson) : await resp.json();
+  return json;
+}
+
+async function fetchYFDividends(ticker) {
+  const period1 = Math.floor((Date.now() / 1000) - 6 * 365.25 * 86400);
+  const period2 = Math.floor(Date.now() / 1000) + 365 * 86400;
+  const yfUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?events=dividends&interval=3mo&period1=${period1}&period2=${period2}`;
+
+  // Method 1 — direct (works on some networks/browsers)
+  try {
+    const resp = await fetch(yfUrl, { headers: { 'Accept': 'application/json' } });
+    if (resp.ok) { const j = await resp.json(); return parseYFJson(j); }
+  } catch(e) {}
+
+  // Method 2 — corsproxy.io free proxy
+  try {
+    const resp = await fetch(`https://corsproxy.io/?${encodeURIComponent(yfUrl)}`);
+    if (resp.ok) { const j = await resp.json(); return parseYFJson(j); }
+  } catch(e) {}
+
+  // Method 3 — allorigins.win (returns JSON wrapped in {contents:...})
+  try {
+    const resp = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(yfUrl)}`);
+    if (resp.ok) {
+      const wrapper = await resp.json();
+      const j = JSON.parse(wrapper.contents);
+      return parseYFJson(j);
+    }
+  } catch(e) {}
+
+  throw new Error('CORS blocked on all routes — enter dividends manually');
 }
 
 async function syncAll() {
