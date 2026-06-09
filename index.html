@@ -545,7 +545,7 @@ function parseYFJson(json) {
 }
 
 async function fetchYFDividends(ticker) {
-  const p1 = Math.floor(Date.now()/1000 - 6*365.25*86400);
+  const p1 = Math.floor(Date.now()/1000 - 9*365.25*86400); // back to ~2017
   const p2 = Math.floor(Date.now()/1000 + 365*86400);
   const yfUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?events=dividends&interval=3mo&period1=${p1}&period2=${p2}`;
   for (const url of [
@@ -626,7 +626,7 @@ function getYears() {
     return Math.min(m,y);
   },CURRENT_YEAR-1);
   const yrs=[];
-  for(let y=CURRENT_YEAR;y>=Math.max(minY,CURRENT_YEAR-6);y--) yrs.push(y);
+  for(let y=CURRENT_YEAR;y>=Math.max(minY,2018);y--) yrs.push(y);
   return yrs;
 }
 
@@ -754,7 +754,7 @@ function buildDetail(h) {
   const base=state.dividends[h.ticker]||[];
   const extra=estimateFuture(h,base);
   const allDivs=[...base,...extra].sort((a,b)=>b.exDate.localeCompare(a.exDate));
-  const display=allDivs.filter(d=>new Date(d.exDate).getFullYear()>=CURRENT_YEAR-1);
+  const display=allDivs.filter(d=>new Date(d.exDate).getFullYear()>=2018);
 
   let divHtml='';
   if(display.length){
