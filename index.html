@@ -405,23 +405,31 @@ body.offline .offline-bar{display:block}
   </div>
 </div>
 
+<!-- hidden file inputs for import -->
+<input type="file" id="fileImportTxn"  accept=".csv,text/csv" style="display:none" onchange="handleImportFile(this,'transactions')">
+<input type="file" id="fileImportDiv"  accept=".csv,text/csv" style="display:none" onchange="handleImportFile(this,'dividends')">
+<input type="file" id="fileImportAll"  accept=".csv,text/csv" style="display:none" onchange="handleImportFile(this,'combined')">
+
 <!-- ═══ Modal: Backup ═══ -->
 <div class="modal-overlay" id="modalBackup">
   <div class="modal">
     <div class="modal-header">
-      <div class="modal-title">Backup & Export</div>
+      <div class="modal-title">Backup &amp; Restore</div>
       <button class="modal-close" onclick="closeModal('modalBackup')">✕</button>
     </div>
     <div class="modal-body">
-      <div class="info-box">
-        <strong>Save to iCloud Drive:</strong> After tapping an option below, tap <strong>Share</strong> in the iOS share sheet, then choose <strong>Save to Files → iCloud Drive</strong>.
+
+      <!-- EXPORT -->
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:10px">Export</div>
+      <div class="info-box" style="margin-bottom:12px">
+        <strong>Save to iCloud Drive:</strong> tap Share in the iOS sheet → <strong>Save to Files → iCloud Drive</strong>.
       </div>
 
       <div class="backup-option" onclick="exportTransactions()">
         <div class="bk-icon">📋</div>
         <div>
           <div class="bk-title">Export Transactions</div>
-          <div class="bk-desc">All holdings with buy/sell transactions, units, prices and dates</div>
+          <div class="bk-desc">Buy/sell history — units, prices and dates per ticker</div>
         </div>
       </div>
 
@@ -429,7 +437,7 @@ body.offline .offline-bar{display:block}
         <div class="bk-icon">💰</div>
         <div>
           <div class="bk-title">Export Dividend History</div>
-          <div class="bk-desc">All dividend/DPU records per ticker with ex-dates and amounts</div>
+          <div class="bk-desc">All ex-dates and DPU records per ticker</div>
         </div>
       </div>
 
@@ -437,13 +445,45 @@ body.offline .offline-bar{display:block}
         <div class="bk-icon">📦</div>
         <div>
           <div class="bk-title">Export Everything (Combined)</div>
-          <div class="bk-desc">Transactions + dividend history in one CSV file</div>
+          <div class="bk-desc">Transactions + dividend history in one CSV</div>
+        </div>
+      </div>
+
+      <!-- IMPORT -->
+      <div class="divider"></div>
+      <div style="font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:10px">Import from iCloud Drive</div>
+      <div class="info-box warning" style="margin-bottom:12px">
+        <strong>Merge:</strong> imported records are added to existing data — duplicates are skipped.<br>
+        <strong>Replace:</strong> clears current data first, then imports. You will be asked.
+      </div>
+
+      <div class="backup-option" onclick="document.getElementById('fileImportTxn').click()">
+        <div class="bk-icon">📂</div>
+        <div>
+          <div class="bk-title">Import Transactions CSV</div>
+          <div class="bk-desc">Restores holdings &amp; buy/sell transactions from a transactions export</div>
+        </div>
+      </div>
+
+      <div class="backup-option" onclick="document.getElementById('fileImportDiv').click()">
+        <div class="bk-icon">📂</div>
+        <div>
+          <div class="bk-title">Import Dividend History CSV</div>
+          <div class="bk-desc">Restores ex-date/DPU records from a dividends export</div>
+        </div>
+      </div>
+
+      <div class="backup-option" onclick="document.getElementById('fileImportAll').click()">
+        <div class="bk-icon">📂</div>
+        <div>
+          <div class="bk-title">Import Combined CSV</div>
+          <div class="bk-desc">Restores both transactions and dividend history from one file</div>
         </div>
       </div>
 
       <div class="divider"></div>
-      <div style="font-size:12px;color:var(--muted);text-align:center">
-        Files are saved as <strong style="color:var(--text)">.csv</strong> — openable in Excel, Numbers, or Google Sheets
+      <div style="font-size:11px;color:var(--muted);text-align:center">
+        Files are <strong style="color:var(--text)">.csv</strong> — also openable in Excel, Numbers, Google Sheets
       </div>
     </div>
   </div>
@@ -1098,6 +1138,132 @@ function saveManualDividend(){
 // BACKUP / EXPORT
 // ═══════════════════════════════════════════
 function csvRow(arr){ return arr.map(v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"').join(','); }
+
+// ── CSV parser (handles quoted fields with embedded commas/newlines) ──
+function parseCSVLines(text){
+  const rows=[];
+  let cur=[],field='',inQ=false;
+  const flush=()=>{cur.push(field);field='';};
+  for(let i=0;i<text.length;i++){
+    const c=text[i],n=text[i+1];
+    if(inQ){
+      if(c==='"'&&n==='"'){field+='"';i++;}
+      else if(c==='"'){inQ=false;}
+      else field+=c;
+    }else{
+      if(c==='"'){inQ=true;}
+      else if(c===','){flush();}
+      else if(c==='\r'&&n==='\n'){flush();if(cur.some(f=>f!==''))rows.push(cur);cur=[];i++;}
+      else if(c==='\n'||c==='\r'){flush();if(cur.some(f=>f!==''))rows.push(cur);cur=[];}
+      else field+=c;
+    }
+  }
+  flush();if(cur.some(f=>f!==''))rows.push(cur);
+  return rows;
+}
+
+// ── Import dispatcher ──
+async function handleImportFile(input, mode){
+  const file=input.files[0]; input.value='';
+  if(!file) return;
+  try{
+    const text=await file.text();
+    const rows=parseCSVLines(text);
+    if(!rows.length){toast('File appears empty','error');return;}
+
+    // Split combined file into sections
+    let txnRows=[],divRows=[];
+    if(mode==='combined'){
+      let section='';
+      for(const row of rows){
+        const first=(row[0]||'').trim().toUpperCase();
+        if(first==='TRANSACTIONS'){section='txn';continue;}
+        if(first==='DIVIDEND HISTORY'){section='div';continue;}
+        if(first==='TICKER'&&section==='txn') continue; // header row
+        if(first==='TICKER'&&section==='div') continue;
+        if(section==='txn') txnRows.push(row);
+        if(section==='div') divRows.push(row);
+      }
+    } else if(mode==='transactions'){
+      // skip header row (Ticker,Display Name,…)
+      txnRows=rows.filter(r=>!((r[0]||'').toLowerCase()==='ticker'));
+    } else {
+      divRows=rows.filter(r=>!((r[0]||'').toLowerCase()==='ticker'));
+    }
+
+    // Count what we found
+    const txnTickers=[...new Set(txnRows.map(r=>r[0]).filter(Boolean))];
+    const divTickers=[...new Set(divRows.map(r=>r[0]).filter(Boolean))];
+    let summary='';
+    if(txnRows.length) summary+=`${txnRows.length} transaction row${txnRows.length>1?'s':''} (${txnTickers.length} tickers)`;
+    if(divRows.length) summary+=(summary?'\n':'')+`${divRows.length} dividend row${divRows.length>1?'s':''} (${divTickers.length} tickers)`;
+    if(!summary){toast('No valid data found in file','error');return;}
+
+    const replace=confirm(`Found:\n${summary}\n\nChoose:\n• OK = Replace existing data\n• Cancel = Merge (keep existing, add new)`);
+    applyImport(txnRows, divRows, replace);
+  }catch(e){
+    toast('Import failed: '+e.message,'error');console.error(e);
+  }
+}
+
+function applyImport(txnRows, divRows, replace){
+  let holdingsAdded=0, txnsAdded=0, divsAdded=0;
+
+  // ── Transactions ──
+  if(txnRows.length){
+    if(replace) state.holdings=[];
+    // Group rows by ticker
+    const byTicker={};
+    for(const row of txnRows){
+      const ticker=(row[0]||'').trim(); if(!ticker) continue;
+      const name=(row[1]||'').trim()||shortTicker(ticker);
+      const type=(row[2]||'').trim().toUpperCase();
+      const units=parseFloat(row[3]); if(isNaN(units)||units<=0) continue;
+      const price=parseFloat(row[4]); if(isNaN(price)) continue;
+      const date=(row[5]||'').trim(); if(!date) continue;
+      if(type!=='BUY'&&type!=='SELL') continue;
+      if(!byTicker[ticker]) byTicker[ticker]={name,txns:[]};
+      byTicker[ticker].txns.push({id:uid(),type,units,price,date});
+    }
+    for(const [ticker,{name,txns}] of Object.entries(byTicker)){
+      let h=state.holdings.find(h=>h.ticker===ticker);
+      if(!h){
+        h={id:uid(),ticker,name,transactions:[]};
+        state.holdings.push(h);holdingsAdded++;
+      }
+      const existingKeys=new Set(h.transactions.map(t=>`${t.type}|${t.date}|${t.units}|${t.price}`));
+      for(const t of txns){
+        const key=`${t.type}|${t.date}|${t.units}|${t.price}`;
+        if(!existingKeys.has(key)){h.transactions.push(t);txnsAdded++;existingKeys.add(key);}
+      }
+    }
+  }
+
+  // ── Dividends ──
+  if(divRows.length){
+    if(replace) state.dividends={};
+    for(const row of divRows){
+      const ticker=(row[0]||'').trim(); if(!ticker) continue;
+      const exDate=(row[1]||'').trim(); if(!exDate) continue;
+      const amount=parseFloat(row[2]); if(isNaN(amount)||amount<=0) continue;
+      const source=(row[3]||'manual').trim()||'manual';
+      if(!state.dividends[ticker]) state.dividends[ticker]=[];
+      if(!state.dividends[ticker].some(d=>d.exDate===exDate)){
+        state.dividends[ticker].push({exDate,amount,source});divsAdded++;
+      }
+    }
+    // sort each
+    for(const ticker of Object.keys(state.dividends))
+      state.dividends[ticker].sort((a,b)=>a.exDate.localeCompare(b.exDate));
+  }
+
+  saveState();render();closeModal('modalBackup');
+  const parts=[];
+  if(holdingsAdded) parts.push(`${holdingsAdded} new holding${holdingsAdded>1?'s':''}`);
+  if(txnsAdded)     parts.push(`${txnsAdded} transaction${txnsAdded>1?'s':''}`);
+  if(divsAdded)     parts.push(`${divsAdded} dividend record${divsAdded>1?'s':''}`);
+  toast(parts.length?'Imported: '+parts.join(', '):'Nothing new to import (all duplicates)', parts.length?'success':'info');
+}
 
 function exportTransactions(){
   const rows=[csvRow(['Ticker','Display Name','Type','Units','Price Per Unit','Date','Total Value'])];
