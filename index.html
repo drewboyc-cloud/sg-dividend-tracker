@@ -13,411 +13,215 @@
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <style>
   :root {
-    --bg: #0f1117;
-    --surface: #1a1f2e;
-    --surface2: #222840;
-    --border: #2d3748;
-    --accent: #00d4aa;
-    --accent2: #f6ad55;
-    --accent3: #63b3ed;
-    --text: #e2e8f0;
-    --muted: #718096;
-    --danger: #fc8181;
-    --green: #68d391;
-    --radius: 12px;
-    --shadow: 0 4px 24px rgba(0,0,0,0.4);
+    --bg:#0f1117; --surface:#1a1f2e; --surface2:#222840; --surface3:#2a3050;
+    --border:#2d3748; --accent:#00d4aa; --accent2:#f6ad55; --accent3:#63b3ed;
+    --text:#e2e8f0; --muted:#718096; --danger:#fc8181; --green:#68d391;
+    --radius:12px; --shadow:0 4px 24px rgba(0,0,0,0.4);
   }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: var(--bg);
-    color: var(--text);
-    min-height: 100vh;
-    font-size: 15px;
-  }
-  /* Header */
-  header {
-    background: var(--surface);
-    border-bottom: 1px solid var(--border);
-    padding: 14px 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .logo { display: flex; align-items: center; gap: 10px; }
-  .logo-icon {
-    width: 36px; height: 36px;
-    background: linear-gradient(135deg, var(--accent), #0099aa);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 20px; font-weight: 900; color: #0f1117;
-  }
-  .logo-text { font-size: 17px; font-weight: 700; letter-spacing: -0.3px; }
-  .logo-sub { font-size: 11px; color: var(--muted); margin-top: 1px; }
-  .header-actions { display: flex; gap: 8px; align-items: center; }
-  .sync-status { font-size: 11px; color: var(--muted); text-align: right; line-height: 1.4; }
-  .sync-status.ok { color: var(--accent); }
-  .sync-status.error { color: var(--accent2); }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
 
-  /* Buttons */
-  button {
-    cursor: pointer; border: none; border-radius: 8px;
-    font-family: inherit; font-size: 13px; font-weight: 600;
-    transition: all 0.15s;
-  }
-  .btn-primary {
-    background: var(--accent); color: #0f1117;
-    padding: 8px 16px;
-  }
-  .btn-primary:hover { background: #00bfa0; }
-  .btn-secondary {
-    background: var(--surface2); color: var(--text);
-    padding: 8px 14px; border: 1px solid var(--border);
-  }
-  .btn-secondary:hover { background: var(--border); }
-  .btn-icon {
-    background: var(--surface2); color: var(--text);
-    padding: 8px 10px; border: 1px solid var(--border);
-    font-size: 16px;
-  }
-  .btn-icon:hover { background: var(--border); }
-  .btn-danger { background: var(--danger); color: #0f1117; padding: 6px 12px; }
-  .btn-sm { padding: 5px 10px; font-size: 12px; }
+  /* ── Header ── */
+  header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+  .logo{display:flex;align-items:center;gap:10px}
+  .logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),#0099aa);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#0f1117}
+  .logo-text{font-size:17px;font-weight:700;letter-spacing:-0.3px}
+  .logo-sub{font-size:11px;color:var(--muted);margin-top:1px}
+  .header-actions{display:flex;gap:8px;align-items:center}
+  .sync-status{font-size:11px;color:var(--muted);text-align:right;line-height:1.4}
+  .sync-status.ok{color:var(--accent)}
+  .sync-status.error{color:var(--accent2)}
 
-  /* Summary cards */
-  .summary {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-    padding: 20px 20px 0;
-  }
-  .kpi-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 20px;
-    position: relative;
-    overflow: hidden;
-  }
-  .kpi-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 3px;
-  }
-  .kpi-card.received::before { background: linear-gradient(90deg, var(--accent), #00bfa0); }
-  .kpi-card.projected::before { background: linear-gradient(90deg, var(--accent2), #e8963a); }
-  .kpi-label {
-    font-size: 11px; text-transform: uppercase;
-    letter-spacing: 0.8px; color: var(--muted);
-    margin-bottom: 10px;
-  }
-  .kpi-value {
-    font-size: 28px; font-weight: 800; letter-spacing: -1px;
-    line-height: 1;
-  }
-  .kpi-value.received { color: var(--accent); }
-  .kpi-value.projected { color: var(--accent2); }
-  .kpi-sub {
-    font-size: 11px; color: var(--muted);
-    margin-top: 8px; line-height: 1.5;
-  }
-  .kpi-sub span { color: var(--text); }
+  /* ── Buttons ── */
+  button{cursor:pointer;border:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;transition:all 0.15s}
+  .btn-primary{background:var(--accent);color:#0f1117;padding:8px 16px}
+  .btn-primary:hover{background:#00bfa0}
+  .btn-secondary{background:var(--surface2);color:var(--text);padding:8px 14px;border:1px solid var(--border)}
+  .btn-secondary:hover{background:var(--border)}
+  .btn-icon{background:var(--surface2);color:var(--text);padding:8px 10px;border:1px solid var(--border);font-size:16px}
+  .btn-icon:hover{background:var(--border)}
+  .btn-sm{padding:5px 10px;font-size:12px}
+  .btn-xs{padding:3px 8px;font-size:11px;border-radius:6px}
+  .btn-ghost{background:transparent;color:var(--muted);padding:3px 7px;border-radius:6px;font-size:13px}
+  .btn-ghost:hover{background:var(--surface2);color:var(--text)}
+  .btn-danger-ghost{background:transparent;color:var(--danger);padding:3px 7px;border-radius:6px;font-size:12px}
+  .btn-danger-ghost:hover{background:rgba(252,129,129,0.1)}
 
-  /* Tabs */
-  .tabs-wrapper {
-    padding: 16px 20px 0;
-    border-bottom: 1px solid var(--border);
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-  }
-  .tabs {
-    display: flex; gap: 2px;
-    min-width: max-content;
-  }
-  .tab {
-    padding: 8px 18px;
-    font-size: 13px; font-weight: 600;
-    color: var(--muted);
-    background: transparent;
-    border-radius: 8px 8px 0 0;
-    border: none;
-    cursor: pointer;
-    transition: all 0.15s;
-    white-space: nowrap;
-  }
-  .tab:hover { color: var(--text); background: var(--surface2); }
-  .tab.active {
-    color: var(--accent);
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-bottom: 1px solid var(--surface);
-    margin-bottom: -1px;
-  }
+  /* ── KPI cards ── */
+  .summary{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:20px 20px 0}
+  .kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;position:relative;overflow:hidden}
+  .kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+  .kpi-card.received::before{background:linear-gradient(90deg,var(--accent),#00bfa0)}
+  .kpi-card.projected::before{background:linear-gradient(90deg,var(--accent2),#e8963a)}
+  .kpi-label{font-size:11px;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:10px}
+  .kpi-value{font-size:28px;font-weight:800;letter-spacing:-1px;line-height:1}
+  .kpi-value.received{color:var(--accent)}
+  .kpi-value.projected{color:var(--accent2)}
+  .kpi-sub{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5}
+  .kpi-sub span{color:var(--text)}
 
-  /* Tab content */
-  .tab-content { padding: 20px; }
+  /* ── Tabs ── */
+  .tabs-wrapper{padding:16px 20px 0;border-bottom:1px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .tabs{display:flex;gap:2px;min-width:max-content}
+  .tab{padding:8px 18px;font-size:13px;font-weight:600;color:var(--muted);background:transparent;border-radius:8px 8px 0 0;border:none;cursor:pointer;transition:all 0.15s;white-space:nowrap}
+  .tab:hover{color:var(--text);background:var(--surface2)}
+  .tab.active{color:var(--accent);background:var(--surface);border:1px solid var(--border);border-bottom:1px solid var(--surface);margin-bottom:-1px}
 
-  /* Section headings */
-  .section-header {
-    display: flex; align-items: center; justify-content: space-between;
-    margin-bottom: 14px;
-  }
-  .section-title {
-    font-size: 13px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 0.6px;
-    color: var(--muted);
-  }
+  /* ── Tab content ── */
+  .tab-content{padding:20px}
 
-  /* Holdings table */
-  .table-wrap { overflow-x: auto; border-radius: var(--radius); border: 1px solid var(--border); }
-  table { width: 100%; border-collapse: collapse; }
-  thead { background: var(--surface2); }
-  th {
-    padding: 11px 14px;
-    font-size: 11px; font-weight: 700;
-    text-transform: uppercase; letter-spacing: 0.6px;
-    color: var(--muted);
-    text-align: left; white-space: nowrap;
-  }
-  th.right, td.right { text-align: right; }
-  td {
-    padding: 12px 14px;
-    font-size: 14px;
-    border-top: 1px solid var(--border);
-    vertical-align: middle;
-  }
-  tr:hover td { background: var(--surface2); }
-  .ticker-badge {
-    display: inline-block;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 6px;
-    padding: 3px 8px;
-    font-size: 12px; font-weight: 700;
-    font-family: monospace;
-    letter-spacing: 0.5px;
-    color: var(--accent3);
-  }
-  .amount-green { color: var(--accent); font-weight: 700; }
-  .amount-amber { color: var(--accent2); font-weight: 600; }
-  .amount-muted { color: var(--muted); }
-  .units { font-variant-numeric: tabular-nums; }
-  td .row-actions { display: flex; gap: 6px; justify-content: flex-end; }
-  .btn-row { background: transparent; color: var(--muted); padding: 4px 7px; border-radius: 6px; font-size: 13px; }
-  .btn-row:hover { background: var(--surface2); color: var(--text); }
+  /* ── Section header ── */
+  .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+  .section-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--muted)}
 
-  /* Past year card */
-  .year-summary-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 28px;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  .year-total-label { font-size: 13px; color: var(--muted); margin-bottom: 10px; }
-  .year-total-value { font-size: 40px; font-weight: 900; color: var(--accent); letter-spacing: -1.5px; }
-  .year-note { font-size: 12px; color: var(--muted); margin-top: 8px; }
+  /* ── Holdings table ── */
+  .table-wrap{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--border)}
+  table{width:100%;border-collapse:collapse}
+  thead{background:var(--surface2)}
+  th{padding:11px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--muted);text-align:left;white-space:nowrap}
+  th.right,td.right{text-align:right}
+  td{padding:11px 14px;font-size:14px;border-top:1px solid var(--border);vertical-align:top}
 
-  /* Empty state */
-  .empty-state {
-    text-align: center;
-    padding: 48px 20px;
-    color: var(--muted);
-  }
-  .empty-state .icon { font-size: 40px; margin-bottom: 16px; }
-  .empty-state h3 { font-size: 17px; color: var(--text); margin-bottom: 8px; }
-  .empty-state p { font-size: 14px; line-height: 1.6; margin-bottom: 20px; }
+  /* Holding main row */
+  .holding-row{cursor:pointer}
+  .holding-row:hover td{background:rgba(255,255,255,0.02)}
+  .holding-row td:first-child{min-width:120px}
 
-  /* Modals */
-  .modal-overlay {
-    display: none;
-    position: fixed; inset: 0;
-    background: rgba(0,0,0,0.7);
-    z-index: 200;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-  }
-  .modal-overlay.open { display: flex; }
-  .modal {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    width: 100%; max-width: 480px;
-    max-height: 90vh;
-    overflow-y: auto;
-    box-shadow: var(--shadow);
-  }
-  .modal-header {
-    padding: 20px 20px 16px;
-    border-bottom: 1px solid var(--border);
-    display: flex; align-items: center; justify-content: space-between;
-  }
-  .modal-title { font-size: 17px; font-weight: 700; }
-  .modal-close {
-    background: var(--surface2); color: var(--muted);
-    border: 1px solid var(--border);
-    border-radius: 6px; padding: 6px 10px;
-    font-size: 14px;
-  }
-  .modal-close:hover { color: var(--text); }
-  .modal-body { padding: 20px; }
-  .modal-footer {
-    padding: 16px 20px;
-    border-top: 1px solid var(--border);
-    display: flex; justify-content: flex-end; gap: 10px;
-  }
+  /* Ticker badge */
+  .ticker-badge{display:inline-flex;align-items:center;gap:5px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 9px;font-size:12px;font-weight:700;font-family:monospace;letter-spacing:0.5px;color:var(--accent3);cursor:pointer;transition:all 0.15s;user-select:none}
+  .ticker-badge:hover{border-color:var(--accent3);background:var(--surface3)}
+  .ticker-badge .expand-arrow{font-size:10px;color:var(--muted);transition:transform 0.2s}
+  .ticker-badge.expanded .expand-arrow{transform:rotate(90deg)}
+  .holding-name{font-size:11px;color:var(--muted);margin-top:3px;font-style:italic}
 
-  /* Form */
-  .form-group { margin-bottom: 16px; }
-  label { display: block; font-size: 12px; font-weight: 600; color: var(--muted); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.5px; }
-  input, select, textarea {
-    width: 100%;
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 8px;
-    color: var(--text);
-    padding: 10px 12px;
-    font-family: inherit;
-    font-size: 14px;
-    transition: border-color 0.15s;
-  }
-  input:focus, select:focus, textarea:focus {
-    outline: none;
-    border-color: var(--accent);
-  }
-  textarea { resize: vertical; min-height: 100px; font-family: monospace; font-size: 12px; }
-  .form-hint { font-size: 11px; color: var(--muted); margin-top: 4px; line-height: 1.5; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  /* Inline dividend chips (shown without expanding) */
+  .div-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
+  .div-chip{display:inline-block;background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.2);border-radius:4px;padding:2px 6px;font-size:10px;color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap}
+  .div-chip.proj{background:rgba(246,173,85,0.1);border-color:rgba(246,173,85,0.2);color:var(--accent2)}
 
-  /* Info box */
-  .info-box {
-    background: rgba(0, 212, 170, 0.08);
-    border: 1px solid rgba(0, 212, 170, 0.25);
-    border-radius: 8px;
-    padding: 12px 14px;
-    font-size: 12px;
-    color: var(--text);
-    line-height: 1.6;
-    margin-bottom: 16px;
-  }
-  .info-box.warning {
-    background: rgba(246, 173, 85, 0.08);
-    border-color: rgba(246, 173, 85, 0.25);
-  }
-  .info-box strong { color: var(--accent); }
-  .info-box.warning strong { color: var(--accent2); }
-
-  /* Dividers */
-  .divider { height: 1px; background: var(--border); margin: 16px 0; }
+  /* Amounts */
+  .amount-green{color:var(--accent);font-weight:700}
+  .amount-amber{color:var(--accent2);font-weight:600}
+  .amount-muted{color:var(--muted)}
+  .units{font-variant-numeric:tabular-nums}
 
   /* Tags */
-  .tag {
-    display: inline-block;
-    font-size: 10px; font-weight: 700;
-    padding: 2px 6px; border-radius: 4px;
-    text-transform: uppercase; letter-spacing: 0.5px;
-  }
-  .tag-est { background: rgba(246,173,85,0.15); color: var(--accent2); }
-  .tag-conf { background: rgba(0,212,170,0.12); color: var(--accent); }
+  .tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;text-transform:uppercase;letter-spacing:0.5px}
+  .tag-est{background:rgba(246,173,85,0.15);color:var(--accent2)}
+  .tag-conf{background:rgba(0,212,170,0.12);color:var(--accent)}
 
-  /* Spinner */
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .spinner {
-    display: inline-block;
-    width: 14px; height: 14px;
-    border: 2px solid var(--border);
-    border-top-color: var(--accent);
-    border-radius: 50%;
-    animation: spin 0.7s linear infinite;
-    vertical-align: middle;
-    margin-right: 6px;
-  }
+  /* ── Expanded detail section ── */
+  .detail-row{display:none}
+  .detail-row.open{display:table-row}
+  .detail-row td{background:var(--surface2);padding:0;border-top:none}
+  .detail-inner{padding:16px 16px 20px;border-top:1px dashed var(--border)}
 
-  /* Import section */
-  .drop-zone {
-    border: 2px dashed var(--border);
-    border-radius: 10px;
-    padding: 24px;
-    text-align: center;
-    color: var(--muted);
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.15s;
-    margin-bottom: 12px;
-  }
-  .drop-zone:hover, .drop-zone.drag-over {
-    border-color: var(--accent);
-    background: rgba(0,212,170,0.05);
-    color: var(--accent);
-  }
-  .drop-zone input[type=file] { display: none; }
+  /* Tranches */
+  .detail-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--muted);margin-bottom:10px}
+  .tranche-list{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+  .tranche-item{display:flex;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 12px;gap:8px}
+  .tranche-info{flex:1}
+  .tranche-units{font-size:13px;font-weight:700;color:var(--text)}
+  .tranche-date{font-size:11px;color:var(--muted);margin-top:2px}
+  .tranche-earned{font-size:11px;color:var(--accent);margin-top:2px}
+  .tranche-actions{display:flex;gap:4px;flex-shrink:0}
 
-  /* Toast */
-  .toast-wrap {
-    position: fixed; bottom: 24px; right: 20px;
-    display: flex; flex-direction: column; gap: 8px;
-    z-index: 300;
-  }
-  .toast {
-    background: var(--surface2);
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    padding: 12px 16px;
-    font-size: 13px;
-    box-shadow: var(--shadow);
-    animation: slideIn 0.2s ease;
-    max-width: 320px;
-  }
-  .toast.success { border-left: 3px solid var(--accent); }
-  .toast.error { border-left: 3px solid var(--danger); }
-  .toast.info { border-left: 3px solid var(--accent3); }
-  @keyframes slideIn {
-    from { transform: translateX(20px); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-  }
+  /* Add tranche inline form */
+  .add-tranche-form{display:none;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px;margin-top:8px;gap:10px;flex-wrap:wrap;align-items:flex-end}
+  .add-tranche-form.open{display:flex}
+  .add-tranche-form .form-group{margin-bottom:0;flex:1;min-width:100px}
+  .add-tranche-form label{display:block;font-size:10px;font-weight:600;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.4px}
+  .add-tranche-form input{background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);padding:7px 10px;font-family:inherit;font-size:13px;width:100%}
+  .add-tranche-form input:focus{outline:none;border-color:var(--accent)}
 
-  /* Offline banner */
-  .offline-bar {
-    display: none;
-    background: rgba(246,173,85,0.12);
-    border-bottom: 1px solid rgba(246,173,85,0.3);
-    padding: 8px 20px;
-    font-size: 12px;
-    color: var(--accent2);
-    text-align: center;
-  }
-  body.offline .offline-bar { display: block; }
+  /* Dividend history */
+  .div-history{margin-top:4px}
+  .div-event{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 0;border-top:1px solid var(--border);font-size:12px}
+  .div-event:first-child{border-top:none}
+  .div-event-left{display:flex;flex-direction:column;gap:2px}
+  .div-event-date{color:var(--muted);font-size:11px;font-variant-numeric:tabular-nums}
+  .div-event-dpu{color:var(--text);font-family:monospace;font-size:13px;font-weight:600}
+  .div-event-right{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0}
+  .div-event-total{color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;font-size:13px}
+  .div-event-total.proj{color:var(--accent2)}
+  .div-event-status{font-size:10px;color:var(--muted)}
+
+  /* Past year card */
+  .year-summary-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;text-align:center;margin-bottom:20px}
+  .year-total-label{font-size:13px;color:var(--muted);margin-bottom:10px}
+  .year-total-value{font-size:40px;font-weight:900;color:var(--accent);letter-spacing:-1.5px}
+  .year-note{font-size:12px;color:var(--muted);margin-top:8px}
+
+  /* Empty state */
+  .empty-state{text-align:center;padding:48px 20px;color:var(--muted)}
+  .empty-state .icon{font-size:40px;margin-bottom:16px}
+  .empty-state h3{font-size:17px;color:var(--text);margin-bottom:8px}
+  .empty-state p{font-size:14px;line-height:1.6;margin-bottom:20px}
+
+  /* ── Modals ── */
+  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;align-items:center;justify-content:center;padding:20px}
+  .modal-overlay.open{display:flex}
+  .modal{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);width:100%;max-width:500px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow)}
+  .modal-header{padding:20px 20px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+  .modal-title{font-size:17px;font-weight:700}
+  .modal-close{background:var(--surface2);color:var(--muted);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:14px}
+  .modal-close:hover{color:var(--text)}
+  .modal-body{padding:20px}
+  .modal-footer{padding:16px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px}
+
+  /* Forms */
+  .form-group{margin-bottom:16px}
+  label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px}
+  input,select,textarea{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:10px 12px;font-family:inherit;font-size:14px;transition:border-color 0.15s}
+  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)}
+  .form-hint{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.5}
+  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+
+  /* Info boxes */
+  .info-box{background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.25);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--text);line-height:1.6;margin-bottom:16px}
+  .info-box.warning{background:rgba(246,173,85,0.08);border-color:rgba(246,173,85,0.25)}
+  .info-box strong{color:var(--accent)}
+  .info-box.warning strong{color:var(--accent2)}
+  .divider{height:1px;background:var(--border);margin:16px 0}
+
+  /* Tranche list in modal */
+  .modal-tranche-list{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;min-height:20px}
+  .modal-tranche-item{display:flex;align-items:center;justify-content:space-between;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 12px}
+  .modal-tranche-item span{font-size:13px;color:var(--text)}
+  .modal-tranche-item .hint{font-size:11px;color:var(--muted);margin-top:2px}
+  .no-tranches{font-size:12px;color:var(--muted);padding:8px 0;text-align:center}
+
+  /* Spinner & toast */
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:6px}
+  .toast-wrap{position:fixed;bottom:24px;right:20px;display:flex;flex-direction:column;gap:8px;z-index:300}
+  .toast{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:13px;box-shadow:var(--shadow);max-width:320px}
+  .toast.success{border-left:3px solid var(--accent)}
+  .toast.error{border-left:3px solid var(--danger)}
+  .toast.info{border-left:3px solid var(--accent3)}
+  @keyframes slideIn{from{transform:translateX(20px);opacity:0}to{transform:translateX(0);opacity:1}}
+  .toast{animation:slideIn 0.2s ease}
+
+  /* Offline bar */
+  .offline-bar{display:none;background:rgba(246,173,85,0.12);border-bottom:1px solid rgba(246,173,85,0.3);padding:8px 20px;font-size:12px;color:var(--accent2);text-align:center}
+  body.offline .offline-bar{display:block}
 
   /* Footer */
-  .footer {
-    padding: 20px;
-    text-align: center;
-    font-size: 11px;
-    color: var(--muted);
-    border-top: 1px solid var(--border);
-    margin-top: 20px;
-  }
+  .footer{padding:20px;text-align:center;font-size:11px;color:var(--muted);border-top:1px solid var(--border);margin-top:20px}
 
   /* Responsive */
-  @media (max-width: 500px) {
-    .summary { grid-template-columns: 1fr 1fr; gap: 10px; padding: 14px 14px 0; }
-    .kpi-value { font-size: 22px; }
-    .kpi-card { padding: 14px; }
-    .tab-content { padding: 14px; }
-    .tabs-wrapper { padding: 12px 14px 0; }
-    header { padding: 12px 14px; }
-    .form-row { grid-template-columns: 1fr; }
+  @media(max-width:500px){
+    .summary{gap:10px;padding:14px 14px 0}
+    .kpi-value{font-size:22px}
+    .kpi-card{padding:14px}
+    .tab-content{padding:14px}
+    .tabs-wrapper{padding:12px 14px 0}
+    header{padding:12px 14px}
+    .form-row{grid-template-columns:1fr}
+    .div-event{grid-template-columns:auto 1fr auto}
+    .div-event-status{display:none}
   }
-  @media (max-width: 380px) {
-    .kpi-value { font-size: 18px; }
-    .logo-text { font-size: 15px; }
-  }
+  @media(max-width:380px){.kpi-value{font-size:18px}.logo-text{font-size:15px}}
 </style>
 </head>
 <body>
@@ -434,12 +238,12 @@
   </div>
   <div class="header-actions">
     <div class="sync-status" id="syncStatus">Not synced</div>
-    <button class="btn-icon" id="syncBtn" title="Sync dividend data" onclick="syncAll()">⟳</button>
-    <button class="btn-primary btn-sm" onclick="openModal('modalHolding')">+ Add</button>
+    <button class="btn-icon" id="syncBtn" title="Sync dividend data from Yahoo Finance" onclick="syncAll()">⟳</button>
+    <button class="btn-primary btn-sm" onclick="openAddHolding()">+ Add</button>
   </div>
 </header>
 
-<!-- Summary KPIs -->
+<!-- KPI cards -->
 <div class="summary">
   <div class="kpi-card received">
     <div class="kpi-label">Received YTD <span id="ytdYear"></span></div>
@@ -453,21 +257,20 @@
   </div>
 </div>
 
-<!-- Year Tabs -->
+<!-- Year tabs -->
 <div class="tabs-wrapper">
   <div class="tabs" id="yearTabs"></div>
 </div>
 
-<!-- Tab Content -->
+<!-- Tab content -->
 <div class="tab-content" id="tabContent"></div>
 
-<!-- Footer -->
-<div class="footer" id="footer">Add your holdings to get started · Data from Yahoo Finance</div>
-
-<!-- Toast container -->
+<div class="footer" id="footer">Add holdings to get started</div>
 <div class="toast-wrap" id="toastWrap"></div>
 
-<!-- ── Modal: Add / Edit Holding ── -->
+<!-- ════════════════════════════════════════
+     Modal: Add / Edit Holding + Tranches
+     ════════════════════════════════════════ -->
 <div class="modal-overlay" id="modalHolding">
   <div class="modal">
     <div class="modal-header">
@@ -475,77 +278,52 @@
       <button class="modal-close" onclick="closeModal('modalHolding')">✕</button>
     </div>
     <div class="modal-body">
-      <div class="info-box">
-        Enter your SGX stock ticker (with or without <strong>.SI</strong>). The app will fetch dividend history automatically when online.
-      </div>
       <input type="hidden" id="editHoldingId">
       <div class="form-row">
         <div class="form-group">
           <label>Ticker Symbol</label>
           <input type="text" id="inputTicker" placeholder="e.g. CICT.SI" autocapitalize="characters">
-          <div class="form-hint">SGX ticker, e.g. CICT.SI, MINT.SI, D01.SI</div>
+          <div class="form-hint">SGX ticker (will add .SI if missing)</div>
         </div>
         <div class="form-group">
-          <label>Display Name (optional)</label>
+          <label>Display Name</label>
           <input type="text" id="inputName" placeholder="e.g. CICT">
+          <div class="form-hint">Your preferred short name</div>
         </div>
       </div>
-      <div class="form-row">
-        <div class="form-group">
-          <label>Units Held</label>
-          <input type="number" id="inputUnits" placeholder="e.g. 5000" min="1">
+
+      <div class="divider"></div>
+
+      <!-- Tranches -->
+      <div class="detail-section-title" style="margin-bottom:10px">Purchase Tranches</div>
+      <div class="modal-tranche-list" id="modalTrancheList"></div>
+
+      <!-- Add tranche row -->
+      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px;margin-top:4px">
+        <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px">Add Tranche</div>
+        <div class="form-row" style="margin-bottom:10px">
+          <div>
+            <label>Units</label>
+            <input type="number" id="trancheUnits" placeholder="e.g. 5000" min="1">
+          </div>
+          <div>
+            <label>Purchase Date</label>
+            <input type="date" id="trancheDate">
+          </div>
         </div>
-        <div class="form-group">
-          <label>Acquisition Date</label>
-          <input type="date" id="inputAcqDate">
-          <div class="form-hint">Date you first purchased (for dividend eligibility)</div>
-        </div>
+        <button class="btn-secondary btn-sm" onclick="addTrancheToModal()">+ Add This Tranche</button>
       </div>
     </div>
     <div class="modal-footer">
       <button class="btn-secondary" onclick="closeModal('modalHolding')">Cancel</button>
-      <button class="btn-primary" onclick="saveHolding()">Save Holding</button>
+      <button class="btn-primary" onclick="saveHolding()">Save</button>
     </div>
   </div>
 </div>
 
-<!-- ── Modal: Import CSV ── -->
-<div class="modal-overlay" id="modalImport">
-  <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title">Import from Yahoo Finance</div>
-      <button class="modal-close" onclick="closeModal('modalImport')">✕</button>
-    </div>
-    <div class="modal-body">
-      <div class="info-box">
-        <strong>How to export from Yahoo Finance:</strong><br>
-        Go to Finance → My Portfolio → select your portfolio → click the download/export icon (↓). Upload the CSV below.
-      </div>
-      <div class="drop-zone" id="dropZone" onclick="document.getElementById('csvFile').click()">
-        <div style="font-size:28px;margin-bottom:8px">📂</div>
-        <div>Drop Yahoo Finance CSV here or click to browse</div>
-        <div style="font-size:11px;margin-top:4px">Supports Yahoo Finance Portfolio export format</div>
-        <input type="file" id="csvFile" accept=".csv,.txt" onchange="handleCSVFile(event)">
-      </div>
-      <div class="divider"></div>
-      <div style="font-size:13px;font-weight:600;margin-bottom:10px;color:var(--muted)">OR paste CSV content directly:</div>
-      <div class="form-group">
-        <textarea id="csvPaste" placeholder="Paste your Yahoo Finance portfolio CSV here..."></textarea>
-      </div>
-      <div class="form-group">
-        <label>Simple format also accepted:</label>
-        <textarea id="simplePaste" placeholder="Ticker,Units,AcquisitionDate&#10;CICT.SI,5000,2023-01-15&#10;MINT.SI,3000,2022-06-10" style="min-height:80px"></textarea>
-        <div class="form-hint">One holding per line: Ticker, Units, YYYY-MM-DD date</div>
-      </div>
-    </div>
-    <div class="modal-footer">
-      <button class="btn-secondary" onclick="closeModal('modalImport')">Cancel</button>
-      <button class="btn-primary" onclick="processImport()">Import</button>
-    </div>
-  </div>
-</div>
-
-<!-- ── Modal: Manual Dividend Entry ── -->
+<!-- ════════════════════════════════════════
+     Modal: Manual Dividend Entry
+     ════════════════════════════════════════ -->
 <div class="modal-overlay" id="modalDividend">
   <div class="modal">
     <div class="modal-header">
@@ -554,21 +332,20 @@
     </div>
     <div class="modal-body">
       <div class="info-box warning">
-        Use this to manually add a dividend that wasn't auto-fetched. Enter the <strong>ex-dividend date</strong> announced by SGX.
+        Enter the <strong>ex-dividend date</strong> and DPU amount as announced by SGX/the company. This overrides or supplements auto-fetched data.
       </div>
       <div class="form-group">
-        <label>Ticker</label>
-        <select id="divTicker" style=""></select>
+        <label>Stock</label>
+        <select id="divTicker"></select>
       </div>
       <div class="form-row">
         <div class="form-group">
           <label>Ex-Dividend Date</label>
           <input type="date" id="divExDate">
-          <div class="form-hint">Date announced by SGX/company</div>
         </div>
         <div class="form-group">
           <label>DPU / Dividend per Unit (SGD)</label>
-          <input type="number" id="divAmount" placeholder="e.g. 0.054" step="0.0001" min="0">
+          <input type="number" id="divAmount" placeholder="e.g. 0.0540" step="0.0001" min="0">
         </div>
       </div>
     </div>
@@ -580,265 +357,265 @@
 </div>
 
 <script>
-// ─────────────────────────────────────────
+// ══════════════════════════════════════════
 // STATE
-// ─────────────────────────────────────────
+// ══════════════════════════════════════════
+/*
+  holdings: [{
+    id, ticker, name,
+    tranches: [{id, units, acquisitionDate}]
+  }]
+  dividends: { ticker: [{exDate, amount, source:'api'|'manual'}] }
+*/
 let state = {
-  holdings: [],     // [{id, ticker, name, units, acquisitionDate}]
-  dividends: {},    // {ticker: [{exDate:'YYYY-MM-DD', amount:0.054, source:'api'|'manual'}]}
+  holdings: [],
+  dividends: {},
   lastSync: null,
   syncErrors: {}
 };
 
+// Temporary tranches being edited in the modal
+let modalTranches = [];
+
 const TODAY = new Date();
 const CURRENT_YEAR = TODAY.getFullYear();
 let activeYear = CURRENT_YEAR;
+let expandedRows = new Set();
 
-// ─────────────────────────────────────────
-// PERSISTENCE
-// ─────────────────────────────────────────
+// ══════════════════════════════════════════
+// PERSISTENCE + MIGRATION
+// ══════════════════════════════════════════
 function loadState() {
   try {
     const saved = localStorage.getItem('sgdiv_state');
-    if (saved) {
-      const parsed = JSON.parse(saved);
-      state = { ...state, ...parsed };
-    }
-  } catch(e) { console.error('load state error', e); }
+    if (!saved) return;
+    const parsed = JSON.parse(saved);
+    state = { ...state, ...parsed };
+
+    // Migrate old format: {units, acquisitionDate} → tranches array
+    state.holdings = state.holdings.map(h => {
+      if (!h.tranches) {
+        h.tranches = [{
+          id: uid(),
+          units: h.units || 0,
+          acquisitionDate: h.acquisitionDate || dateStr(new Date(CURRENT_YEAR - 1, 0, 1))
+        }];
+        delete h.units;
+        delete h.acquisitionDate;
+      }
+      return h;
+    });
+  } catch(e) { console.error('loadState', e); }
 }
 
 function saveState() {
   try { localStorage.setItem('sgdiv_state', JSON.stringify(state)); } catch(e) {}
 }
 
-// ─────────────────────────────────────────
-// UTILITY
-// ─────────────────────────────────────────
-function fmtSGD(amount) {
-  const rounded = Math.ceil(Math.max(0, amount));
-  return 'S$' + rounded.toLocaleString('en-SG');
+// ══════════════════════════════════════════
+// UTILITIES
+// ══════════════════════════════════════════
+function fmtSGD(v) { return 'S$' + Math.ceil(Math.max(0,v)).toLocaleString('en-SG'); }
+function fmtSGDx(v) { return 'S$' + v.toLocaleString('en-SG',{minimumFractionDigits:2,maximumFractionDigits:2}); }
+function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+function dateStr(d) { return d instanceof Date ? d.toISOString().split('T')[0] : d; }
+function toDate(s) { if(!s) return null; const d = new Date(s+'T00:00:00'); return isNaN(d)?null:d; }
+function fmtDate(s) {
+  const d = toDate(s); if(!d) return s;
+  return d.toLocaleDateString('en-SG',{day:'numeric',month:'short',year:'numeric'});
 }
-
-function fmtSGDExact(amount) {
-  return 'S$' + amount.toLocaleString('en-SG', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+function fmtMonYear(s) {
+  const d = toDate(s); if(!d) return s;
+  return d.toLocaleDateString('en-SG',{month:'short',year:'2-digit'});
 }
-
 function normalizeTicker(t) {
-  if (!t) return '';
+  if(!t) return '';
   t = t.trim().toUpperCase();
-  if (!t.endsWith('.SI') && !t.includes('.')) t += '.SI';
+  if(!t.endsWith('.SI') && !t.includes('.')) t += '.SI';
   return t;
 }
+function displayTicker(t) { return t.replace(/\.SI$/i,''); }
+function totalUnits(holding) { return holding.tranches.reduce((s,tr)=>s+Number(tr.units),0); }
 
-function displayTicker(ticker) {
-  return ticker.replace(/\.SI$/i, '');
-}
-
-function uid() {
-  return Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
-}
-
-function dateStr(d) {
-  return d instanceof Date ? d.toISOString().split('T')[0] : d;
-}
-
-function toDate(str) {
-  if (!str) return null;
-  const d = new Date(str + 'T00:00:00');
-  return isNaN(d) ? null : d;
-}
-
-// ─────────────────────────────────────────
-// YAHOO FINANCE FETCH  (3-method fallback)
-// ─────────────────────────────────────────
-function parseYFJson(json) {
-  const raw = json?.chart?.result?.[0]?.events?.dividends || {};
-  const divs = Object.values(raw).map(d => ({
-    exDate: dateStr(new Date(d.date * 1000)),
-    amount: Number(d.amount),
-    source: 'api'
-  })).sort((a, b) => a.exDate.localeCompare(b.exDate));
-  return divs;
-}
-
-async function tryFetch(url, parseJson) {
-  const resp = await fetch(url, { headers: { 'Accept': 'application/json' } });
-  if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-  const json = parseJson ? await resp.json().then(parseJson) : await resp.json();
-  return json;
-}
-
-async function fetchYFDividends(ticker) {
-  const period1 = Math.floor((Date.now() / 1000) - 6 * 365.25 * 86400);
-  const period2 = Math.floor(Date.now() / 1000) + 365 * 86400;
-  const yfUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?events=dividends&interval=3mo&period1=${period1}&period2=${period2}`;
-
-  // Method 1 — direct (works on some networks/browsers)
-  try {
-    const resp = await fetch(yfUrl, { headers: { 'Accept': 'application/json' } });
-    if (resp.ok) { const j = await resp.json(); return parseYFJson(j); }
-  } catch(e) {}
-
-  // Method 2 — corsproxy.io free proxy
-  try {
-    const resp = await fetch(`https://corsproxy.io/?${encodeURIComponent(yfUrl)}`);
-    if (resp.ok) { const j = await resp.json(); return parseYFJson(j); }
-  } catch(e) {}
-
-  // Method 3 — allorigins.win (returns JSON wrapped in {contents:...})
-  try {
-    const resp = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(yfUrl)}`);
-    if (resp.ok) {
-      const wrapper = await resp.json();
-      const j = JSON.parse(wrapper.contents);
-      return parseYFJson(j);
-    }
-  } catch(e) {}
-
-  throw new Error('CORS blocked on all routes — enter dividends manually');
-}
-
-async function syncAll() {
-  if (!state.holdings.length) { toast('No holdings to sync', 'info'); return; }
-  const btn = document.getElementById('syncBtn');
-  btn.innerHTML = '<span class="spinner"></span>';
-  btn.disabled = true;
-  setSyncStatus('Syncing...', '');
-
-  const tickers = [...new Set(state.holdings.map(h => h.ticker))];
-  let ok = 0, fail = 0;
-  state.syncErrors = {};
-
-  await Promise.allSettled(tickers.map(async ticker => {
-    try {
-      const divs = await fetchYFDividends(ticker);
-      if (divs.length) {
-        // Merge with manual entries (keep manual if api doesn't have them)
-        const manual = (state.dividends[ticker] || []).filter(d => d.source === 'manual');
-        const apiDates = new Set(divs.map(d => d.exDate));
-        const manualOnly = manual.filter(d => !apiDates.has(d.exDate));
-        state.dividends[ticker] = [...divs, ...manualOnly]
-          .sort((a, b) => a.exDate.localeCompare(b.exDate));
-        ok++;
-      } else {
-        fail++;
-        state.syncErrors[ticker] = 'No dividend data found';
-      }
-    } catch(e) {
-      fail++;
-      state.syncErrors[ticker] = e.message;
-    }
-  }));
-
-  state.lastSync = new Date().toISOString();
-  saveState();
-  btn.innerHTML = '⟳';
-  btn.disabled = false;
-
-  if (ok > 0 && fail === 0) setSyncStatus(`Synced ${ok} stocks`, 'ok');
-  else if (ok > 0) setSyncStatus(`Synced ${ok}, ${fail} failed`, 'ok');
-  else setSyncStatus(`Sync failed (${fail})`, 'error');
-
-  if (fail > 0) {
-    const failedTickers = Object.keys(state.syncErrors).join(', ');
-    toast(`Some tickers failed (${failedTickers}). Use manual dividend entry or check your connection.`, 'error');
-  }
-  if (ok > 0) toast(`Dividend data updated for ${ok} stock${ok>1?'s':''}`, 'success');
-
-  render();
-}
-
-function setSyncStatus(msg, cls) {
-  const el = document.getElementById('syncStatus');
-  el.textContent = msg;
-  el.className = 'sync-status ' + cls;
-}
-
-// ─────────────────────────────────────────
+// ══════════════════════════════════════════
 // DIVIDEND CALCULATIONS
-// ─────────────────────────────────────────
+// ══════════════════════════════════════════
+function getDivEvents(holding, allDivs, year) {
+  const todayStr = dateStr(TODAY);
+  const events = [];
+
+  const yearDivs = allDivs.filter(d => new Date(d.exDate).getFullYear() === year);
+
+  for (const div of yearDivs) {
+    let received = 0, projected = 0;
+    const trancheBreakdown = [];
+
+    for (const tr of holding.tranches) {
+      const acq = tr.acquisitionDate;
+      if (!acq || div.exDate < acq) continue; // didn't hold on ex-date
+      const amt = Number(div.amount) * Number(tr.units);
+      if (div.exDate <= todayStr) {
+        received += amt;
+        trancheBreakdown.push({ units: tr.units, acq, amt, status: 'received' });
+      } else {
+        projected += amt;
+        trancheBreakdown.push({ units: tr.units, acq, amt, status: 'projected' });
+      }
+    }
+
+    if (received + projected > 0) {
+      events.push({
+        exDate: div.exDate,
+        amount: div.amount,
+        source: div.source,
+        received,
+        projected,
+        total: received + projected,
+        status: received > 0 ? 'received' : 'projected',
+        trancheBreakdown
+      });
+    }
+  }
+
+  return events;
+}
+
 function getDividendsForHolding(holding, year) {
   const allDivs = state.dividends[holding.ticker] || [];
-  const acqDate = toDate(holding.acquisitionDate);
-  const todayStr = dateStr(TODAY);
-
-  let received = 0, projected = 0, projectedConf = 0, projectedEst = 0;
-
-  for (const div of allDivs) {
-    if (new Date(div.exDate).getFullYear() !== year) continue;
-    if (acqDate && div.exDate < dateStr(acqDate)) continue; // didn't hold on ex-date
-
-    const amount = div.amount * holding.units;
-    if (div.exDate <= todayStr) {
-      received += amount;
-    } else {
-      projected += amount;
-      if (div.source === 'api') projectedConf += amount;
-      else projectedEst += amount;
-    }
-  }
-
-  // If no future confirmed divs in YF data, estimate from prior year pattern
-  if (year === CURRENT_YEAR && projectedConf === 0) {
-    const estimated = estimateFutureDividends(holding, allDivs);
-    projected += estimated;
-    projectedEst += estimated;
-  }
-
-  return { received, projected, projectedConf, projectedEst };
+  const events = getDivEvents(holding, allDivs, year);
+  const received = events.reduce((s,e)=>s+e.received, 0);
+  const projected = events.reduce((s,e)=>s+e.projected, 0);
+  const projConf = events.filter(e=>e.source==='api').reduce((s,e)=>s+e.projected,0);
+  const projEst  = events.filter(e=>e.source==='manual'||e.source==='est').reduce((s,e)=>s+e.projected,0);
+  return { received, projected, projConf, projEst, events };
 }
 
 function estimateFutureDividends(holding, allDivs) {
-  // Look at dividends paid last year, see which months haven't occurred yet this year
-  const lastYear = CURRENT_YEAR - 1;
   const todayStr = dateStr(TODAY);
-
-  const lastYearDivs = allDivs.filter(d => new Date(d.exDate).getFullYear() === lastYear);
-  if (!lastYearDivs.length) return 0;
-
+  const lastYearDivs = allDivs.filter(d => new Date(d.exDate).getFullYear() === CURRENT_YEAR - 1);
   const thisYearDivs = allDivs.filter(d => new Date(d.exDate).getFullYear() === CURRENT_YEAR);
-  let estimated = 0;
+  let extras = [];
 
   for (const div of lastYearDivs) {
-    const lyDate = new Date(div.exDate);
-    const lyMonth = lyDate.getMonth();
-
-    // Check if a dividend in same ±6-week window already happened this year
-    const alreadyCovered = thisYearDivs.some(d => {
-      const m = new Date(d.exDate).getMonth();
-      return Math.abs(m - lyMonth) <= 1;
-    });
-
-    if (!alreadyCovered) {
-      // Estimate same month this year
-      const estDay = Math.min(lyDate.getDate(), 28);
-      const estDate = new Date(CURRENT_YEAR, lyMonth, estDay);
+    const lyM = new Date(div.exDate).getMonth();
+    const covered = thisYearDivs.some(d => Math.abs(new Date(d.exDate).getMonth() - lyM) <= 1);
+    if (!covered) {
+      const lyDate = new Date(div.exDate);
+      const estDate = new Date(CURRENT_YEAR, lyM, Math.min(lyDate.getDate(), 28));
       if (dateStr(estDate) > todayStr) {
-        // Check acquisition date
-        const acqDate = toDate(holding.acquisitionDate);
-        if (!acqDate || dateStr(estDate) >= dateStr(acqDate)) {
-          estimated += div.amount * holding.units;
-        }
+        extras.push({ exDate: dateStr(estDate), amount: div.amount, source: 'est' });
       }
     }
   }
+  return extras;
+}
 
-  return estimated;
+function getAllDivsForHolding(holding, year) {
+  const base = state.dividends[holding.ticker] || [];
+  // For current year, append estimates for missing months
+  if (year === CURRENT_YEAR) {
+    const extra = estimateFutureDividends(holding, base);
+    return [...base, ...extra];
+  }
+  return base;
+}
+
+function getDivsForYear(holding, year) {
+  const all = getAllDivsForHolding(holding, year);
+  return getDivEvents(holding, all, year);
 }
 
 function calcYear(year) {
   let received = 0, projected = 0;
   for (const h of state.holdings) {
-    const r = getDividendsForHolding(h, year);
-    received += r.received;
-    projected += r.projected;
+    const events = getDivsForYear(h, year);
+    received += events.reduce((s,e)=>s+e.received,0);
+    projected += events.reduce((s,e)=>s+e.projected,0);
   }
-  return { received, projected, total: received + projected };
+  return { received, projected };
 }
 
-// ─────────────────────────────────────────
+// ══════════════════════════════════════════
+// YAHOO FINANCE FETCH (3-method fallback)
+// ══════════════════════════════════════════
+function parseYFJson(json) {
+  const raw = json?.chart?.result?.[0]?.events?.dividends || {};
+  return Object.values(raw).map(d => ({
+    exDate: dateStr(new Date(d.date * 1000)),
+    amount: Number(d.amount),
+    source: 'api'
+  })).sort((a,b)=>a.exDate.localeCompare(b.exDate));
+}
+
+async function fetchYFDividends(ticker) {
+  const p1 = Math.floor(Date.now()/1000 - 6*365.25*86400);
+  const p2 = Math.floor(Date.now()/1000 + 365*86400);
+  const yfUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?events=dividends&interval=3mo&period1=${p1}&period2=${p2}`;
+
+  // Method 1 — direct
+  try {
+    const r = await fetch(yfUrl, { headers:{'Accept':'application/json'} });
+    if (r.ok) return parseYFJson(await r.json());
+  } catch(e) {}
+
+  // Method 2 — corsproxy.io
+  try {
+    const r = await fetch(`https://corsproxy.io/?${encodeURIComponent(yfUrl)}`);
+    if (r.ok) return parseYFJson(await r.json());
+  } catch(e) {}
+
+  // Method 3 — allorigins
+  try {
+    const r = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(yfUrl)}`);
+    if (r.ok) { const w = await r.json(); return parseYFJson(JSON.parse(w.contents)); }
+  } catch(e) {}
+
+  throw new Error('CORS blocked — enter dividends manually');
+}
+
+async function syncAll() {
+  if (!state.holdings.length) { toast('No holdings to sync','info'); return; }
+  const btn = document.getElementById('syncBtn');
+  btn.innerHTML = '<span class="spinner"></span>';
+  btn.disabled = true;
+  setSyncStatus('Syncing…','');
+  state.syncErrors = {};
+
+  const tickers = [...new Set(state.holdings.map(h=>h.ticker))];
+  let ok=0, fail=0;
+
+  await Promise.allSettled(tickers.map(async ticker => {
+    try {
+      const divs = await fetchYFDividends(ticker);
+      if (divs.length) {
+        const manual = (state.dividends[ticker]||[]).filter(d=>d.source==='manual');
+        const apiDates = new Set(divs.map(d=>d.exDate));
+        state.dividends[ticker] = [...divs, ...manual.filter(d=>!apiDates.has(d.exDate))]
+          .sort((a,b)=>a.exDate.localeCompare(b.exDate));
+        ok++;
+      } else { fail++; state.syncErrors[ticker]='No data'; }
+    } catch(e) { fail++; state.syncErrors[ticker]=e.message; }
+  }));
+
+  state.lastSync = new Date().toISOString();
+  saveState();
+  btn.innerHTML='⟳'; btn.disabled=false;
+  if (ok>0 && fail===0) setSyncStatus(`Synced ${ok} stocks`,'ok');
+  else if (ok>0) setSyncStatus(`${ok} ok, ${fail} failed`,'error');
+  else setSyncStatus('Sync failed — use manual entry','error');
+  if (ok>0) toast(`Dividend data updated for ${ok} stock${ok>1?'s':''}`,'success');
+  if (fail>0) toast(`${fail} ticker${fail>1?'s':''} failed. Use + Dividend to enter manually.`,'error');
+  render();
+}
+
+function setSyncStatus(msg, cls) {
+  const el = document.getElementById('syncStatus');
+  el.textContent = msg; el.className = 'sync-status ' + cls;
+}
+
+// ══════════════════════════════════════════
 // RENDER
-// ─────────────────────────────────────────
+// ══════════════════════════════════════════
 function render() {
   renderSummary();
   renderTabs();
@@ -847,31 +624,25 @@ function render() {
 }
 
 function renderSummary() {
-  const yr = CURRENT_YEAR;
-  document.getElementById('ytdYear').textContent = yr;
-  document.getElementById('ytdYear2').textContent = yr;
-
-  const { received, projected } = calcYear(yr);
-
+  document.getElementById('ytdYear').textContent = CURRENT_YEAR;
+  document.getElementById('ytdYear2').textContent = CURRENT_YEAR;
+  const { received, projected } = calcYear(CURRENT_YEAR);
   document.getElementById('kpiReceived').textContent = fmtSGD(received);
   document.getElementById('kpiProjected').textContent = fmtSGD(projected);
-
-  const recSub = state.holdings.length
-    ? `${state.holdings.length} stock${state.holdings.length>1?'s':''} · as of ${TODAY.toLocaleDateString('en-SG', {day:'numeric',month:'short'})}`
-    : 'No holdings yet';
-  document.getElementById('kpiReceivedSub').innerHTML = `<span>${recSub}</span>`;
-
-  const projSub = projected > 0
-    ? `Est. annual total: <span>${fmtSGD(received + projected)}</span>`
-    : (state.holdings.length ? 'No upcoming dividends found' : '—');
-  document.getElementById('kpiProjectedSub').innerHTML = projSub;
+  const n = state.holdings.length;
+  document.getElementById('kpiReceivedSub').innerHTML =
+    n ? `<span>${n} stock${n>1?'s':''} · as of ${TODAY.toLocaleDateString('en-SG',{day:'numeric',month:'short'})}</span>` : 'No holdings yet';
+  document.getElementById('kpiProjectedSub').innerHTML = projected > 0
+    ? `Est. annual total: <span>${fmtSGD(received+projected)}</span>`
+    : (n ? 'No upcoming dividends found' : '—');
 }
 
 function getYears() {
-  // Current year + past 5 years (or as far back as acquisition dates go)
-  const minYear = state.holdings.reduce((min, h) => {
-    const y = h.acquisitionDate ? new Date(h.acquisitionDate).getFullYear() : CURRENT_YEAR;
-    return Math.min(min, y);
+  const minYear = state.holdings.reduce((m,h) => {
+    const y = h.tranches.reduce((my, tr) => {
+      return Math.min(my, tr.acquisitionDate ? new Date(tr.acquisitionDate).getFullYear() : CURRENT_YEAR);
+    }, CURRENT_YEAR);
+    return Math.min(m, y);
   }, CURRENT_YEAR - 1);
   const years = [];
   for (let y = CURRENT_YEAR; y >= Math.max(minYear, CURRENT_YEAR - 6); y--) years.push(y);
@@ -880,19 +651,14 @@ function getYears() {
 
 function renderTabs() {
   const years = getYears();
-  const tabs = document.getElementById('yearTabs');
-  tabs.innerHTML = years.map(y =>
-    `<button class="tab${y === activeYear ? ' active' : ''}" onclick="setYear(${y})">${y === CURRENT_YEAR ? y + ' ★' : y}</button>`
-  ).join('') +
-  `<button class="tab" onclick="openModal('modalImport')" style="margin-left:8px">⬆ Import CSV</button>` +
-  `<button class="tab" onclick="openDividendModal()" style="margin-left:4px">+ Dividend</button>`;
+  document.getElementById('yearTabs').innerHTML =
+    years.map(y =>
+      `<button class="tab${y===activeYear?' active':''}" onclick="setYear(${y})">${y===CURRENT_YEAR?y+' ★':y}</button>`
+    ).join('') +
+    `<button class="tab" onclick="openDividendModal()" style="margin-left:8px">+ Dividend</button>`;
 }
 
-function setYear(y) {
-  activeYear = y;
-  renderTabs();
-  renderTabContent();
-}
+function setYear(y) { activeYear=y; renderTabs(); renderTabContent(); }
 
 function renderTabContent() {
   const el = document.getElementById('tabContent');
@@ -901,70 +667,73 @@ function renderTabContent() {
       <div class="empty-state">
         <div class="icon">📊</div>
         <h3>No Holdings Yet</h3>
-        <p>Add your Singapore stock holdings to start tracking dividend income.<br>
-        You can add them one by one or import a Yahoo Finance portfolio CSV.</p>
-        <button class="btn-primary" onclick="openModal('modalHolding')">+ Add First Holding</button>
-        &nbsp;
-        <button class="btn-secondary" onclick="openModal('modalImport')">⬆ Import CSV</button>
+        <p>Add your Singapore stocks and purchase dates.<br>Each stock can have multiple purchase tranches.</p>
+        <button class="btn-primary" onclick="openAddHolding()">+ Add First Holding</button>
       </div>`;
     return;
   }
-
-  if (activeYear === CURRENT_YEAR) {
-    renderCurrentYear(el);
-  } else {
-    renderPastYear(el, activeYear);
-  }
+  activeYear === CURRENT_YEAR ? renderCurrentYear(el) : renderPastYear(el, activeYear);
 }
 
 function renderCurrentYear(el) {
-  const todayStr = dateStr(TODAY);
   let rows = '';
-
   for (const h of state.holdings) {
-    const { received, projected, projectedConf, projectedEst } = getDividendsForHolding(h, CURRENT_YEAR);
-    const hasDivData = (state.dividends[h.ticker] || []).length > 0;
+    const allDivs = getAllDivsForHolding(h, CURRENT_YEAR);
+    const events = getDivEvents(h, allDivs, CURRENT_YEAR);
+    const received = events.reduce((s,e)=>s+e.received,0);
+    const projected = events.reduce((s,e)=>s+e.projected,0);
+    const hasConf = events.some(e=>e.projected>0 && e.source==='api');
     const syncErr = state.syncErrors[h.ticker];
+    const isExpanded = expandedRows.has(h.id);
 
-    const projTag = projectedConf > 0
-      ? `<span class="tag tag-conf">Confirmed</span>`
-      : projectedEst > 0 ? `<span class="tag tag-est">Estimated</span>` : '';
+    // Inline dividend chips — show each payment
+    const receivedEvents = events.filter(e=>e.received>0).slice(-4);
+    const projEvents = events.filter(e=>e.projected>0).slice(0,2);
+    const chips = [
+      ...receivedEvents.map(e=>`<span class="div-chip">${fmtMonYear(e.exDate)} ${fmtSGDx(e.received)}</span>`),
+      ...projEvents.map(e=>`<span class="div-chip proj">~${fmtMonYear(e.exDate)} ${fmtSGDx(e.projected)}</span>`)
+    ].join('');
 
-    rows += `<tr>
-      <td>
-        <span class="ticker-badge" onclick="quickRename('${h.id}')" title="Tap to rename" style="cursor:pointer">${h.name || displayTicker(h.ticker)}</span>
-        <span style="font-size:10px;color:var(--muted);margin-left:4px;vertical-align:middle">✎</span>
-        ${syncErr ? `<div style="font-size:10px;color:var(--accent2);margin-top:3px">⚠ ${syncErr}</div>` : ''}
-      </td>
-      <td class="right units">${Number(h.units).toLocaleString()}</td>
-      <td class="right ${received > 0 ? 'amount-green' : 'amount-muted'}">${received > 0 ? fmtSGDExact(received) : '—'}</td>
-      <td class="right">
-        ${projected > 0 ? `<span class="amount-amber">${fmtSGDExact(projected)}</span> ${projTag}` : '<span class="amount-muted">—</span>'}
-      </td>
-      <td class="right">
-        <div class="row-actions">
-          <button class="btn-row" onclick="editHolding('${h.id}')" title="Edit">✎</button>
-          <button class="btn-row" onclick="deleteHolding('${h.id}')" title="Remove" style="color:var(--danger)">✕</button>
-        </div>
-      </td>
-    </tr>`;
+    const projTag = projected > 0
+      ? (hasConf ? `<span class="tag tag-conf">Conf</span>` : `<span class="tag tag-est">Est</span>`)
+      : '';
+
+    // Expanded detail
+    const detailHtml = isExpanded ? buildDetailSection(h, allDivs, events) : '';
+
+    rows += `
+      <tr class="holding-row" onclick="toggleExpand('${h.id}')">
+        <td>
+          <span class="ticker-badge${isExpanded?' expanded':''}" >
+            <span>${h.name || displayTicker(h.ticker)}</span>
+            <span class="expand-arrow">▶</span>
+          </span>
+          ${syncErr ? `<div style="font-size:10px;color:var(--accent2);margin-top:3px">⚠ ${syncErr}</div>` : ''}
+          <div class="div-chips">${chips}</div>
+        </td>
+        <td class="right units">${totalUnits(h).toLocaleString()}</td>
+        <td class="right ${received>0?'amount-green':'amount-muted'}">${received>0?fmtSGDx(received):'—'}</td>
+        <td class="right">
+          ${projected>0 ? `<span class="amount-amber">${fmtSGDx(projected)}</span> ${projTag}` : '<span class="amount-muted">—</span>'}
+        </td>
+        <td class="right" onclick="event.stopPropagation()">
+          <button class="btn-ghost" onclick="openEditHolding('${h.id}')" title="Edit">✎</button>
+          <button class="btn-danger-ghost" onclick="deleteHolding('${h.id}')" title="Remove">✕</button>
+        </td>
+      </tr>
+      <tr class="detail-row${isExpanded?' open':''}" id="detail-${h.id}">
+        <td colspan="5">${isExpanded ? `<div class="detail-inner">${detailHtml}</div>` : ''}</td>
+      </tr>`;
   }
 
-  const acqNote = `<div class="info-box" style="margin-bottom:16px">
-    <strong>Note:</strong> Dividends are counted from your acquisition date.
-    Projected = confirmed upcoming ex-dividend dates from Yahoo Finance + estimated from prior year pattern.
-    <a href="#" onclick="openDividendModal();return false" style="color:var(--accent);text-decoration:none"> + Add manual dividend</a>
-  </div>`;
-
   el.innerHTML = `
-    ${acqNote}
     <div class="section-header">
       <div class="section-title">Holdings & Dividend Income — ${CURRENT_YEAR}</div>
     </div>
     <div class="table-wrap">
       <table>
         <thead><tr>
-          <th>Stock</th>
+          <th>Stock <span style="font-size:10px;color:var(--muted);text-transform:none;letter-spacing:0">(tap to expand)</span></th>
           <th class="right">Units</th>
           <th class="right">Received YTD</th>
           <th class="right">Est. Remaining</th>
@@ -972,279 +741,247 @@ function renderCurrentYear(el) {
         </tr></thead>
         <tbody>${rows}</tbody>
       </table>
+    </div>
+    <div style="font-size:11px;color:var(--muted);margin-top:12px;text-align:center">
+      Tap a stock row to see tranches & dividend history · <a href="#" onclick="openDividendModal();return false" style="color:var(--accent);text-decoration:none">+ Add manual dividend</a>
     </div>`;
 }
 
-function renderPastYear(el, year) {
-  const { received, total } = calcYear(year);
-  // For past years, everything is "received" (ex-dates have all passed)
-  const allDivs = getAllDividendsForYear(year);
+function buildDetailSection(h, allDivs, events) {
+  // ── Tranches ──
+  let trancheHtml = '<div class="tranche-list">';
+  for (const tr of h.tranches) {
+    // Calc how much this tranche earned YTD
+    const trEarned = events.reduce((s,e)=>{
+      if (e.exDate < tr.acquisitionDate) return s;
+      const bt = e.trancheBreakdown.find(b=>b.acq===tr.acquisitionDate&&b.units==tr.units);
+      return s + (bt ? bt.amt : 0);
+    }, 0);
+    trancheHtml += `
+      <div class="tranche-item">
+        <div class="tranche-info">
+          <div class="tranche-units">${Number(tr.units).toLocaleString()} units</div>
+          <div class="tranche-date">Purchased ${fmtDate(tr.acquisitionDate)}</div>
+          ${trEarned>0 ? `<div class="tranche-earned">YTD from this tranche: ${fmtSGDx(trEarned)}</div>` : ''}
+        </div>
+        <div class="tranche-actions" onclick="event.stopPropagation()">
+          <button class="btn-ghost btn-xs" onclick="openEditHolding('${h.id}')">✎ Edit</button>
+        </div>
+      </div>`;
+  }
+  trancheHtml += '</div>';
 
-  const note = allDivs === 0 && !hasDividendDataForYear(year)
-    ? `<div class="info-box warning" style="margin-top:16px">No dividend data for ${year}. Make sure you've synced data or added manual entries.</div>`
-    : '';
+  // ── Dividend events ──
+  const todayStr = dateStr(TODAY);
+  let divHtml = '';
+
+  // Show all years but sort desc
+  const allDivsSorted = [...allDivs].sort((a,b)=>b.exDate.localeCompare(a.exDate));
+  // Show this year + last year events
+  const displayDivs = allDivsSorted.filter(div => {
+    const yr = new Date(div.exDate).getFullYear();
+    return yr >= CURRENT_YEAR - 1;
+  });
+
+  if (displayDivs.length) {
+    let prevYear = null;
+    for (const div of displayDivs) {
+      const yr = new Date(div.exDate).getFullYear();
+      if (yr !== prevYear) {
+        divHtml += `<div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;padding:8px 0 4px">${yr}</div>`;
+        prevYear = yr;
+      }
+
+      // How much did THIS holding receive?
+      let totalAmt = 0;
+      for (const tr of h.tranches) {
+        if (div.exDate >= tr.acquisitionDate) totalAmt += Number(div.amount) * Number(tr.units);
+      }
+      if (totalAmt <= 0) {
+        divHtml += `<div class="div-event">
+          <div class="div-event-left">
+            <span class="div-event-date">${fmtDate(div.exDate)}</span>
+            <span class="div-event-dpu">DPU $${Number(div.amount).toFixed(4)}</span>
+          </div>
+          <div class="div-event-right"><span class="amount-muted" style="font-size:11px">Not held</span></div>
+        </div>`;
+        continue;
+      }
+
+      const isPast = div.exDate <= todayStr;
+      const estBadge = div.source==='est' ? ' <span style="font-size:9px;color:var(--muted);font-weight:400">(est)</span>' : '';
+      divHtml += `<div class="div-event">
+        <div class="div-event-left">
+          <span class="div-event-date">${fmtDate(div.exDate)}</span>
+          <span class="div-event-dpu">DPU $${Number(div.amount).toFixed(4)}${estBadge}</span>
+        </div>
+        <div class="div-event-right">
+          <span class="${isPast?'div-event-total':'div-event-total proj'}">${fmtSGDx(totalAmt)}</span>
+          <span class="div-event-status">${isPast?'✓ received':'⏳ upcoming'}</span>
+        </div>
+      </div>`;
+    }
+  } else {
+    divHtml = `<div style="font-size:12px;color:var(--muted);padding:10px 0">No dividend data. Tap ⟳ to sync or use + Dividend to add manually.</div>`;
+  }
+
+  return `
+    <div class="detail-section-title">Tranches</div>
+    ${trancheHtml}
+    <div style="display:flex;justify-content:flex-end;margin-bottom:16px" onclick="event.stopPropagation()">
+      <button class="btn-secondary btn-sm" onclick="openEditHolding('${h.id}')">✎ Edit / Add Tranche</button>
+    </div>
+    <div class="detail-section-title">Dividend History</div>
+    <div class="div-history">${divHtml}</div>`;
+}
+
+function renderPastYear(el, year) {
+  const { received } = calcYear(year);
+  const eligibleCount = state.holdings.filter(h =>
+    h.tranches.some(tr => tr.acquisitionDate && new Date(tr.acquisitionDate).getFullYear() <= year)
+  ).length;
+  const hasData = state.holdings.some(h => {
+    const divs = state.dividends[h.ticker] || [];
+    return divs.some(d => new Date(d.exDate).getFullYear() === year);
+  });
 
   el.innerHTML = `
     <div class="year-summary-card">
       <div class="year-total-label">Total Dividends Received in ${year}</div>
       <div class="year-total-value">${fmtSGD(received)}</div>
-      <div class="year-note">
-        From ${state.holdings.filter(h => {
-          const acq = h.acquisitionDate ? new Date(h.acquisitionDate).getFullYear() : 9999;
-          return acq <= year;
-        }).length} stock${state.holdings.length !== 1 ? 's' : ''} held during this period
-      </div>
+      <div class="year-note">${eligibleCount} stock${eligibleCount!==1?'s':''} held during this period</div>
     </div>
-    ${note}`;
-}
-
-function getAllDividendsForYear(year) {
-  let total = 0;
-  for (const h of state.holdings) {
-    const { received } = getDividendsForHolding(h, year);
-    total += received;
-  }
-  return total;
-}
-
-function hasDividendDataForYear(year) {
-  return state.holdings.some(h => {
-    const divs = state.dividends[h.ticker] || [];
-    return divs.some(d => new Date(d.exDate).getFullYear() === year);
-  });
+    ${!hasData ? `<div class="info-box warning">No dividend data for ${year}. Tap ⟳ to sync or add manually.</div>` : ''}`;
 }
 
 function updateFooter() {
   const el = document.getElementById('footer');
   if (state.lastSync) {
     const d = new Date(state.lastSync);
-    el.textContent = `Last synced: ${d.toLocaleDateString('en-SG', {day:'numeric',month:'short',year:'numeric'})} ${d.toLocaleTimeString('en-SG', {hour:'2-digit',minute:'2-digit'})}`;
+    el.textContent = `Last synced: ${d.toLocaleDateString('en-SG',{day:'numeric',month:'short',year:'numeric'})} ${d.toLocaleTimeString('en-SG',{hour:'2-digit',minute:'2-digit'})}`;
   } else {
-    el.textContent = 'Not yet synced · Tap ⟳ to fetch dividend data from Yahoo Finance';
+    el.textContent = 'Not yet synced · Tap ⟳ to fetch dividend data · Enter dividends manually if sync fails';
   }
 }
 
-// ─────────────────────────────────────────
-// HOLDINGS CRUD
-// ─────────────────────────────────────────
-function openModal(id) {
-  document.getElementById(id).classList.add('open');
-}
-function closeModal(id) {
-  document.getElementById(id).classList.remove('open');
+// ══════════════════════════════════════════
+// EXPAND / COLLAPSE
+// ══════════════════════════════════════════
+function toggleExpand(id) {
+  if (expandedRows.has(id)) expandedRows.delete(id);
+  else expandedRows.add(id);
+  renderTabContent();
 }
 
-function openHoldingModal(holding) {
-  document.getElementById('holdingModalTitle').textContent = holding ? 'Edit Holding' : 'Add Holding';
-  document.getElementById('editHoldingId').value = holding?.id || '';
-  document.getElementById('inputTicker').value = holding?.ticker || '';
-  document.getElementById('inputName').value = holding?.name || '';
-  document.getElementById('inputUnits').value = holding?.units || '';
-  document.getElementById('inputAcqDate').value = holding?.acquisitionDate || dateStr(TODAY);
+// ══════════════════════════════════════════
+// HOLDING MODAL
+// ══════════════════════════════════════════
+function openAddHolding() {
+  modalTranches = [];
+  document.getElementById('holdingModalTitle').textContent = 'Add Holding';
+  document.getElementById('editHoldingId').value = '';
+  document.getElementById('inputTicker').value = '';
+  document.getElementById('inputName').value = '';
+  document.getElementById('trancheUnits').value = '';
+  document.getElementById('trancheDate').value = dateStr(TODAY);
+  renderModalTranches();
+  openModal('modalHolding');
+  setTimeout(()=>document.getElementById('inputTicker').focus(), 100);
+}
+
+function openEditHolding(id) {
+  const h = state.holdings.find(h=>h.id===id);
+  if (!h) return;
+  modalTranches = h.tranches.map(tr=>({...tr}));
+  document.getElementById('holdingModalTitle').textContent = 'Edit Holding';
+  document.getElementById('editHoldingId').value = id;
+  document.getElementById('inputTicker').value = h.ticker;
+  document.getElementById('inputName').value = h.name || '';
+  document.getElementById('trancheUnits').value = '';
+  document.getElementById('trancheDate').value = dateStr(TODAY);
+  renderModalTranches();
   openModal('modalHolding');
 }
 
-function editHolding(id) {
-  const h = state.holdings.find(h => h.id === id);
-  if (h) openHoldingModal(h);
+function renderModalTranches() {
+  const el = document.getElementById('modalTrancheList');
+  if (!modalTranches.length) {
+    el.innerHTML = '<div class="no-tranches">No tranches yet — add one below</div>';
+    return;
+  }
+  el.innerHTML = modalTranches.map((tr,i) => `
+    <div class="modal-tranche-item">
+      <div>
+        <span>${Number(tr.units).toLocaleString()} units</span>
+        <div class="hint">Purchased ${fmtDate(tr.acquisitionDate)}</div>
+      </div>
+      <button class="btn-danger-ghost btn-xs" onclick="removeModalTranche(${i})">Remove</button>
+    </div>`).join('');
 }
 
-function quickRename(id) {
-  const h = state.holdings.find(h => h.id === id);
-  if (!h) return;
-  const current = h.name || displayTicker(h.ticker);
-  const newName = prompt(`Rename "${current}" to:`, current);
-  if (newName === null) return; // cancelled
-  h.name = newName.trim() || displayTicker(h.ticker);
-  saveState();
-  render();
+function addTrancheToModal() {
+  const units = parseInt(document.getElementById('trancheUnits').value, 10);
+  const date = document.getElementById('trancheDate').value;
+  if (!units || units <= 0) { toast('Enter valid units','error'); return; }
+  if (!date) { toast('Enter a purchase date','error'); return; }
+  modalTranches.push({ id: uid(), units, acquisitionDate: date });
+  document.getElementById('trancheUnits').value = '';
+  document.getElementById('trancheDate').value = dateStr(TODAY);
+  renderModalTranches();
+  toast(`Tranche added: ${units.toLocaleString()} units on ${fmtDate(date)}`,'success');
+}
+
+function removeModalTranche(i) {
+  modalTranches.splice(i, 1);
+  renderModalTranches();
 }
 
 function saveHolding() {
   const ticker = normalizeTicker(document.getElementById('inputTicker').value);
   const name = document.getElementById('inputName').value.trim() || displayTicker(ticker);
-  const units = parseInt(document.getElementById('inputUnits').value, 10);
-  const acquisitionDate = document.getElementById('inputAcqDate').value;
   const editId = document.getElementById('editHoldingId').value;
 
-  if (!ticker) { toast('Please enter a ticker symbol', 'error'); return; }
-  if (!units || units <= 0) { toast('Please enter valid units', 'error'); return; }
-  if (!acquisitionDate) { toast('Please enter an acquisition date', 'error'); return; }
+  // Check if there's a pending tranche in the input fields
+  const pendingUnits = parseInt(document.getElementById('trancheUnits').value, 10);
+  const pendingDate = document.getElementById('trancheDate').value;
+  if (pendingUnits > 0 && pendingDate) {
+    modalTranches.push({ id: uid(), units: pendingUnits, acquisitionDate: pendingDate });
+  }
+
+  if (!ticker) { toast('Enter a ticker symbol','error'); return; }
+  if (!modalTranches.length) { toast('Add at least one purchase tranche','error'); return; }
 
   if (editId) {
-    const idx = state.holdings.findIndex(h => h.id === editId);
-    if (idx !== -1) state.holdings[idx] = { ...state.holdings[idx], ticker, name, units, acquisitionDate };
+    const idx = state.holdings.findIndex(h=>h.id===editId);
+    if (idx !== -1) state.holdings[idx] = { ...state.holdings[idx], ticker, name, tranches: modalTranches };
   } else {
-    state.holdings.push({ id: uid(), ticker, name, units, acquisitionDate });
+    state.holdings.push({ id: uid(), ticker, name, tranches: modalTranches });
   }
 
   saveState();
   closeModal('modalHolding');
   render();
-  toast(`${name} saved. Tap ⟳ to fetch dividend data.`, 'success');
+  toast(`${name} saved · Tap ⟳ to sync dividend data`, 'success');
 }
 
 function deleteHolding(id) {
-  const h = state.holdings.find(h => h.id === id);
+  const h = state.holdings.find(h=>h.id===id);
   if (!h) return;
-  if (!confirm(`Remove ${h.name || displayTicker(h.ticker)} from your holdings?`)) return;
-  state.holdings = state.holdings.filter(h => h.id !== id);
-  saveState();
-  render();
-  toast('Holding removed', 'info');
+  if (!confirm(`Remove ${h.name||displayTicker(h.ticker)} and all its data?`)) return;
+  state.holdings = state.holdings.filter(h=>h.id!==id);
+  expandedRows.delete(id);
+  saveState(); render();
+  toast('Holding removed','info');
 }
 
-// ─────────────────────────────────────────
-// IMPORT CSV
-// ─────────────────────────────────────────
-function handleCSVFile(e) {
-  const file = e.target.files[0];
-  if (!file) return;
-  const reader = new FileReader();
-  reader.onload = ev => {
-    document.getElementById('csvPaste').value = ev.target.result;
-  };
-  reader.readAsText(file);
-}
-
-function processImport() {
-  const yahooCSV = document.getElementById('csvPaste').value.trim();
-  const simpleCSV = document.getElementById('simplePaste').value.trim();
-  let added = 0;
-
-  if (yahooCSV) {
-    added += parseYahooCSV(yahooCSV);
-  }
-  if (simpleCSV) {
-    added += parseSimpleCSV(simpleCSV);
-  }
-
-  if (added === 0) {
-    toast('No holdings found in the pasted data. Check the format.', 'error');
-    return;
-  }
-
-  saveState();
-  closeModal('modalImport');
-  document.getElementById('csvPaste').value = '';
-  document.getElementById('simplePaste').value = '';
-  render();
-  toast(`Imported ${added} holding${added !== 1 ? 's' : ''}. Tap ⟳ to sync dividend data.`, 'success');
-}
-
-function parseYahooCSV(csv) {
-  const lines = csv.split('\n').filter(l => l.trim());
-  if (lines.length < 2) return 0;
-
-  // Parse header — strip quotes, collapse whitespace, lowercase
-  const header = parseCSVLine(lines[0]).map(h => h.replace(/"/g, '').trim().toLowerCase().replace(/\s+/g, ' '));
-
-  const symIdx  = header.findIndex(h => ['symbol','ticker','stock symbol'].includes(h));
-  const qtyIdx  = header.findIndex(h => ['quantity','shares','qty','no. of shares','number of shares','units'].includes(h));
-  const dateIdx = header.findIndex(h => ['trade date','purchase date','buy date','date purchased','acquisition date','purchased date','date'].includes(h));
-
-  // Debug: show detected columns in console
-  console.log('YF CSV headers:', header);
-  console.log('sym:', symIdx, 'qty:', qtyIdx, 'date:', dateIdx);
-
-  if (symIdx === -1) return parseSimpleCSV(csv); // fallback
-
-  let added = 0, updated = 0;
-  for (let i = 1; i < lines.length; i++) {
-    const cols = parseCSVLine(lines[i]);
-    if (!cols[symIdx]) continue;
-    const ticker = normalizeTicker(cols[symIdx]);
-    if (!ticker || ticker.toUpperCase() === 'SYMBOL' || ticker.toUpperCase() === 'TICKER') continue;
-
-    // Quantity — strip commas, currency symbols, spaces
-    const rawQty = (cols[qtyIdx] || '').replace(/[^0-9.-]/g, '');
-    const units = parseInt(rawQty, 10) || 0;
-    if (units <= 0) continue;
-
-    let acqDate = '';
-    if (dateIdx !== -1) acqDate = normalizeDate(cols[dateIdx]);
-    if (!acqDate) acqDate = dateStr(new Date(CURRENT_YEAR - 1, 0, 1));
-
-    const existing = state.holdings.find(h => h.ticker === ticker);
-    if (existing) {
-      existing.units = units;
-      if (dateIdx !== -1 && normalizeDate(cols[dateIdx])) existing.acquisitionDate = acqDate;
-      updated++;
-    } else {
-      state.holdings.push({ id: uid(), ticker, name: displayTicker(ticker), units, acquisitionDate: acqDate });
-      added++;
-    }
-  }
-  if (updated > 0) toast(`Updated ${updated} existing holding${updated!==1?'s':''}`, 'info');
-  return added;
-}
-
-function parseSimpleCSV(csv) {
-  const lines = csv.split('\n').filter(l => l.trim());
-  let added = 0;
-  for (const line of lines) {
-    if (line.toLowerCase().startsWith('ticker') || line.toLowerCase().startsWith('symbol')) continue;
-    const parts = line.split(',').map(p => p.trim().replace(/"/g, ''));
-    if (parts.length < 2) continue;
-    const ticker = normalizeTicker(parts[0]);
-    const units = parseInt(parts[1], 10);
-    if (!ticker || !units || units <= 0) continue;
-    const acqDate = normalizeDate(parts[2]) || dateStr(new Date(CURRENT_YEAR - 1, 0, 1));
-    const existing = state.holdings.find(h => h.ticker === ticker);
-    if (existing) {
-      existing.units = units;
-    } else {
-      state.holdings.push({ id: uid(), ticker, name: displayTicker(ticker), units, acquisitionDate: acqDate });
-      added++;
-    }
-  }
-  return added;
-}
-
-function parseCSVLine(line) {
-  const result = [];
-  let cur = '', inQ = false;
-  for (let i = 0; i < line.length; i++) {
-    const c = line[i];
-    if (c === '"') { inQ = !inQ; }
-    else if (c === ',' && !inQ) { result.push(cur.trim()); cur = ''; }
-    else cur += c;
-  }
-  result.push(cur.trim());
-  return result;
-}
-
-function normalizeDate(str) {
-  if (!str) return '';
-  // Strip quotes, collapse multiple spaces (Yahoo Finance uses "Jan  9, 2026")
-  str = str.replace(/"/g, '').trim().replace(/\s+/g, ' ');
-  if (!str) return '';
-  // YYYY-MM-DD
-  if (/^\d{4}-\d{2}-\d{2}$/.test(str)) return str;
-  // YYYYMMDD (Yahoo Finance Trade Date format e.g. 20260603)
-  if (/^\d{8}$/.test(str)) return `${str.slice(0,4)}-${str.slice(4,6)}-${str.slice(6,8)}`;
-  // YYYY/MM/DD
-  if (/^\d{4}\/\d{2}\/\d{2}$/.test(str)) return str.replace(/\//g, '-');
-  // MM/DD/YYYY or DD/MM/YYYY
-  const slash = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
-  if (slash) {
-    const d = new Date(`${slash[3]}-${slash[1].padStart(2,'0')}-${slash[2].padStart(2,'0')}`);
-    if (!isNaN(d)) return dateStr(d);
-  }
-  // "Jan 9, 2026" / "09 Jan 2026" / any format JS can parse
-  const d = new Date(str);
-  if (!isNaN(d)) return dateStr(d);
-  return '';
-}
-
-// ─────────────────────────────────────────
-// MANUAL DIVIDEND
-// ─────────────────────────────────────────
+// ══════════════════════════════════════════
+// MANUAL DIVIDEND MODAL
+// ══════════════════════════════════════════
 function openDividendModal() {
-  if (!state.holdings.length) { toast('Add holdings first', 'info'); return; }
+  if (!state.holdings.length) { toast('Add holdings first','info'); return; }
   const sel = document.getElementById('divTicker');
-  sel.innerHTML = state.holdings.map(h =>
-    `<option value="${h.ticker}">${h.name || displayTicker(h.ticker)} (${h.ticker})</option>`
+  sel.innerHTML = state.holdings.map(h=>
+    `<option value="${h.ticker}">${h.name||displayTicker(h.ticker)} (${h.ticker})</option>`
   ).join('');
   document.getElementById('divExDate').value = dateStr(TODAY);
   document.getElementById('divAmount').value = '';
@@ -1255,96 +992,65 @@ function saveManualDividend() {
   const ticker = document.getElementById('divTicker').value;
   const exDate = document.getElementById('divExDate').value;
   const amount = parseFloat(document.getElementById('divAmount').value);
-
-  if (!exDate) { toast('Please enter an ex-dividend date', 'error'); return; }
-  if (isNaN(amount) || amount <= 0) { toast('Please enter a valid dividend amount', 'error'); return; }
-
-  if (!state.dividends[ticker]) state.dividends[ticker] = [];
-
-  // Replace if same exDate exists
-  state.dividends[ticker] = state.dividends[ticker].filter(d => d.exDate !== exDate);
-  state.dividends[ticker].push({ exDate, amount, source: 'manual' });
-  state.dividends[ticker].sort((a, b) => a.exDate.localeCompare(b.exDate));
-
-  saveState();
-  closeModal('modalDividend');
-  render();
-  toast(`Dividend added for ${displayTicker(ticker)}: S$${amount.toFixed(4)} on ${exDate}`, 'success');
+  if (!exDate) { toast('Enter ex-dividend date','error'); return; }
+  if (isNaN(amount)||amount<=0) { toast('Enter valid DPU amount','error'); return; }
+  if (!state.dividends[ticker]) state.dividends[ticker]=[];
+  state.dividends[ticker] = state.dividends[ticker].filter(d=>d.exDate!==exDate);
+  state.dividends[ticker].push({exDate, amount, source:'manual'});
+  state.dividends[ticker].sort((a,b)=>a.exDate.localeCompare(b.exDate));
+  saveState(); closeModal('modalDividend'); render();
+  toast(`Added: ${displayTicker(ticker)} DPU S$${amount.toFixed(4)} ex-date ${fmtDate(exDate)}`,'success');
 }
 
-// ─────────────────────────────────────────
-// TOAST
-// ─────────────────────────────────────────
-function toast(msg, type = 'info') {
+// ══════════════════════════════════════════
+// MODAL HELPERS
+// ══════════════════════════════════════════
+function openModal(id) { document.getElementById(id).classList.add('open'); }
+function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+
+function toast(msg, type='info') {
   const wrap = document.getElementById('toastWrap');
   const el = document.createElement('div');
-  el.className = `toast ${type}`;
-  el.textContent = msg;
+  el.className = `toast ${type}`; el.textContent = msg;
   wrap.appendChild(el);
-  setTimeout(() => el.remove(), 4000);
+  setTimeout(()=>el.remove(), 4500);
 }
 
-// ─────────────────────────────────────────
-// OFFLINE DETECTION
-// ─────────────────────────────────────────
+// ══════════════════════════════════════════
+// OFFLINE + SW
+// ══════════════════════════════════════════
 function updateOnlineStatus() {
   document.body.classList.toggle('offline', !navigator.onLine);
-  if (!navigator.onLine) setSyncStatus('Offline', 'error');
+  if (!navigator.onLine) setSyncStatus('Offline','error');
 }
-
-window.addEventListener('online', () => { updateOnlineStatus(); });
+window.addEventListener('online', updateOnlineStatus);
 window.addEventListener('offline', updateOnlineStatus);
 
-// Drop zone drag events
 document.addEventListener('DOMContentLoaded', () => {
-  const dz = document.getElementById('dropZone');
-  dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('drag-over'); });
-  dz.addEventListener('dragleave', () => dz.classList.remove('drag-over'));
-  dz.addEventListener('drop', e => {
-    e.preventDefault();
-    dz.classList.remove('drag-over');
-    const file = e.dataTransfer.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = ev => document.getElementById('csvPaste').value = ev.target.result;
-      reader.readAsText(file);
-    }
-  });
-
-  // Close modals on overlay click
-  document.querySelectorAll('.modal-overlay').forEach(overlay => {
-    overlay.addEventListener('click', e => {
-      if (e.target === overlay) overlay.classList.remove('open');
-    });
-  });
+  document.querySelectorAll('.modal-overlay').forEach(o =>
+    o.addEventListener('click', e => { if(e.target===o) o.classList.remove('open'); })
+  );
 });
 
-// ─────────────────────────────────────────
-// SERVICE WORKER
-// ─────────────────────────────────────────
 if ('serviceWorker' in navigator) {
-  const swPath = new URL('./sw.js', location.href).href;
-  navigator.serviceWorker.register(swPath, { scope: './' }).catch(() => {});
+  navigator.serviceWorker.register(new URL('./sw.js', location.href).href, {scope:'./'}).catch(()=>{});
 }
 
-// ─────────────────────────────────────────
+// ══════════════════════════════════════════
 // INIT
-// ─────────────────────────────────────────
+// ══════════════════════════════════════════
 loadState();
 updateOnlineStatus();
 render();
 
 if (state.lastSync) {
   const elapsed = Date.now() - new Date(state.lastSync).getTime();
-  setSyncStatus(`Synced ${Math.floor(elapsed / 60000)}m ago`, 'ok');
+  setSyncStatus(`Synced ${Math.floor(elapsed/60000)}m ago`,'ok');
 }
-
-// Auto-sync once on load if online and has holdings
-if (navigator.onLine && state.holdings.length && !state.lastSync) {
-  setTimeout(syncAll, 1200);
-} else if (navigator.onLine && state.holdings.length && state.lastSync) {
-  const elapsed = Date.now() - new Date(state.lastSync).getTime();
-  if (elapsed > 4 * 3600 * 1000) setTimeout(syncAll, 1200); // re-sync if >4h old
+if (navigator.onLine && state.holdings.length) {
+  if (!state.lastSync || Date.now()-new Date(state.lastSync).getTime() > 4*3600*1000) {
+    setTimeout(syncAll, 1500);
+  }
 }
 </script>
 </body>
