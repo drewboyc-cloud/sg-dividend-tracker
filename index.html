@@ -904,7 +904,8 @@ function renderCurrentYear(el) {
 
     rows += `<tr>
       <td>
-        <span class="ticker-badge">${h.name || displayTicker(h.ticker)}</span>
+        <span class="ticker-badge" onclick="quickRename('${h.id}')" title="Tap to rename" style="cursor:pointer">${h.name || displayTicker(h.ticker)}</span>
+        <span style="font-size:10px;color:var(--muted);margin-left:4px;vertical-align:middle">✎</span>
         ${syncErr ? `<div style="font-size:10px;color:var(--accent2);margin-top:3px">⚠ ${syncErr}</div>` : ''}
       </td>
       <td class="right units">${Number(h.units).toLocaleString()}</td>
@@ -1020,6 +1021,17 @@ function editHolding(id) {
   if (h) openHoldingModal(h);
 }
 
+function quickRename(id) {
+  const h = state.holdings.find(h => h.id === id);
+  if (!h) return;
+  const current = h.name || displayTicker(h.ticker);
+  const newName = prompt(`Rename "${current}" to:`, current);
+  if (newName === null) return; // cancelled
+  h.name = newName.trim() || displayTicker(h.ticker);
+  saveState();
+  render();
+}
+
 function saveHolding() {
   const ticker = normalizeTicker(document.getElementById('inputTicker').value);
   const name = document.getElementById('inputName').value.trim() || displayTicker(ticker);
@@ -1096,36 +1108,46 @@ function parseYahooCSV(csv) {
   const lines = csv.split('\n').filter(l => l.trim());
   if (lines.length < 2) return 0;
 
-  const header = lines[0].split(',').map(h => h.trim().replace(/"/g, '').toLowerCase());
-  const symIdx = header.findIndex(h => h === 'symbol' || h === 'ticker');
-  const qtyIdx = header.findIndex(h => h === 'quantity' || h === 'shares' || h === 'qty');
-  const dateIdx = header.findIndex(h => h === 'trade date' || h === 'purchase date' || h === 'date');
+  // Parse header — strip quotes, collapse whitespace, lowercase
+  const header = parseCSVLine(lines[0]).map(h => h.replace(/"/g, '').trim().toLowerCase().replace(/\s+/g, ' '));
+
+  const symIdx  = header.findIndex(h => ['symbol','ticker','stock symbol'].includes(h));
+  const qtyIdx  = header.findIndex(h => ['quantity','shares','qty','no. of shares','number of shares','units'].includes(h));
+  const dateIdx = header.findIndex(h => ['trade date','purchase date','buy date','date purchased','acquisition date','purchased date','date'].includes(h));
+
+  // Debug: show detected columns in console
+  console.log('YF CSV headers:', header);
+  console.log('sym:', symIdx, 'qty:', qtyIdx, 'date:', dateIdx);
 
   if (symIdx === -1) return parseSimpleCSV(csv); // fallback
 
-  let added = 0;
+  let added = 0, updated = 0;
   for (let i = 1; i < lines.length; i++) {
     const cols = parseCSVLine(lines[i]);
     if (!cols[symIdx]) continue;
     const ticker = normalizeTicker(cols[symIdx]);
-    if (!ticker || ticker === 'SYMBOL') continue;
-    const units = parseInt((cols[qtyIdx] || '').replace(/[^0-9.-]/g, ''), 10) || 0;
+    if (!ticker || ticker.toUpperCase() === 'SYMBOL' || ticker.toUpperCase() === 'TICKER') continue;
+
+    // Quantity — strip commas, currency symbols, spaces
+    const rawQty = (cols[qtyIdx] || '').replace(/[^0-9.-]/g, '');
+    const units = parseInt(rawQty, 10) || 0;
     if (units <= 0) continue;
 
-    let acqDate = dateIdx !== -1 ? cols[dateIdx] : '';
-    acqDate = normalizeDate(acqDate) || dateStr(new Date(CURRENT_YEAR - 1, 0, 1));
+    let acqDate = '';
+    if (dateIdx !== -1) acqDate = normalizeDate(cols[dateIdx]);
+    if (!acqDate) acqDate = dateStr(new Date(CURRENT_YEAR - 1, 0, 1));
 
-    // Update existing or add new
     const existing = state.holdings.find(h => h.ticker === ticker);
     if (existing) {
       existing.units = units;
-      existing.acquisitionDate = acqDate;
+      if (dateIdx !== -1 && normalizeDate(cols[dateIdx])) existing.acquisitionDate = acqDate;
+      updated++;
     } else {
-      const name = displayTicker(ticker);
-      state.holdings.push({ id: uid(), ticker, name, units, acquisitionDate: acqDate });
+      state.holdings.push({ id: uid(), ticker, name: displayTicker(ticker), units, acquisitionDate: acqDate });
       added++;
     }
   }
+  if (updated > 0) toast(`Updated ${updated} existing holding${updated!==1?'s':''}`, 'info');
   return added;
 }
 
@@ -1166,10 +1188,18 @@ function parseCSVLine(line) {
 
 function normalizeDate(str) {
   if (!str) return '';
-  str = str.trim().replace(/"/g, '');
-  // Try YYYY-MM-DD
+  // Strip quotes, collapse multiple spaces (Yahoo Finance uses "Jan  9, 2026")
+  str = str.replace(/"/g, '').trim().replace(/\s+/g, ' ');
+  if (!str) return '';
+  // YYYY-MM-DD
   if (/^\d{4}-\d{2}-\d{2}$/.test(str)) return str;
-  // Try "Jan 15, 2023" or "Jan  9, 2023"
+  // MM/DD/YYYY or DD/MM/YYYY
+  const slash = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
+  if (slash) {
+    const d = new Date(`${slash[3]}-${slash[1].padStart(2,'0')}-${slash[2].padStart(2,'0')}`);
+    if (!isNaN(d)) return dateStr(d);
+  }
+  // "Jan 9, 2026" / "09 Jan 2026" / any format JS can parse
   const d = new Date(str);
   if (!isNaN(d)) return dateStr(d);
   return '';
