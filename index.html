@@ -1193,6 +1193,10 @@ function normalizeDate(str) {
   if (!str) return '';
   // YYYY-MM-DD
   if (/^\d{4}-\d{2}-\d{2}$/.test(str)) return str;
+  // YYYYMMDD (Yahoo Finance Trade Date format e.g. 20260603)
+  if (/^\d{8}$/.test(str)) return `${str.slice(0,4)}-${str.slice(4,6)}-${str.slice(6,8)}`;
+  // YYYY/MM/DD
+  if (/^\d{4}\/\d{2}\/\d{2}$/.test(str)) return str.replace(/\//g, '-');
   // MM/DD/YYYY or DD/MM/YYYY
   const slash = str.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})$/);
   if (slash) {
