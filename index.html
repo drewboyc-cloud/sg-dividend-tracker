@@ -12,216 +12,213 @@
 <link rel="apple-touch-icon" href="icon-180.png">
 <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
 <style>
-  :root {
-    --bg:#0f1117; --surface:#1a1f2e; --surface2:#222840; --surface3:#2a3050;
-    --border:#2d3748; --accent:#00d4aa; --accent2:#f6ad55; --accent3:#63b3ed;
-    --text:#e2e8f0; --muted:#718096; --danger:#fc8181; --green:#68d391;
-    --radius:12px; --shadow:0 4px 24px rgba(0,0,0,0.4);
-  }
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
+:root{
+  --bg:#0f1117;--surface:#1a1f2e;--surface2:#222840;--surface3:#2a3050;
+  --border:#2d3748;--accent:#00d4aa;--accent2:#f6ad55;--accent3:#63b3ed;
+  --red:#fc8181;--green:#68d391;--text:#e2e8f0;--muted:#718096;
+  --radius:12px;--shadow:0 4px 24px rgba(0,0,0,.4);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
 
-  /* ── Header ── */
-  header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
-  .logo{display:flex;align-items:center;gap:10px}
-  .logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),#0099aa);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#0f1117}
-  .logo-text{font-size:17px;font-weight:700;letter-spacing:-0.3px}
-  .logo-sub{font-size:11px;color:var(--muted);margin-top:1px}
-  .header-actions{display:flex;gap:8px;align-items:center}
-  .sync-status{font-size:11px;color:var(--muted);text-align:right;line-height:1.4}
-  .sync-status.ok{color:var(--accent)}
-  .sync-status.error{color:var(--accent2)}
+/* Header */
+header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
+.logo{display:flex;align-items:center;gap:10px}
+.logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),#0099aa);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#0f1117}
+.logo-text{font-size:17px;font-weight:700;letter-spacing:-.3px}
+.logo-sub{font-size:11px;color:var(--muted);margin-top:1px}
+.header-actions{display:flex;gap:8px;align-items:center}
+.sync-status{font-size:11px;color:var(--muted);text-align:right;line-height:1.4}
+.sync-status.ok{color:var(--accent)}.sync-status.error{color:var(--accent2)}
 
-  /* ── Buttons ── */
-  button{cursor:pointer;border:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;transition:all 0.15s}
-  .btn-primary{background:var(--accent);color:#0f1117;padding:8px 16px}
-  .btn-primary:hover{background:#00bfa0}
-  .btn-secondary{background:var(--surface2);color:var(--text);padding:8px 14px;border:1px solid var(--border)}
-  .btn-secondary:hover{background:var(--border)}
-  .btn-icon{background:var(--surface2);color:var(--text);padding:8px 10px;border:1px solid var(--border);font-size:16px}
-  .btn-icon:hover{background:var(--border)}
-  .btn-sm{padding:5px 10px;font-size:12px}
-  .btn-xs{padding:3px 8px;font-size:11px;border-radius:6px}
-  .btn-ghost{background:transparent;color:var(--muted);padding:3px 7px;border-radius:6px;font-size:13px}
-  .btn-ghost:hover{background:var(--surface2);color:var(--text)}
-  .btn-danger-ghost{background:transparent;color:var(--danger);padding:3px 7px;border-radius:6px;font-size:12px}
-  .btn-danger-ghost:hover{background:rgba(252,129,129,0.1)}
+/* Buttons */
+button{cursor:pointer;border:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;transition:all .15s}
+.btn-primary{background:var(--accent);color:#0f1117;padding:8px 16px}
+.btn-primary:hover{background:#00bfa0}
+.btn-secondary{background:var(--surface2);color:var(--text);padding:8px 14px;border:1px solid var(--border)}
+.btn-secondary:hover{background:var(--border)}
+.btn-icon{background:var(--surface2);color:var(--text);padding:8px 10px;border:1px solid var(--border);font-size:16px}
+.btn-icon:hover{background:var(--border)}
+.btn-sm{padding:5px 10px;font-size:12px}
+.btn-xs{padding:3px 8px;font-size:11px;border-radius:6px}
+.btn-ghost{background:transparent;color:var(--muted);padding:3px 8px;border-radius:6px;font-size:13px}
+.btn-ghost:hover{background:var(--surface2);color:var(--text)}
+.btn-sell{background:rgba(252,129,129,.15);color:var(--red);border:1px solid rgba(252,129,129,.3);padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700}
+.btn-sell:hover{background:rgba(252,129,129,.25)}
+.btn-buy{background:rgba(0,212,170,.12);color:var(--accent);border:1px solid rgba(0,212,170,.3);padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700}
+.btn-buy:hover{background:rgba(0,212,170,.2)}
 
-  /* ── KPI cards ── */
-  .summary{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:20px 20px 0}
-  .kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;position:relative;overflow:hidden}
-  .kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
-  .kpi-card.received::before{background:linear-gradient(90deg,var(--accent),#00bfa0)}
-  .kpi-card.projected::before{background:linear-gradient(90deg,var(--accent2),#e8963a)}
-  .kpi-label{font-size:11px;text-transform:uppercase;letter-spacing:0.8px;color:var(--muted);margin-bottom:10px}
-  .kpi-value{font-size:28px;font-weight:800;letter-spacing:-1px;line-height:1}
-  .kpi-value.received{color:var(--accent)}
-  .kpi-value.projected{color:var(--accent2)}
-  .kpi-sub{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5}
-  .kpi-sub span{color:var(--text)}
+/* KPI cards */
+.summary{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:20px 20px 0}
+.kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;position:relative;overflow:hidden}
+.kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.kpi-card.received::before{background:linear-gradient(90deg,var(--accent),#00bfa0)}
+.kpi-card.projected::before{background:linear-gradient(90deg,var(--accent2),#e8963a)}
+.kpi-label{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--muted);margin-bottom:10px}
+.kpi-value{font-size:28px;font-weight:800;letter-spacing:-1px;line-height:1}
+.kpi-value.received{color:var(--accent)}.kpi-value.projected{color:var(--accent2)}
+.kpi-sub{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5}
+.kpi-sub span{color:var(--text)}
 
-  /* ── Tabs ── */
-  .tabs-wrapper{padding:16px 20px 0;border-bottom:1px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch}
-  .tabs{display:flex;gap:2px;min-width:max-content}
-  .tab{padding:8px 18px;font-size:13px;font-weight:600;color:var(--muted);background:transparent;border-radius:8px 8px 0 0;border:none;cursor:pointer;transition:all 0.15s;white-space:nowrap}
-  .tab:hover{color:var(--text);background:var(--surface2)}
-  .tab.active{color:var(--accent);background:var(--surface);border:1px solid var(--border);border-bottom:1px solid var(--surface);margin-bottom:-1px}
+/* Tabs */
+.tabs-wrapper{padding:16px 20px 0;border-bottom:1px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch}
+.tabs{display:flex;gap:2px;min-width:max-content}
+.tab{padding:8px 18px;font-size:13px;font-weight:600;color:var(--muted);background:transparent;border-radius:8px 8px 0 0;border:none;cursor:pointer;transition:all .15s;white-space:nowrap}
+.tab:hover{color:var(--text);background:var(--surface2)}
+.tab.active{color:var(--accent);background:var(--surface);border:1px solid var(--border);border-bottom:1px solid var(--surface);margin-bottom:-1px}
 
-  /* ── Tab content ── */
-  .tab-content{padding:20px}
+/* Tab content */
+.tab-content{padding:20px}
+.section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
+.section-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)}
 
-  /* ── Section header ── */
-  .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
-  .section-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--muted)}
+/* Holdings list (cards, not table — mobile friendly) */
+.holdings-list{display:flex;flex-direction:column;gap:10px}
+.holding-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
 
-  /* ── Holdings table ── */
-  .table-wrap{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--border)}
-  table{width:100%;border-collapse:collapse}
-  thead{background:var(--surface2)}
-  th{padding:11px 14px;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--muted);text-align:left;white-space:nowrap}
-  th.right,td.right{text-align:right}
-  td{padding:11px 14px;font-size:14px;border-top:1px solid var(--border);vertical-align:top}
+/* Card header row */
+.card-header{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;cursor:pointer;user-select:none}
+.card-header:hover{background:rgba(255,255,255,.02)}
+.card-left{flex:1;min-width:0}
+.card-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
 
-  /* Holding main row */
-  .holding-row{cursor:pointer}
-  .holding-row:hover td{background:rgba(255,255,255,0.02)}
-  .holding-row td:first-child{min-width:120px}
+/* Ticker */
+.ticker-badge{display:inline-flex;align-items:center;gap:5px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 9px;font-size:12px;font-weight:700;font-family:monospace;letter-spacing:.5px;color:var(--accent3)}
+.expand-arrow{font-size:10px;color:var(--muted);transition:transform .2s;margin-left:2px}
+.card-header.expanded .expand-arrow{transform:rotate(90deg)}
+.holding-meta{font-size:12px;color:var(--muted);margin-top:5px;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.meta-units{color:var(--text);font-weight:600}
+.meta-avg{color:var(--accent3)}
+.meta-pnl-pos{color:var(--green);font-size:11px}
+.meta-pnl-neg{color:var(--red);font-size:11px}
 
-  /* Ticker badge */
-  .ticker-badge{display:inline-flex;align-items:center;gap:5px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 9px;font-size:12px;font-weight:700;font-family:monospace;letter-spacing:0.5px;color:var(--accent3);cursor:pointer;transition:all 0.15s;user-select:none}
-  .ticker-badge:hover{border-color:var(--accent3);background:var(--surface3)}
-  .ticker-badge .expand-arrow{font-size:10px;color:var(--muted);transition:transform 0.2s}
-  .ticker-badge.expanded .expand-arrow{transform:rotate(90deg)}
-  .holding-name{font-size:11px;color:var(--muted);margin-top:3px;font-style:italic}
+/* Dividend chips */
+.div-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:7px}
+.div-chip{display:inline-block;background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.2);border-radius:4px;padding:2px 7px;font-size:10px;color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap}
+.div-chip.proj{background:rgba(246,173,85,.1);border-color:rgba(246,173,85,.2);color:var(--accent2)}
 
-  /* Inline dividend chips (shown without expanding) */
-  .div-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
-  .div-chip{display:inline-block;background:rgba(0,212,170,0.1);border:1px solid rgba(0,212,170,0.2);border-radius:4px;padding:2px 6px;font-size:10px;color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap}
-  .div-chip.proj{background:rgba(246,173,85,0.1);border-color:rgba(246,173,85,0.2);color:var(--accent2)}
+/* Card right amounts */
+.card-ytd{font-size:15px;font-weight:800;color:var(--accent)}
+.card-proj{font-size:12px;color:var(--accent2)}
+.card-proj-label{font-size:10px;color:var(--muted);text-align:right}
+.card-actions{display:flex;gap:4px;margin-top:6px}
 
-  /* Amounts */
-  .amount-green{color:var(--accent);font-weight:700}
-  .amount-amber{color:var(--accent2);font-weight:600}
-  .amount-muted{color:var(--muted)}
-  .units{font-variant-numeric:tabular-nums}
+/* Tags */
+.tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px}
+.tag-est{background:rgba(246,173,85,.15);color:var(--accent2)}
+.tag-conf{background:rgba(0,212,170,.12);color:var(--accent)}
+.tag-buy{background:rgba(0,212,170,.12);color:var(--accent);font-size:9px;padding:1px 5px;border-radius:3px}
+.tag-sell{background:rgba(252,129,129,.12);color:var(--red);font-size:9px;padding:1px 5px;border-radius:3px}
 
-  /* Tags */
-  .tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;text-transform:uppercase;letter-spacing:0.5px}
-  .tag-est{background:rgba(246,173,85,0.15);color:var(--accent2)}
-  .tag-conf{background:rgba(0,212,170,0.12);color:var(--accent)}
+/* Expanded detail */
+.card-detail{border-top:1px solid var(--border);background:var(--surface2);padding:16px}
+.detail-section{margin-bottom:18px}
+.detail-section:last-child{margin-bottom:0}
+.detail-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:10px}
 
-  /* ── Expanded detail section ── */
-  .detail-row{display:none}
-  .detail-row.open{display:table-row}
-  .detail-row td{background:var(--surface2);padding:0;border-top:none}
-  .detail-inner{padding:16px 16px 20px;border-top:1px dashed var(--border)}
+/* Transactions list */
+.txn-list{display:flex;flex-direction:column;gap:6px}
+.txn-item{display:flex;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:9px 12px;gap:8px}
+.txn-left{flex:1}
+.txn-type-date{display:flex;align-items:center;gap:6px;margin-bottom:3px}
+.txn-detail{font-size:11px;color:var(--muted)}
+.txn-right{text-align:right;flex-shrink:0}
+.txn-total{font-size:13px;font-weight:700}
+.txn-total.buy{color:var(--accent3)}
+.txn-total.sell{color:var(--red)}
+.txn-pnl{font-size:11px;margin-top:2px}
 
-  /* Tranches */
-  .detail-section-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:0.6px;color:var(--muted);margin-bottom:10px}
-  .tranche-list{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
-  .tranche-item{display:flex;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:8px 12px;gap:8px}
-  .tranche-info{flex:1}
-  .tranche-units{font-size:13px;font-weight:700;color:var(--text)}
-  .tranche-date{font-size:11px;color:var(--muted);margin-top:2px}
-  .tranche-earned{font-size:11px;color:var(--accent);margin-top:2px}
-  .tranche-actions{display:flex;gap:4px;flex-shrink:0}
+/* FIFO summary box */
+.fifo-box{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 14px;display:grid;grid-template-columns:1fr 1fr;gap:8px 16px}
+.fifo-item label{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);display:block;margin-bottom:2px}
+.fifo-item .val{font-size:14px;font-weight:700}
+.fifo-item .val.green{color:var(--green)}.fifo-item .val.red{color:var(--red)}.fifo-item .val.teal{color:var(--accent)}
 
-  /* Add tranche inline form */
-  .add-tranche-form{display:none;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px;margin-top:8px;gap:10px;flex-wrap:wrap;align-items:flex-end}
-  .add-tranche-form.open{display:flex}
-  .add-tranche-form .form-group{margin-bottom:0;flex:1;min-width:100px}
-  .add-tranche-form label{display:block;font-size:10px;font-weight:600;color:var(--muted);margin-bottom:4px;text-transform:uppercase;letter-spacing:0.4px}
-  .add-tranche-form input{background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);padding:7px 10px;font-family:inherit;font-size:13px;width:100%}
-  .add-tranche-form input:focus{outline:none;border-color:var(--accent)}
+/* Dividend history */
+.div-history{display:flex;flex-direction:column;gap:0}
+.div-event{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 0;border-top:1px solid var(--border);font-size:12px}
+.div-event:first-child{border-top:none}
+.div-event-left{display:flex;flex-direction:column;gap:2px}
+.div-event-date{font-size:11px;color:var(--muted)}
+.div-event-dpu{font-family:monospace;font-size:13px;font-weight:600;color:var(--text)}
+.div-event-right{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0}
+.div-event-total{font-weight:700;font-variant-numeric:tabular-nums;font-size:13px;color:var(--accent)}
+.div-event-total.proj{color:var(--accent2)}
+.div-event-status{font-size:10px;color:var(--muted)}
+.yr-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);padding:8px 0 4px;border-top:1px solid var(--border);margin-top:4px}
+.yr-label:first-child{border-top:none;margin-top:0}
 
-  /* Dividend history */
-  .div-history{margin-top:4px}
-  .div-event{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 0;border-top:1px solid var(--border);font-size:12px}
-  .div-event:first-child{border-top:none}
-  .div-event-left{display:flex;flex-direction:column;gap:2px}
-  .div-event-date{color:var(--muted);font-size:11px;font-variant-numeric:tabular-nums}
-  .div-event-dpu{color:var(--text);font-family:monospace;font-size:13px;font-weight:600}
-  .div-event-right{display:flex;flex-direction:column;align-items:flex-end;gap:2px;flex-shrink:0}
-  .div-event-total{color:var(--accent);font-weight:700;font-variant-numeric:tabular-nums;font-size:13px}
-  .div-event-total.proj{color:var(--accent2)}
-  .div-event-status{font-size:10px;color:var(--muted)}
+/* Past year card */
+.year-summary-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;text-align:center;margin-bottom:20px}
+.year-total-value{font-size:40px;font-weight:900;color:var(--accent);letter-spacing:-1.5px}
+.year-note{font-size:12px;color:var(--muted);margin-top:8px}
 
-  /* Past year card */
-  .year-summary-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;text-align:center;margin-bottom:20px}
-  .year-total-label{font-size:13px;color:var(--muted);margin-bottom:10px}
-  .year-total-value{font-size:40px;font-weight:900;color:var(--accent);letter-spacing:-1.5px}
-  .year-note{font-size:12px;color:var(--muted);margin-top:8px}
+/* Empty state */
+.empty-state{text-align:center;padding:48px 20px;color:var(--muted)}
+.empty-state .icon{font-size:40px;margin-bottom:16px}
+.empty-state h3{font-size:17px;color:var(--text);margin-bottom:8px}
+.empty-state p{font-size:14px;line-height:1.6;margin-bottom:20px}
 
-  /* Empty state */
-  .empty-state{text-align:center;padding:48px 20px;color:var(--muted)}
-  .empty-state .icon{font-size:40px;margin-bottom:16px}
-  .empty-state h3{font-size:17px;color:var(--text);margin-bottom:8px}
-  .empty-state p{font-size:14px;line-height:1.6;margin-bottom:20px}
+/* Modals */
+.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);width:100%;max-width:500px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow)}
+.modal-header{padding:20px 20px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.modal-title{font-size:17px;font-weight:700}
+.modal-close{background:var(--surface2);color:var(--muted);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:14px}
+.modal-close:hover{color:var(--text)}
+.modal-body{padding:20px}
+.modal-footer{padding:16px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px}
 
-  /* ── Modals ── */
-  .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.7);z-index:200;align-items:center;justify-content:center;padding:20px}
-  .modal-overlay.open{display:flex}
-  .modal{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);width:100%;max-width:500px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow)}
-  .modal-header{padding:20px 20px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
-  .modal-title{font-size:17px;font-weight:700}
-  .modal-close{background:var(--surface2);color:var(--muted);border:1px solid var(--border);border-radius:6px;padding:6px 10px;font-size:14px}
-  .modal-close:hover{color:var(--text)}
-  .modal-body{padding:20px}
-  .modal-footer{padding:16px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px}
+/* Forms */
+.form-group{margin-bottom:14px}
+label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
+input,select{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:10px 12px;font-family:inherit;font-size:14px;transition:border-color .15s}
+input:focus,select:focus{outline:none;border-color:var(--accent)}
+.form-hint{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.5}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
 
-  /* Forms */
-  .form-group{margin-bottom:16px}
-  label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:0.5px}
-  input,select,textarea{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:10px 12px;font-family:inherit;font-size:14px;transition:border-color 0.15s}
-  input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent)}
-  .form-hint{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.5}
-  .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+/* Info boxes */
+.info-box{background:rgba(0,212,170,.08);border:1px solid rgba(0,212,170,.25);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--text);line-height:1.6;margin-bottom:14px}
+.info-box.warning{background:rgba(246,173,85,.08);border-color:rgba(246,173,85,.25)}
+.info-box strong{color:var(--accent)}.info-box.warning strong{color:var(--accent2)}
+.divider{height:1px;background:var(--border);margin:16px 0}
 
-  /* Info boxes */
-  .info-box{background:rgba(0,212,170,0.08);border:1px solid rgba(0,212,170,0.25);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--text);line-height:1.6;margin-bottom:16px}
-  .info-box.warning{background:rgba(246,173,85,0.08);border-color:rgba(246,173,85,0.25)}
-  .info-box strong{color:var(--accent)}
-  .info-box.warning strong{color:var(--accent2)}
-  .divider{height:1px;background:var(--border);margin:16px 0}
+/* Modal transaction list */
+.modal-txn-list{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;min-height:10px}
+.modal-txn-item{display:flex;align-items:center;justify-content:space-between;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;gap:8px}
+.modal-txn-text{font-size:13px;color:var(--text)}
+.modal-txn-sub{font-size:11px;color:var(--muted);margin-top:2px}
+.no-txns{font-size:12px;color:var(--muted);padding:8px 0;text-align:center}
 
-  /* Tranche list in modal */
-  .modal-tranche-list{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;min-height:20px}
-  .modal-tranche-item{display:flex;align-items:center;justify-content:space-between;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 12px}
-  .modal-tranche-item span{font-size:13px;color:var(--text)}
-  .modal-tranche-item .hint{font-size:11px;color:var(--muted);margin-top:2px}
-  .no-tranches{font-size:12px;color:var(--muted);padding:8px 0;text-align:center}
+/* Type toggle */
+.type-toggle{display:flex;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:14px}
+.type-toggle button{flex:1;padding:9px;border:none;border-radius:0;font-size:13px;font-weight:700;background:var(--surface2);color:var(--muted)}
+.type-toggle button.active-buy{background:rgba(0,212,170,.2);color:var(--accent)}
+.type-toggle button.active-sell{background:rgba(252,129,129,.2);color:var(--red)}
 
-  /* Spinner & toast */
-  @keyframes spin{to{transform:rotate(360deg)}}
-  .spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin 0.7s linear infinite;vertical-align:middle;margin-right:6px}
-  .toast-wrap{position:fixed;bottom:24px;right:20px;display:flex;flex-direction:column;gap:8px;z-index:300}
-  .toast{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:13px;box-shadow:var(--shadow);max-width:320px}
-  .toast.success{border-left:3px solid var(--accent)}
-  .toast.error{border-left:3px solid var(--danger)}
-  .toast.info{border-left:3px solid var(--accent3)}
-  @keyframes slideIn{from{transform:translateX(20px);opacity:0}to{transform:translateX(0);opacity:1}}
-  .toast{animation:slideIn 0.2s ease}
+/* Spinner & toast */
+@keyframes spin{to{transform:rotate(360deg)}}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
+.toast-wrap{position:fixed;bottom:24px;right:20px;display:flex;flex-direction:column;gap:8px;z-index:300}
+.toast{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:13px;box-shadow:var(--shadow);max-width:320px;animation:slideIn .2s ease}
+.toast.success{border-left:3px solid var(--accent)}.toast.error{border-left:3px solid var(--red)}.toast.info{border-left:3px solid var(--accent3)}
+@keyframes slideIn{from{transform:translateX(20px);opacity:0}to{transform:translateX(0);opacity:1}}
 
-  /* Offline bar */
-  .offline-bar{display:none;background:rgba(246,173,85,0.12);border-bottom:1px solid rgba(246,173,85,0.3);padding:8px 20px;font-size:12px;color:var(--accent2);text-align:center}
-  body.offline .offline-bar{display:block}
+/* Offline */
+.offline-bar{display:none;background:rgba(246,173,85,.12);border-bottom:1px solid rgba(246,173,85,.3);padding:8px 20px;font-size:12px;color:var(--accent2);text-align:center}
+body.offline .offline-bar{display:block}
+.footer{padding:20px;text-align:center;font-size:11px;color:var(--muted);border-top:1px solid var(--border);margin-top:20px}
 
-  /* Footer */
-  .footer{padding:20px;text-align:center;font-size:11px;color:var(--muted);border-top:1px solid var(--border);margin-top:20px}
-
-  /* Responsive */
-  @media(max-width:500px){
-    .summary{gap:10px;padding:14px 14px 0}
-    .kpi-value{font-size:22px}
-    .kpi-card{padding:14px}
-    .tab-content{padding:14px}
-    .tabs-wrapper{padding:12px 14px 0}
-    header{padding:12px 14px}
-    .form-row{grid-template-columns:1fr}
-    .div-event{grid-template-columns:auto 1fr auto}
-    .div-event-status{display:none}
-  }
-  @media(max-width:380px){.kpi-value{font-size:18px}.logo-text{font-size:15px}}
+/* Responsive */
+@media(max-width:500px){
+  .summary{gap:10px;padding:14px 14px 0}.kpi-value{font-size:22px}.kpi-card{padding:14px}
+  .tab-content{padding:14px}.tabs-wrapper{padding:12px 14px 0}header{padding:12px 14px}
+  .form-row{grid-template-columns:1fr}.form-row-3{grid-template-columns:1fr 1fr}
+  .fifo-box{grid-template-columns:1fr 1fr}
+}
+@media(max-width:380px){.kpi-value{font-size:18px}.logo-text{font-size:15px}}
 </style>
 </head>
 <body>
@@ -238,12 +235,11 @@
   </div>
   <div class="header-actions">
     <div class="sync-status" id="syncStatus">Not synced</div>
-    <button class="btn-icon" id="syncBtn" title="Sync dividend data from Yahoo Finance" onclick="syncAll()">⟳</button>
+    <button class="btn-icon" id="syncBtn" title="Sync dividend data" onclick="syncAll()">⟳</button>
     <button class="btn-primary btn-sm" onclick="openAddHolding()">+ Add</button>
   </div>
 </header>
 
-<!-- KPI cards -->
 <div class="summary">
   <div class="kpi-card received">
     <div class="kpi-label">Received YTD <span id="ytdYear"></span></div>
@@ -257,20 +253,14 @@
   </div>
 </div>
 
-<!-- Year tabs -->
-<div class="tabs-wrapper">
-  <div class="tabs" id="yearTabs"></div>
-</div>
-
-<!-- Tab content -->
+<div class="tabs-wrapper"><div class="tabs" id="yearTabs"></div></div>
 <div class="tab-content" id="tabContent"></div>
-
 <div class="footer" id="footer">Add holdings to get started</div>
 <div class="toast-wrap" id="toastWrap"></div>
 
-<!-- ════════════════════════════════════════
-     Modal: Add / Edit Holding + Tranches
-     ════════════════════════════════════════ -->
+<!-- ═══════════════════════════════
+     Modal: Add / Edit Holding
+     ═══════════════════════════════ -->
 <div class="modal-overlay" id="modalHolding">
   <div class="modal">
     <div class="modal-header">
@@ -283,35 +273,41 @@
         <div class="form-group">
           <label>Ticker Symbol</label>
           <input type="text" id="inputTicker" placeholder="e.g. CICT.SI" autocapitalize="characters">
-          <div class="form-hint">SGX ticker (will add .SI if missing)</div>
         </div>
         <div class="form-group">
           <label>Display Name</label>
           <input type="text" id="inputName" placeholder="e.g. CICT">
-          <div class="form-hint">Your preferred short name</div>
         </div>
       </div>
 
       <div class="divider"></div>
+      <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:12px">Transactions</div>
 
-      <!-- Tranches -->
-      <div class="detail-section-title" style="margin-bottom:10px">Purchase Tranches</div>
-      <div class="modal-tranche-list" id="modalTrancheList"></div>
+      <!-- Existing transactions -->
+      <div class="modal-txn-list" id="modalTxnList"></div>
 
-      <!-- Add tranche row -->
-      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:12px;margin-top:4px">
-        <div style="font-size:11px;font-weight:600;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;margin-bottom:10px">Add Tranche</div>
-        <div class="form-row" style="margin-bottom:10px">
-          <div>
+      <!-- Add transaction form -->
+      <div style="background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:14px;margin-top:4px">
+        <div style="font-size:11px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:.5px;margin-bottom:12px">Add Transaction</div>
+        <div class="type-toggle" id="typeToggle">
+          <button id="btnBuy" class="active-buy" onclick="setTxnType('BUY')">BUY</button>
+          <button id="btnSell" onclick="setTxnType('SELL')">SELL</button>
+        </div>
+        <div class="form-row-3">
+          <div class="form-group" style="margin-bottom:0">
             <label>Units</label>
-            <input type="number" id="trancheUnits" placeholder="e.g. 5000" min="1">
+            <input type="number" id="txnUnits" placeholder="5000" min="1">
           </div>
-          <div>
-            <label>Purchase Date</label>
-            <input type="date" id="trancheDate">
+          <div class="form-group" style="margin-bottom:0">
+            <label>Price/Unit ($)</label>
+            <input type="number" id="txnPrice" placeholder="1.85" step="0.001" min="0">
+          </div>
+          <div class="form-group" style="margin-bottom:0">
+            <label>Date</label>
+            <input type="date" id="txnDate">
           </div>
         </div>
-        <button class="btn-secondary btn-sm" onclick="addTrancheToModal()">+ Add This Tranche</button>
+        <button class="btn-secondary btn-sm" style="margin-top:10px" onclick="addTxnToModal()">+ Add Transaction</button>
       </div>
     </div>
     <div class="modal-footer">
@@ -321,9 +317,9 @@
   </div>
 </div>
 
-<!-- ════════════════════════════════════════
+<!-- ═══════════════════════════════
      Modal: Manual Dividend Entry
-     ════════════════════════════════════════ -->
+     ═══════════════════════════════ -->
 <div class="modal-overlay" id="modalDividend">
   <div class="modal">
     <div class="modal-header">
@@ -332,7 +328,7 @@
     </div>
     <div class="modal-body">
       <div class="info-box warning">
-        Enter the <strong>ex-dividend date</strong> and DPU amount as announced by SGX/the company. This overrides or supplements auto-fetched data.
+        Enter the <strong>ex-dividend date</strong> and DPU as announced by SGX. Only ex-dates where you hold units will count.
       </div>
       <div class="form-group">
         <label>Stock</label>
@@ -344,8 +340,8 @@
           <input type="date" id="divExDate">
         </div>
         <div class="form-group">
-          <label>DPU / Dividend per Unit (SGD)</label>
-          <input type="number" id="divAmount" placeholder="e.g. 0.0540" step="0.0001" min="0">
+          <label>DPU / Dividend (SGD)</label>
+          <input type="number" id="divAmount" placeholder="0.0540" step="0.0001" min="0">
         </div>
       </div>
     </div>
@@ -357,193 +353,194 @@
 </div>
 
 <script>
-// ══════════════════════════════════════════
+// ═══════════════════════════════════════════
 // STATE
-// ══════════════════════════════════════════
+// ═══════════════════════════════════════════
 /*
   holdings: [{
     id, ticker, name,
-    tranches: [{id, units, acquisitionDate}]
+    transactions: [{id, type:'BUY'|'SELL', units, price, date}]
   }]
-  dividends: { ticker: [{exDate, amount, source:'api'|'manual'}] }
+  dividends: { ticker: [{exDate, amount, source}] }
 */
-let state = {
-  holdings: [],
-  dividends: {},
-  lastSync: null,
-  syncErrors: {}
-};
-
-// Temporary tranches being edited in the modal
-let modalTranches = [];
-
+let state = { holdings:[], dividends:{}, lastSync:null, syncErrors:{} };
+let modalTxns = [];   // working copy in modal
+let modalTxnType = 'BUY';
 const TODAY = new Date();
 const CURRENT_YEAR = TODAY.getFullYear();
 let activeYear = CURRENT_YEAR;
-let expandedRows = new Set();
+let expandedIds = new Set();
 
-// ══════════════════════════════════════════
+// ═══════════════════════════════════════════
 // PERSISTENCE + MIGRATION
-// ══════════════════════════════════════════
+// ═══════════════════════════════════════════
 function loadState() {
   try {
-    const saved = localStorage.getItem('sgdiv_state');
-    if (!saved) return;
-    const parsed = JSON.parse(saved);
-    state = { ...state, ...parsed };
-
-    // Migrate old format: {units, acquisitionDate} → tranches array
+    const s = localStorage.getItem('sgdiv_state');
+    if (!s) return;
+    state = { ...state, ...JSON.parse(s) };
+    // Migrate tranches → transactions
     state.holdings = state.holdings.map(h => {
-      if (!h.tranches) {
-        h.tranches = [{
-          id: uid(),
-          units: h.units || 0,
-          acquisitionDate: h.acquisitionDate || dateStr(new Date(CURRENT_YEAR - 1, 0, 1))
-        }];
-        delete h.units;
-        delete h.acquisitionDate;
+      if (h.tranches && !h.transactions) {
+        h.transactions = h.tranches.map(tr => ({
+          id: tr.id || uid(),
+          type: 'BUY',
+          units: Number(tr.units) || 0,
+          price: 0,
+          date: tr.acquisitionDate || dateStr(new Date(CURRENT_YEAR-1,0,1))
+        }));
+        delete h.tranches;
       }
       return h;
     });
-  } catch(e) { console.error('loadState', e); }
+  } catch(e) { console.error(e); }
 }
-
 function saveState() {
   try { localStorage.setItem('sgdiv_state', JSON.stringify(state)); } catch(e) {}
 }
 
-// ══════════════════════════════════════════
+// ═══════════════════════════════════════════
 // UTILITIES
-// ══════════════════════════════════════════
-function fmtSGD(v) { return 'S$' + Math.ceil(Math.max(0,v)).toLocaleString('en-SG'); }
-function fmtSGDx(v) { return 'S$' + v.toLocaleString('en-SG',{minimumFractionDigits:2,maximumFractionDigits:2}); }
-function uid() { return Date.now().toString(36) + Math.random().toString(36).slice(2,7); }
+// ═══════════════════════════════════════════
+function uid() { return Date.now().toString(36)+Math.random().toString(36).slice(2,7); }
 function dateStr(d) { return d instanceof Date ? d.toISOString().split('T')[0] : d; }
-function toDate(s) { if(!s) return null; const d = new Date(s+'T00:00:00'); return isNaN(d)?null:d; }
+function toDate(s) { if(!s) return null; const d=new Date(s+'T00:00:00'); return isNaN(d)?null:d; }
 function fmtDate(s) {
-  const d = toDate(s); if(!d) return s;
+  const d=toDate(s); if(!d) return s;
   return d.toLocaleDateString('en-SG',{day:'numeric',month:'short',year:'numeric'});
 }
-function fmtMonYear(s) {
-  const d = toDate(s); if(!d) return s;
+function fmtMonYr(s) {
+  const d=toDate(s); if(!d) return s;
   return d.toLocaleDateString('en-SG',{month:'short',year:'2-digit'});
+}
+function fmtSGD(v) { return 'S$'+Math.ceil(Math.max(0,isNaN(v)?0:v)).toLocaleString('en-SG'); }
+function fmtSGDx(v) {
+  if(isNaN(v)||v===null) return 'S$0.00';
+  return 'S$'+Number(v).toLocaleString('en-SG',{minimumFractionDigits:2,maximumFractionDigits:2});
+}
+function fmtPrice(v) {
+  if(!v||isNaN(v)) return '—';
+  return '$'+Number(v).toLocaleString('en-SG',{minimumFractionDigits:3,maximumFractionDigits:3});
 }
 function normalizeTicker(t) {
   if(!t) return '';
-  t = t.trim().toUpperCase();
-  if(!t.endsWith('.SI') && !t.includes('.')) t += '.SI';
+  t=t.trim().toUpperCase();
+  if(!t.endsWith('.SI')&&!t.includes('.')) t+='.SI';
   return t;
 }
-function displayTicker(t) { return t.replace(/\.SI$/i,''); }
-function totalUnits(holding) { return holding.tranches.reduce((s,tr)=>s+Number(tr.units),0); }
+function shortTicker(t) { return t.replace(/\.SI$/i,''); }
 
-// ══════════════════════════════════════════
-// DIVIDEND CALCULATIONS
-// ══════════════════════════════════════════
-function getDivEvents(holding, allDivs, year) {
-  const todayStr = dateStr(TODAY);
-  const events = [];
+// ═══════════════════════════════════════════
+// FIFO ENGINE
+// ═══════════════════════════════════════════
+function applyFIFO(transactions) {
+  // Sort by date asc
+  const sorted = [...transactions].sort((a,b)=>a.date.localeCompare(b.date));
+  const buyLots = sorted
+    .filter(t=>t.type==='BUY')
+    .map(t=>({ ...t, remaining: Number(t.units) }));
 
-  const yearDivs = allDivs.filter(d => new Date(d.exDate).getFullYear() === year);
+  let realizedPnL = 0;
+  const sells = sorted.filter(t=>t.type==='SELL');
 
-  for (const div of yearDivs) {
-    let received = 0, projected = 0;
-    const trancheBreakdown = [];
-
-    for (const tr of holding.tranches) {
-      const acq = tr.acquisitionDate;
-      if (!acq || div.exDate < acq) continue; // didn't hold on ex-date
-      const amt = Number(div.amount) * Number(tr.units);
-      if (div.exDate <= todayStr) {
-        received += amt;
-        trancheBreakdown.push({ units: tr.units, acq, amt, status: 'received' });
-      } else {
-        projected += amt;
-        trancheBreakdown.push({ units: tr.units, acq, amt, status: 'projected' });
-      }
-    }
-
-    if (received + projected > 0) {
-      events.push({
-        exDate: div.exDate,
-        amount: div.amount,
-        source: div.source,
-        received,
-        projected,
-        total: received + projected,
-        status: received > 0 ? 'received' : 'projected',
-        trancheBreakdown
-      });
+  for (const sell of sells) {
+    let toSell = Number(sell.units);
+    for (const lot of buyLots) {
+      if (lot.remaining <= 0 || toSell <= 0) continue;
+      const qty = Math.min(lot.remaining, toSell);
+      realizedPnL += qty * (Number(sell.price) - Number(lot.price));
+      lot.remaining -= qty;
+      toSell -= qty;
     }
   }
 
+  const remaining = buyLots.filter(l=>l.remaining>0);
+  const totalUnits = remaining.reduce((s,l)=>s+l.remaining, 0);
+  const totalCost  = remaining.reduce((s,l)=>s+l.remaining*Number(l.price), 0);
+  const avgPrice   = totalUnits > 0 ? totalCost / totalUnits : 0;
+
+  return { buyLots, remaining, totalUnits, avgPrice, realizedPnL };
+}
+
+// Units held on a given ex-date (for dividend eligibility)
+// Rule: BUY date <= exDate counts; SELL date < exDate reduces
+function unitsOnExDate(transactions, exDate) {
+  let units = 0;
+  for (const t of transactions) {
+    if (t.type==='BUY' && t.date<=exDate) units += Number(t.units);
+    if (t.type==='SELL' && t.date<exDate) units -= Number(t.units);
+  }
+  return Math.max(0, units);
+}
+
+// ═══════════════════════════════════════════
+// DIVIDEND CALCULATIONS
+// ═══════════════════════════════════════════
+function buildDivEvents(holding, allDivs, year) {
+  const todayStr = dateStr(TODAY);
+  const yearDivs = allDivs.filter(d=>new Date(d.exDate).getFullYear()===year);
+  const events = [];
+
+  for (const div of yearDivs) {
+    const units = unitsOnExDate(holding.transactions, div.exDate);
+    if (units <= 0) continue;
+    const amt = Number(div.amount) * units;
+    const isPast = div.exDate <= todayStr;
+    events.push({
+      exDate:div.exDate, amount:div.amount, source:div.source,
+      units, totalAmt:amt,
+      received: isPast ? amt : 0,
+      projected: isPast ? 0 : amt
+    });
+  }
   return events;
 }
 
-function getDividendsForHolding(holding, year) {
-  const allDivs = state.dividends[holding.ticker] || [];
-  const events = getDivEvents(holding, allDivs, year);
-  const received = events.reduce((s,e)=>s+e.received, 0);
-  const projected = events.reduce((s,e)=>s+e.projected, 0);
-  const projConf = events.filter(e=>e.source==='api').reduce((s,e)=>s+e.projected,0);
-  const projEst  = events.filter(e=>e.source==='manual'||e.source==='est').reduce((s,e)=>s+e.projected,0);
-  return { received, projected, projConf, projEst, events };
+function getHoldingYearTotals(holding, year) {
+  const base = state.dividends[holding.ticker] || [];
+  const extra = year===CURRENT_YEAR ? estimateFuture(holding, base) : [];
+  const all = [...base, ...extra];
+  const events = buildDivEvents(holding, all, year);
+  return {
+    received: events.reduce((s,e)=>s+e.received, 0),
+    projected: events.reduce((s,e)=>s+e.projected, 0),
+    events
+  };
 }
 
-function estimateFutureDividends(holding, allDivs) {
+function estimateFuture(holding, baseDivs) {
   const todayStr = dateStr(TODAY);
-  const lastYearDivs = allDivs.filter(d => new Date(d.exDate).getFullYear() === CURRENT_YEAR - 1);
-  const thisYearDivs = allDivs.filter(d => new Date(d.exDate).getFullYear() === CURRENT_YEAR);
-  let extras = [];
-
-  for (const div of lastYearDivs) {
-    const lyM = new Date(div.exDate).getMonth();
-    const covered = thisYearDivs.some(d => Math.abs(new Date(d.exDate).getMonth() - lyM) <= 1);
-    if (!covered) {
-      const lyDate = new Date(div.exDate);
-      const estDate = new Date(CURRENT_YEAR, lyM, Math.min(lyDate.getDate(), 28));
-      if (dateStr(estDate) > todayStr) {
-        extras.push({ exDate: dateStr(estDate), amount: div.amount, source: 'est' });
-      }
+  const lyDivs = baseDivs.filter(d=>new Date(d.exDate).getFullYear()===CURRENT_YEAR-1);
+  const tyDivs = baseDivs.filter(d=>new Date(d.exDate).getFullYear()===CURRENT_YEAR);
+  const extras = [];
+  for (const div of lyDivs) {
+    const m = new Date(div.exDate).getMonth();
+    if (tyDivs.some(d=>Math.abs(new Date(d.exDate).getMonth()-m)<=1)) continue;
+    const lyD = new Date(div.exDate);
+    const estDate = new Date(CURRENT_YEAR, m, Math.min(lyD.getDate(),28));
+    if (dateStr(estDate)>todayStr && unitsOnExDate(holding.transactions, dateStr(estDate))>0) {
+      extras.push({exDate:dateStr(estDate), amount:div.amount, source:'est'});
     }
   }
   return extras;
 }
 
-function getAllDivsForHolding(holding, year) {
-  const base = state.dividends[holding.ticker] || [];
-  // For current year, append estimates for missing months
-  if (year === CURRENT_YEAR) {
-    const extra = estimateFutureDividends(holding, base);
-    return [...base, ...extra];
-  }
-  return base;
-}
-
-function getDivsForYear(holding, year) {
-  const all = getAllDivsForHolding(holding, year);
-  return getDivEvents(holding, all, year);
-}
-
 function calcYear(year) {
-  let received = 0, projected = 0;
+  let received=0, projected=0;
   for (const h of state.holdings) {
-    const events = getDivsForYear(h, year);
-    received += events.reduce((s,e)=>s+e.received,0);
-    projected += events.reduce((s,e)=>s+e.projected,0);
+    const t = getHoldingYearTotals(h, year);
+    received += t.received; projected += t.projected;
   }
   return { received, projected };
 }
 
-// ══════════════════════════════════════════
-// YAHOO FINANCE FETCH (3-method fallback)
-// ══════════════════════════════════════════
+// ═══════════════════════════════════════════
+// YAHOO FINANCE FETCH
+// ═══════════════════════════════════════════
 function parseYFJson(json) {
   const raw = json?.chart?.result?.[0]?.events?.dividends || {};
-  return Object.values(raw).map(d => ({
-    exDate: dateStr(new Date(d.date * 1000)),
-    amount: Number(d.amount),
-    source: 'api'
+  return Object.values(raw).map(d=>({
+    exDate:dateStr(new Date(d.date*1000)), amount:Number(d.amount), source:'api'
   })).sort((a,b)=>a.exDate.localeCompare(b.exDate));
 }
 
@@ -551,506 +548,488 @@ async function fetchYFDividends(ticker) {
   const p1 = Math.floor(Date.now()/1000 - 6*365.25*86400);
   const p2 = Math.floor(Date.now()/1000 + 365*86400);
   const yfUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?events=dividends&interval=3mo&period1=${p1}&period2=${p2}`;
-
-  // Method 1 — direct
-  try {
-    const r = await fetch(yfUrl, { headers:{'Accept':'application/json'} });
-    if (r.ok) return parseYFJson(await r.json());
-  } catch(e) {}
-
-  // Method 2 — corsproxy.io
-  try {
-    const r = await fetch(`https://corsproxy.io/?${encodeURIComponent(yfUrl)}`);
-    if (r.ok) return parseYFJson(await r.json());
-  } catch(e) {}
-
-  // Method 3 — allorigins
-  try {
-    const r = await fetch(`https://api.allorigins.win/get?url=${encodeURIComponent(yfUrl)}`);
-    if (r.ok) { const w = await r.json(); return parseYFJson(JSON.parse(w.contents)); }
-  } catch(e) {}
-
-  throw new Error('CORS blocked — enter dividends manually');
+  for (const url of [
+    yfUrl,
+    `https://corsproxy.io/?${encodeURIComponent(yfUrl)}`,
+    `https://api.allorigins.win/get?url=${encodeURIComponent(yfUrl)}`
+  ]) {
+    try {
+      const r = await fetch(url, {headers:{'Accept':'application/json'}});
+      if (!r.ok) continue;
+      const j = url.includes('allorigins') ? JSON.parse((await r.json()).contents) : await r.json();
+      const divs = parseYFJson(j);
+      if (divs.length) return divs;
+    } catch(e) {}
+  }
+  throw new Error('All routes failed');
 }
 
 async function syncAll() {
   if (!state.holdings.length) { toast('No holdings to sync','info'); return; }
-  const btn = document.getElementById('syncBtn');
-  btn.innerHTML = '<span class="spinner"></span>';
-  btn.disabled = true;
+  const btn=document.getElementById('syncBtn');
+  btn.innerHTML='<span class="spinner"></span>'; btn.disabled=true;
   setSyncStatus('Syncing…','');
-  state.syncErrors = {};
-
-  const tickers = [...new Set(state.holdings.map(h=>h.ticker))];
-  let ok=0, fail=0;
-
-  await Promise.allSettled(tickers.map(async ticker => {
+  state.syncErrors={};
+  const tickers=[...new Set(state.holdings.map(h=>h.ticker))];
+  let ok=0,fail=0;
+  await Promise.allSettled(tickers.map(async ticker=>{
     try {
-      const divs = await fetchYFDividends(ticker);
-      if (divs.length) {
-        const manual = (state.dividends[ticker]||[]).filter(d=>d.source==='manual');
-        const apiDates = new Set(divs.map(d=>d.exDate));
-        state.dividends[ticker] = [...divs, ...manual.filter(d=>!apiDates.has(d.exDate))]
-          .sort((a,b)=>a.exDate.localeCompare(b.exDate));
-        ok++;
-      } else { fail++; state.syncErrors[ticker]='No data'; }
-    } catch(e) { fail++; state.syncErrors[ticker]=e.message; }
+      const divs=await fetchYFDividends(ticker);
+      const manual=(state.dividends[ticker]||[]).filter(d=>d.source==='manual');
+      const apiDates=new Set(divs.map(d=>d.exDate));
+      state.dividends[ticker]=[...divs,...manual.filter(d=>!apiDates.has(d.exDate))]
+        .sort((a,b)=>a.exDate.localeCompare(b.exDate));
+      ok++;
+    } catch(e){ fail++; state.syncErrors[ticker]=e.message; }
   }));
-
-  state.lastSync = new Date().toISOString();
-  saveState();
-  btn.innerHTML='⟳'; btn.disabled=false;
-  if (ok>0 && fail===0) setSyncStatus(`Synced ${ok} stocks`,'ok');
-  else if (ok>0) setSyncStatus(`${ok} ok, ${fail} failed`,'error');
-  else setSyncStatus('Sync failed — use manual entry','error');
-  if (ok>0) toast(`Dividend data updated for ${ok} stock${ok>1?'s':''}`,'success');
-  if (fail>0) toast(`${fail} ticker${fail>1?'s':''} failed. Use + Dividend to enter manually.`,'error');
+  state.lastSync=new Date().toISOString();
+  saveState(); btn.innerHTML='⟳'; btn.disabled=false;
+  if(ok>0&&fail===0) setSyncStatus(`Synced ${ok}`,'ok');
+  else if(ok>0) setSyncStatus(`${ok} ok, ${fail} failed`,'error');
+  else setSyncStatus('Sync failed','error');
+  if(ok>0) toast(`Updated ${ok} stock${ok>1?'s':''}`,'success');
+  if(fail>0) toast(`${fail} failed — use + Dividend to add manually`,'error');
   render();
 }
 
-function setSyncStatus(msg, cls) {
-  const el = document.getElementById('syncStatus');
-  el.textContent = msg; el.className = 'sync-status ' + cls;
+function setSyncStatus(m,c){
+  const el=document.getElementById('syncStatus');
+  el.textContent=m; el.className='sync-status '+c;
 }
 
-// ══════════════════════════════════════════
+// ═══════════════════════════════════════════
 // RENDER
-// ══════════════════════════════════════════
+// ═══════════════════════════════════════════
 function render() {
-  renderSummary();
-  renderTabs();
-  renderTabContent();
-  updateFooter();
+  renderSummary(); renderTabs(); renderTabContent(); updateFooter();
 }
 
 function renderSummary() {
-  document.getElementById('ytdYear').textContent = CURRENT_YEAR;
-  document.getElementById('ytdYear2').textContent = CURRENT_YEAR;
-  const { received, projected } = calcYear(CURRENT_YEAR);
-  document.getElementById('kpiReceived').textContent = fmtSGD(received);
-  document.getElementById('kpiProjected').textContent = fmtSGD(projected);
-  const n = state.holdings.length;
-  document.getElementById('kpiReceivedSub').innerHTML =
-    n ? `<span>${n} stock${n>1?'s':''} · as of ${TODAY.toLocaleDateString('en-SG',{day:'numeric',month:'short'})}</span>` : 'No holdings yet';
-  document.getElementById('kpiProjectedSub').innerHTML = projected > 0
-    ? `Est. annual total: <span>${fmtSGD(received+projected)}</span>`
-    : (n ? 'No upcoming dividends found' : '—');
+  document.getElementById('ytdYear').textContent=CURRENT_YEAR;
+  document.getElementById('ytdYear2').textContent=CURRENT_YEAR;
+  const {received,projected}=calcYear(CURRENT_YEAR);
+  document.getElementById('kpiReceived').textContent=fmtSGD(received);
+  document.getElementById('kpiProjected').textContent=fmtSGD(projected);
+  const n=state.holdings.length;
+  document.getElementById('kpiReceivedSub').innerHTML=
+    n?`<span>${n} stock${n>1?'s':''} · as of ${TODAY.toLocaleDateString('en-SG',{day:'numeric',month:'short'})}</span>`:'No holdings yet';
+  document.getElementById('kpiProjectedSub').innerHTML=projected>0
+    ?`Est. annual total: <span>${fmtSGD(received+projected)}</span>`
+    :(n?'No upcoming dividends found':'—');
 }
 
 function getYears() {
-  const minYear = state.holdings.reduce((m,h) => {
-    const y = h.tranches.reduce((my, tr) => {
-      return Math.min(my, tr.acquisitionDate ? new Date(tr.acquisitionDate).getFullYear() : CURRENT_YEAR);
-    }, CURRENT_YEAR);
-    return Math.min(m, y);
-  }, CURRENT_YEAR - 1);
-  const years = [];
-  for (let y = CURRENT_YEAR; y >= Math.max(minYear, CURRENT_YEAR - 6); y--) years.push(y);
-  return years;
+  const minY=state.holdings.reduce((m,h)=>{
+    const y=h.transactions.reduce((my,t)=>{
+      return Math.min(my,t.date?new Date(t.date).getFullYear():CURRENT_YEAR);
+    },CURRENT_YEAR);
+    return Math.min(m,y);
+  },CURRENT_YEAR-1);
+  const yrs=[];
+  for(let y=CURRENT_YEAR;y>=Math.max(minY,CURRENT_YEAR-6);y--) yrs.push(y);
+  return yrs;
 }
 
 function renderTabs() {
-  const years = getYears();
-  document.getElementById('yearTabs').innerHTML =
-    years.map(y =>
+  document.getElementById('yearTabs').innerHTML=
+    getYears().map(y=>
       `<button class="tab${y===activeYear?' active':''}" onclick="setYear(${y})">${y===CURRENT_YEAR?y+' ★':y}</button>`
-    ).join('') +
+    ).join('')+
     `<button class="tab" onclick="openDividendModal()" style="margin-left:8px">+ Dividend</button>`;
 }
 
-function setYear(y) { activeYear=y; renderTabs(); renderTabContent(); }
+function setYear(y){ activeYear=y; renderTabs(); renderTabContent(); }
 
 function renderTabContent() {
-  const el = document.getElementById('tabContent');
-  if (!state.holdings.length) {
-    el.innerHTML = `
-      <div class="empty-state">
-        <div class="icon">📊</div>
-        <h3>No Holdings Yet</h3>
-        <p>Add your Singapore stocks and purchase dates.<br>Each stock can have multiple purchase tranches.</p>
-        <button class="btn-primary" onclick="openAddHolding()">+ Add First Holding</button>
-      </div>`;
+  const el=document.getElementById('tabContent');
+  if(!state.holdings.length){
+    el.innerHTML=`<div class="empty-state">
+      <div class="icon">📊</div>
+      <h3>No Holdings Yet</h3>
+      <p>Add stocks with buy/sell transactions to track dividend income.<br>Multiple tranches and FIFO accounting supported.</p>
+      <button class="btn-primary" onclick="openAddHolding()">+ Add First Holding</button>
+    </div>`;
     return;
   }
-  activeYear === CURRENT_YEAR ? renderCurrentYear(el) : renderPastYear(el, activeYear);
+  activeYear===CURRENT_YEAR ? renderCurrentYear(el) : renderPastYear(el,activeYear);
 }
 
 function renderCurrentYear(el) {
-  let rows = '';
-  for (const h of state.holdings) {
-    const allDivs = getAllDivsForHolding(h, CURRENT_YEAR);
-    const events = getDivEvents(h, allDivs, CURRENT_YEAR);
-    const received = events.reduce((s,e)=>s+e.received,0);
-    const projected = events.reduce((s,e)=>s+e.projected,0);
-    const hasConf = events.some(e=>e.projected>0 && e.source==='api');
-    const syncErr = state.syncErrors[h.ticker];
-    const isExpanded = expandedRows.has(h.id);
-
-    // Inline dividend chips — show each payment
-    const receivedEvents = events.filter(e=>e.received>0).slice(-4);
-    const projEvents = events.filter(e=>e.projected>0).slice(0,2);
-    const chips = [
-      ...receivedEvents.map(e=>`<span class="div-chip">${fmtMonYear(e.exDate)} ${fmtSGDx(e.received)}</span>`),
-      ...projEvents.map(e=>`<span class="div-chip proj">~${fmtMonYear(e.exDate)} ${fmtSGDx(e.projected)}</span>`)
-    ].join('');
-
-    const projTag = projected > 0
-      ? (hasConf ? `<span class="tag tag-conf">Conf</span>` : `<span class="tag tag-est">Est</span>`)
-      : '';
-
-    // Expanded detail
-    const detailHtml = isExpanded ? buildDetailSection(h, allDivs, events) : '';
-
-    rows += `
-      <tr class="holding-row" onclick="toggleExpand('${h.id}')">
-        <td>
-          <span class="ticker-badge${isExpanded?' expanded':''}" >
-            <span>${h.name || displayTicker(h.ticker)}</span>
-            <span class="expand-arrow">▶</span>
-          </span>
-          ${syncErr ? `<div style="font-size:10px;color:var(--accent2);margin-top:3px">⚠ ${syncErr}</div>` : ''}
-          <div class="div-chips">${chips}</div>
-        </td>
-        <td class="right units">${totalUnits(h).toLocaleString()}</td>
-        <td class="right ${received>0?'amount-green':'amount-muted'}">${received>0?fmtSGDx(received):'—'}</td>
-        <td class="right">
-          ${projected>0 ? `<span class="amount-amber">${fmtSGDx(projected)}</span> ${projTag}` : '<span class="amount-muted">—</span>'}
-        </td>
-        <td class="right" onclick="event.stopPropagation()">
-          <button class="btn-ghost" onclick="openEditHolding('${h.id}')" title="Edit">✎</button>
-          <button class="btn-danger-ghost" onclick="deleteHolding('${h.id}')" title="Remove">✕</button>
-        </td>
-      </tr>
-      <tr class="detail-row${isExpanded?' open':''}" id="detail-${h.id}">
-        <td colspan="5">${isExpanded ? `<div class="detail-inner">${detailHtml}</div>` : ''}</td>
-      </tr>`;
-  }
-
-  el.innerHTML = `
+  const cards = state.holdings.map(h => buildHoldingCard(h)).join('');
+  el.innerHTML=`
     <div class="section-header">
-      <div class="section-title">Holdings & Dividend Income — ${CURRENT_YEAR}</div>
+      <div class="section-title">Holdings — ${CURRENT_YEAR}</div>
     </div>
-    <div class="table-wrap">
-      <table>
-        <thead><tr>
-          <th>Stock <span style="font-size:10px;color:var(--muted);text-transform:none;letter-spacing:0">(tap to expand)</span></th>
-          <th class="right">Units</th>
-          <th class="right">Received YTD</th>
-          <th class="right">Est. Remaining</th>
-          <th class="right"></th>
-        </tr></thead>
-        <tbody>${rows}</tbody>
-      </table>
-    </div>
-    <div style="font-size:11px;color:var(--muted);margin-top:12px;text-align:center">
-      Tap a stock row to see tranches & dividend history · <a href="#" onclick="openDividendModal();return false" style="color:var(--accent);text-decoration:none">+ Add manual dividend</a>
+    <div class="holdings-list">${cards}</div>
+    <div style="font-size:11px;color:var(--muted);margin-top:14px;text-align:center">
+      Tap a card to expand tranches, P&amp;L &amp; dividend history ·
+      <a href="#" onclick="openDividendModal();return false" style="color:var(--accent);text-decoration:none">+ Add dividend</a>
     </div>`;
 }
 
-function buildDetailSection(h, allDivs, events) {
-  // ── Tranches ──
-  let trancheHtml = '<div class="tranche-list">';
-  for (const tr of h.tranches) {
-    // Calc how much this tranche earned YTD
-    const trEarned = events.reduce((s,e)=>{
-      if (e.exDate < tr.acquisitionDate) return s;
-      const bt = e.trancheBreakdown.find(b=>b.acq===tr.acquisitionDate&&b.units==tr.units);
-      return s + (bt ? bt.amt : 0);
-    }, 0);
-    trancheHtml += `
-      <div class="tranche-item">
-        <div class="tranche-info">
-          <div class="tranche-units">${Number(tr.units).toLocaleString()} units</div>
-          <div class="tranche-date">Purchased ${fmtDate(tr.acquisitionDate)}</div>
-          ${trEarned>0 ? `<div class="tranche-earned">YTD from this tranche: ${fmtSGDx(trEarned)}</div>` : ''}
+function buildHoldingCard(h) {
+  const {totalUnits,avgPrice,realizedPnL}=applyFIFO(h.transactions);
+  const {received,projected,events}=getHoldingYearTotals(h,CURRENT_YEAR);
+  const hasConf=events.some(e=>e.projected>0&&e.source==='api');
+  const syncErr=state.syncErrors[h.ticker];
+  const isExp=expandedIds.has(h.id);
+
+  // Chips: last 3 received + up to 2 projected
+  const recEv=events.filter(e=>e.received>0).slice(-3);
+  const prjEv=events.filter(e=>e.projected>0).slice(0,2);
+  const chips=[
+    ...recEv.map(e=>`<span class="div-chip">${fmtMonYr(e.exDate)} ${fmtSGDx(e.received)}</span>`),
+    ...prjEv.map(e=>`<span class="div-chip proj">~${fmtMonYr(e.exDate)} ${fmtSGDx(e.projected)}</span>`)
+  ].join('');
+
+  const projTag=projected>0?(hasConf?`<span class="tag tag-conf">Conf</span>`:`<span class="tag tag-est">Est</span>`):'';
+  const pnlHtml=realizedPnL!==0
+    ?`<span class="${realizedPnL>=0?'meta-pnl-pos':'meta-pnl-neg'}">${realizedPnL>=0?'+':''}${fmtSGDx(realizedPnL)} realized</span>`
+    :'';
+
+  const detail = isExp ? buildDetail(h) : '';
+
+  return `<div class="holding-card">
+    <div class="card-header${isExp?' expanded':''}" onclick="toggleExpand('${h.id}')">
+      <div class="card-left">
+        <span class="ticker-badge">
+          ${h.name||shortTicker(h.ticker)}
+          <span class="expand-arrow">▶</span>
+        </span>
+        <div class="holding-meta">
+          <span class="meta-units">${totalUnits>0?totalUnits.toLocaleString()+' units':'Fully sold'}</span>
+          ${avgPrice>0?`<span class="meta-avg">avg ${fmtPrice(avgPrice)}</span>`:''}
+          ${pnlHtml}
+          ${syncErr?`<span style="font-size:10px;color:var(--accent2)">⚠ ${syncErr}</span>`:''}
         </div>
-        <div class="tranche-actions" onclick="event.stopPropagation()">
-          <button class="btn-ghost btn-xs" onclick="openEditHolding('${h.id}')">✎ Edit</button>
+        <div class="div-chips">${chips}</div>
+      </div>
+      <div class="card-right" onclick="event.stopPropagation()">
+        <div class="card-ytd">${received>0?fmtSGDx(received):'—'}</div>
+        ${projected>0?`<div class="card-proj">${fmtSGDx(projected)} ${projTag}</div><div class="card-proj-label">est. remaining</div>`:''}
+        <div class="card-actions">
+          <button class="btn-ghost btn-xs" onclick="openEditHolding('${h.id}')">✎</button>
+          <button class="btn-ghost btn-xs" style="color:var(--red)" onclick="deleteHolding('${h.id}')">✕</button>
         </div>
-      </div>`;
+      </div>
+    </div>
+    ${isExp?`<div class="card-detail">${detail}</div>`:''}
+  </div>`;
+}
+
+function buildDetail(h) {
+  const {totalUnits,avgPrice,realizedPnL,buyLots}=applyFIFO(h.transactions);
+  const todayStr=dateStr(TODAY);
+
+  // ── Transactions ──
+  const sorted=[...h.transactions].sort((a,b)=>a.date.localeCompare(b.date));
+  let txnHtml='<div class="txn-list">';
+  for (const t of sorted) {
+    const total=Number(t.units)*Number(t.price);
+    const isBuy=t.type==='BUY';
+    txnHtml+=`<div class="txn-item">
+      <div class="txn-left">
+        <div class="txn-type-date">
+          <span class="tag ${isBuy?'tag-buy':'tag-sell'}">${t.type}</span>
+          <span style="font-size:12px;color:var(--muted)">${fmtDate(t.date)}</span>
+        </div>
+        <div class="txn-detail">${Number(t.units).toLocaleString()} units @ ${fmtPrice(t.price)}</div>
+      </div>
+      <div class="txn-right">
+        <div class="txn-total ${isBuy?'buy':'sell'}">${isBuy?'':'-'}${fmtSGDx(total)}</div>
+      </div>
+    </div>`;
   }
-  trancheHtml += '</div>';
+  txnHtml+='</div>';
 
-  // ── Dividend events ──
-  const todayStr = dateStr(TODAY);
-  let divHtml = '';
+  // ── FIFO Box ──
+  const fifoHtml=`<div class="fifo-box">
+    <div class="fifo-item"><label>Current Units</label><div class="val teal">${totalUnits.toLocaleString()}</div></div>
+    <div class="fifo-item"><label>Avg Cost (FIFO)</label><div class="val">${avgPrice>0?fmtPrice(avgPrice):'—'}</div></div>
+    <div class="fifo-item"><label>Realized P&amp;L</label><div class="val ${realizedPnL>=0?'green':'red'}">${realizedPnL>=0?'+':''}${fmtSGDx(realizedPnL)}</div></div>
+    <div class="fifo-item"><label>YTD Dividends</label><div class="val teal">${fmtSGDx(getHoldingYearTotals(h,CURRENT_YEAR).received)}</div></div>
+  </div>`;
 
-  // Show all years but sort desc
-  const allDivsSorted = [...allDivs].sort((a,b)=>b.exDate.localeCompare(a.exDate));
-  // Show this year + last year events
-  const displayDivs = allDivsSorted.filter(div => {
-    const yr = new Date(div.exDate).getFullYear();
-    return yr >= CURRENT_YEAR - 1;
-  });
+  // ── Dividend history ──
+  const base=state.dividends[h.ticker]||[];
+  const extra=estimateFuture(h,base);
+  const allDivs=[...base,...extra].sort((a,b)=>b.exDate.localeCompare(a.exDate));
+  const display=allDivs.filter(d=>new Date(d.exDate).getFullYear()>=CURRENT_YEAR-1);
 
-  if (displayDivs.length) {
-    let prevYear = null;
-    for (const div of displayDivs) {
-      const yr = new Date(div.exDate).getFullYear();
-      if (yr !== prevYear) {
-        divHtml += `<div style="font-size:10px;font-weight:700;color:var(--muted);text-transform:uppercase;letter-spacing:0.5px;padding:8px 0 4px">${yr}</div>`;
-        prevYear = yr;
+  let divHtml='';
+  if(display.length){
+    let prevYr=null;
+    for(const div of display){
+      const yr=new Date(div.exDate).getFullYear();
+      if(yr!==prevYr){
+        divHtml+=`<div class="yr-label">${yr}</div>`;
+        prevYr=yr;
       }
-
-      // How much did THIS holding receive?
-      let totalAmt = 0;
-      for (const tr of h.tranches) {
-        if (div.exDate >= tr.acquisitionDate) totalAmt += Number(div.amount) * Number(tr.units);
-      }
-      if (totalAmt <= 0) {
-        divHtml += `<div class="div-event">
+      const units=unitsOnExDate(h.transactions,div.exDate);
+      const amt=units*Number(div.amount);
+      const isPast=div.exDate<=todayStr;
+      const estBadge=div.source==='est'?' <span style="font-size:9px;color:var(--muted)">(est)</span>':'';
+      if(units<=0){
+        divHtml+=`<div class="div-event">
           <div class="div-event-left">
             <span class="div-event-date">${fmtDate(div.exDate)}</span>
             <span class="div-event-dpu">DPU $${Number(div.amount).toFixed(4)}</span>
           </div>
-          <div class="div-event-right"><span class="amount-muted" style="font-size:11px">Not held</span></div>
+          <div class="div-event-right"><span style="font-size:11px;color:var(--muted)">Not held</span></div>
         </div>`;
-        continue;
+      } else {
+        divHtml+=`<div class="div-event">
+          <div class="div-event-left">
+            <span class="div-event-date">${fmtDate(div.exDate)}</span>
+            <span class="div-event-dpu">DPU $${Number(div.amount).toFixed(4)}${estBadge}</span>
+          </div>
+          <div class="div-event-right">
+            <span class="${isPast?'div-event-total':'div-event-total proj'}">${fmtSGDx(amt)}</span>
+            <span class="div-event-status">${isPast?'✓ received':'⏳ upcoming'}</span>
+          </div>
+        </div>`;
       }
-
-      const isPast = div.exDate <= todayStr;
-      const estBadge = div.source==='est' ? ' <span style="font-size:9px;color:var(--muted);font-weight:400">(est)</span>' : '';
-      divHtml += `<div class="div-event">
-        <div class="div-event-left">
-          <span class="div-event-date">${fmtDate(div.exDate)}</span>
-          <span class="div-event-dpu">DPU $${Number(div.amount).toFixed(4)}${estBadge}</span>
-        </div>
-        <div class="div-event-right">
-          <span class="${isPast?'div-event-total':'div-event-total proj'}">${fmtSGDx(totalAmt)}</span>
-          <span class="div-event-status">${isPast?'✓ received':'⏳ upcoming'}</span>
-        </div>
-      </div>`;
     }
   } else {
-    divHtml = `<div style="font-size:12px;color:var(--muted);padding:10px 0">No dividend data. Tap ⟳ to sync or use + Dividend to add manually.</div>`;
+    divHtml=`<div style="font-size:12px;color:var(--muted);padding:8px 0">No dividend data yet. Tap ⟳ to sync or use + Dividend.</div>`;
   }
 
   return `
-    <div class="detail-section-title">Tranches</div>
-    ${trancheHtml}
-    <div style="display:flex;justify-content:flex-end;margin-bottom:16px" onclick="event.stopPropagation()">
-      <button class="btn-secondary btn-sm" onclick="openEditHolding('${h.id}')">✎ Edit / Add Tranche</button>
+    <div class="detail-section">
+      <div class="detail-title">FIFO Summary</div>
+      ${fifoHtml}
     </div>
-    <div class="detail-section-title">Dividend History</div>
-    <div class="div-history">${divHtml}</div>`;
+    <div class="detail-section">
+      <div class="detail-title" style="display:flex;justify-content:space-between;align-items:center">
+        Transactions
+        <button class="btn-ghost btn-xs" onclick="event.stopPropagation();openEditHolding('${h.id}')">+ Add</button>
+      </div>
+      ${txnHtml}
+    </div>
+    <div class="detail-section">
+      <div class="detail-title">Dividend History</div>
+      <div class="div-history">${divHtml}</div>
+    </div>`;
 }
 
-function renderPastYear(el, year) {
-  const { received } = calcYear(year);
-  const eligibleCount = state.holdings.filter(h =>
-    h.tranches.some(tr => tr.acquisitionDate && new Date(tr.acquisitionDate).getFullYear() <= year)
-  ).length;
-  const hasData = state.holdings.some(h => {
-    const divs = state.dividends[h.ticker] || [];
-    return divs.some(d => new Date(d.exDate).getFullYear() === year);
-  });
-
-  el.innerHTML = `
+function renderPastYear(el,year){
+  const {received}=calcYear(year);
+  const elig=state.holdings.filter(h=>h.transactions.some(t=>t.type==='BUY'&&new Date(t.date).getFullYear()<=year)).length;
+  const hasData=state.holdings.some(h=>(state.dividends[h.ticker]||[]).some(d=>new Date(d.exDate).getFullYear()===year));
+  el.innerHTML=`
     <div class="year-summary-card">
-      <div class="year-total-label">Total Dividends Received in ${year}</div>
+      <div style="font-size:13px;color:var(--muted);margin-bottom:10px">Total Dividends Received in ${year}</div>
       <div class="year-total-value">${fmtSGD(received)}</div>
-      <div class="year-note">${eligibleCount} stock${eligibleCount!==1?'s':''} held during this period</div>
+      <div class="year-note">${elig} stock${elig!==1?'s':''} held during this period</div>
     </div>
-    ${!hasData ? `<div class="info-box warning">No dividend data for ${year}. Tap ⟳ to sync or add manually.</div>` : ''}`;
+    ${!hasData?`<div class="info-box warning">No dividend data for ${year}. Tap ⟳ to sync.</div>`:''}`;
 }
 
-function updateFooter() {
-  const el = document.getElementById('footer');
-  if (state.lastSync) {
-    const d = new Date(state.lastSync);
-    el.textContent = `Last synced: ${d.toLocaleDateString('en-SG',{day:'numeric',month:'short',year:'numeric'})} ${d.toLocaleTimeString('en-SG',{hour:'2-digit',minute:'2-digit'})}`;
+function updateFooter(){
+  const el=document.getElementById('footer');
+  if(state.lastSync){
+    const d=new Date(state.lastSync);
+    el.textContent=`Last synced: ${d.toLocaleDateString('en-SG',{day:'numeric',month:'short',year:'numeric'})} ${d.toLocaleTimeString('en-SG',{hour:'2-digit',minute:'2-digit'})}`;
   } else {
-    el.textContent = 'Not yet synced · Tap ⟳ to fetch dividend data · Enter dividends manually if sync fails';
+    el.textContent='Not synced · Tap ⟳ to fetch dividend data · Use + Dividend if sync fails';
   }
 }
 
-// ══════════════════════════════════════════
+// ═══════════════════════════════════════════
 // EXPAND / COLLAPSE
-// ══════════════════════════════════════════
-function toggleExpand(id) {
-  if (expandedRows.has(id)) expandedRows.delete(id);
-  else expandedRows.add(id);
+// ═══════════════════════════════════════════
+function toggleExpand(id){
+  expandedIds.has(id)?expandedIds.delete(id):expandedIds.add(id);
   renderTabContent();
 }
 
-// ══════════════════════════════════════════
+// ═══════════════════════════════════════════
 // HOLDING MODAL
-// ══════════════════════════════════════════
-function openAddHolding() {
-  modalTranches = [];
-  document.getElementById('holdingModalTitle').textContent = 'Add Holding';
-  document.getElementById('editHoldingId').value = '';
-  document.getElementById('inputTicker').value = '';
-  document.getElementById('inputName').value = '';
-  document.getElementById('trancheUnits').value = '';
-  document.getElementById('trancheDate').value = dateStr(TODAY);
-  renderModalTranches();
+// ═══════════════════════════════════════════
+function openAddHolding(){
+  modalTxns=[]; modalTxnType='BUY';
+  document.getElementById('holdingModalTitle').textContent='Add Holding';
+  document.getElementById('editHoldingId').value='';
+  document.getElementById('inputTicker').value='';
+  document.getElementById('inputName').value='';
+  document.getElementById('txnUnits').value='';
+  document.getElementById('txnPrice').value='';
+  document.getElementById('txnDate').value=dateStr(TODAY);
+  setTxnType('BUY');
+  renderModalTxns();
   openModal('modalHolding');
-  setTimeout(()=>document.getElementById('inputTicker').focus(), 100);
+  setTimeout(()=>document.getElementById('inputTicker').focus(),100);
 }
 
-function openEditHolding(id) {
-  const h = state.holdings.find(h=>h.id===id);
-  if (!h) return;
-  modalTranches = h.tranches.map(tr=>({...tr}));
-  document.getElementById('holdingModalTitle').textContent = 'Edit Holding';
-  document.getElementById('editHoldingId').value = id;
-  document.getElementById('inputTicker').value = h.ticker;
-  document.getElementById('inputName').value = h.name || '';
-  document.getElementById('trancheUnits').value = '';
-  document.getElementById('trancheDate').value = dateStr(TODAY);
-  renderModalTranches();
+function openEditHolding(id){
+  const h=state.holdings.find(h=>h.id===id);
+  if(!h) return;
+  modalTxns=h.transactions.map(t=>({...t}));
+  modalTxnType='BUY';
+  document.getElementById('holdingModalTitle').textContent='Edit Holding';
+  document.getElementById('editHoldingId').value=id;
+  document.getElementById('inputTicker').value=h.ticker;
+  document.getElementById('inputName').value=h.name||'';
+  document.getElementById('txnUnits').value='';
+  document.getElementById('txnPrice').value='';
+  document.getElementById('txnDate').value=dateStr(TODAY);
+  setTxnType('BUY');
+  renderModalTxns();
   openModal('modalHolding');
 }
 
-function renderModalTranches() {
-  const el = document.getElementById('modalTrancheList');
-  if (!modalTranches.length) {
-    el.innerHTML = '<div class="no-tranches">No tranches yet — add one below</div>';
-    return;
+function setTxnType(type){
+  modalTxnType=type;
+  document.getElementById('btnBuy').className=type==='BUY'?'active-buy':'';
+  document.getElementById('btnSell').className=type==='SELL'?'active-sell':'';
+}
+
+function renderModalTxns(){
+  const el=document.getElementById('modalTxnList');
+  if(!modalTxns.length){
+    el.innerHTML='<div class="no-txns">No transactions yet — add one below</div>'; return;
   }
-  el.innerHTML = modalTranches.map((tr,i) => `
-    <div class="modal-tranche-item">
+  const sorted=[...modalTxns].sort((a,b)=>a.date.localeCompare(b.date));
+  el.innerHTML=sorted.map((t,i)=>{
+    const orig=modalTxns.indexOf(t); // original index
+    return `<div class="modal-txn-item">
       <div>
-        <span>${Number(tr.units).toLocaleString()} units</span>
-        <div class="hint">Purchased ${fmtDate(tr.acquisitionDate)}</div>
+        <div class="modal-txn-text">
+          <span class="tag ${t.type==='BUY'?'tag-buy':'tag-sell'}">${t.type}</span>
+          &nbsp;${Number(t.units).toLocaleString()} units @ ${fmtPrice(t.price)}
+        </div>
+        <div class="modal-txn-sub">${fmtDate(t.date)}</div>
       </div>
-      <button class="btn-danger-ghost btn-xs" onclick="removeModalTranche(${i})">Remove</button>
-    </div>`).join('');
+      <button class="btn-ghost btn-xs" style="color:var(--red)" onclick="removeModalTxn('${t.id}')">✕</button>
+    </div>`;
+  }).join('');
 }
 
-function addTrancheToModal() {
-  const units = parseInt(document.getElementById('trancheUnits').value, 10);
-  const date = document.getElementById('trancheDate').value;
-  if (!units || units <= 0) { toast('Enter valid units','error'); return; }
-  if (!date) { toast('Enter a purchase date','error'); return; }
-  modalTranches.push({ id: uid(), units, acquisitionDate: date });
-  document.getElementById('trancheUnits').value = '';
-  document.getElementById('trancheDate').value = dateStr(TODAY);
-  renderModalTranches();
-  toast(`Tranche added: ${units.toLocaleString()} units on ${fmtDate(date)}`,'success');
-}
+function addTxnToModal(){
+  const units=parseInt(document.getElementById('txnUnits').value,10);
+  const price=parseFloat(document.getElementById('txnPrice').value);
+  const date=document.getElementById('txnDate').value;
+  if(!units||units<=0){ toast('Enter valid units','error'); return; }
+  if(isNaN(price)||price<0){ toast('Enter valid price','error'); return; }
+  if(!date){ toast('Enter a date','error'); return; }
 
-function removeModalTranche(i) {
-  modalTranches.splice(i, 1);
-  renderModalTranches();
-}
-
-function saveHolding() {
-  const ticker = normalizeTicker(document.getElementById('inputTicker').value);
-  const name = document.getElementById('inputName').value.trim() || displayTicker(ticker);
-  const editId = document.getElementById('editHoldingId').value;
-
-  // Check if there's a pending tranche in the input fields
-  const pendingUnits = parseInt(document.getElementById('trancheUnits').value, 10);
-  const pendingDate = document.getElementById('trancheDate').value;
-  if (pendingUnits > 0 && pendingDate) {
-    modalTranches.push({ id: uid(), units: pendingUnits, acquisitionDate: pendingDate });
+  // Validate sell doesn't exceed available units
+  if(modalTxnType==='SELL'){
+    const {totalUnits}=applyFIFO([...modalTxns,{id:'__temp',type:'BUY',units:0,price:0,date}]);
+    const availBefore=applyFIFO(modalTxns.filter(t=>t.date<=date)).totalUnits;
+    if(units>availBefore){ toast(`Can only sell up to ${availBefore.toLocaleString()} units held by ${fmtDate(date)}`,'error'); return; }
   }
 
-  if (!ticker) { toast('Enter a ticker symbol','error'); return; }
-  if (!modalTranches.length) { toast('Add at least one purchase tranche','error'); return; }
+  modalTxns.push({id:uid(),type:modalTxnType,units,price,date});
+  document.getElementById('txnUnits').value='';
+  document.getElementById('txnPrice').value='';
+  renderModalTxns();
+  toast(`${modalTxnType} added: ${units.toLocaleString()} @ ${fmtPrice(price)}`,'success');
+}
 
-  if (editId) {
-    const idx = state.holdings.findIndex(h=>h.id===editId);
-    if (idx !== -1) state.holdings[idx] = { ...state.holdings[idx], ticker, name, tranches: modalTranches };
+function removeModalTxn(id){
+  modalTxns=modalTxns.filter(t=>t.id!==id);
+  renderModalTxns();
+}
+
+function saveHolding(){
+  const ticker=normalizeTicker(document.getElementById('inputTicker').value);
+  const name=document.getElementById('inputName').value.trim()||shortTicker(ticker);
+  const editId=document.getElementById('editHoldingId').value;
+
+  // Auto-add pending transaction if fields filled
+  const pu=parseInt(document.getElementById('txnUnits').value,10);
+  const pp=parseFloat(document.getElementById('txnPrice').value);
+  const pd=document.getElementById('txnDate').value;
+  if(pu>0&&!isNaN(pp)&&pp>=0&&pd) modalTxns.push({id:uid(),type:modalTxnType,units:pu,price:pp,date:pd});
+
+  if(!ticker){ toast('Enter a ticker','error'); return; }
+  if(!modalTxns.length){ toast('Add at least one transaction','error'); return; }
+  if(!modalTxns.some(t=>t.type==='BUY')){ toast('Add at least one BUY transaction','error'); return; }
+
+  if(editId){
+    const idx=state.holdings.findIndex(h=>h.id===editId);
+    if(idx!==-1) state.holdings[idx]={...state.holdings[idx],ticker,name,transactions:modalTxns};
   } else {
-    state.holdings.push({ id: uid(), ticker, name, tranches: modalTranches });
+    state.holdings.push({id:uid(),ticker,name,transactions:modalTxns});
   }
-
-  saveState();
-  closeModal('modalHolding');
-  render();
-  toast(`${name} saved · Tap ⟳ to sync dividend data`, 'success');
+  saveState(); closeModal('modalHolding'); render();
+  toast(`${name} saved · Tap ⟳ to sync dividend data`,'success');
 }
 
-function deleteHolding(id) {
-  const h = state.holdings.find(h=>h.id===id);
-  if (!h) return;
-  if (!confirm(`Remove ${h.name||displayTicker(h.ticker)} and all its data?`)) return;
-  state.holdings = state.holdings.filter(h=>h.id!==id);
-  expandedRows.delete(id);
+function deleteHolding(id){
+  const h=state.holdings.find(h=>h.id===id);
+  if(!h||!confirm(`Remove ${h.name||shortTicker(h.ticker)}?`)) return;
+  state.holdings=state.holdings.filter(h=>h.id!==id);
+  expandedIds.delete(id);
   saveState(); render();
   toast('Holding removed','info');
 }
 
-// ══════════════════════════════════════════
-// MANUAL DIVIDEND MODAL
-// ══════════════════════════════════════════
-function openDividendModal() {
-  if (!state.holdings.length) { toast('Add holdings first','info'); return; }
-  const sel = document.getElementById('divTicker');
-  sel.innerHTML = state.holdings.map(h=>
-    `<option value="${h.ticker}">${h.name||displayTicker(h.ticker)} (${h.ticker})</option>`
-  ).join('');
-  document.getElementById('divExDate').value = dateStr(TODAY);
-  document.getElementById('divAmount').value = '';
+// ═══════════════════════════════════════════
+// DIVIDEND MODAL
+// ═══════════════════════════════════════════
+function openDividendModal(){
+  if(!state.holdings.length){ toast('Add holdings first','info'); return; }
+  document.getElementById('divTicker').innerHTML=
+    state.holdings.map(h=>`<option value="${h.ticker}">${h.name||shortTicker(h.ticker)} (${h.ticker})</option>`).join('');
+  document.getElementById('divExDate').value=dateStr(TODAY);
+  document.getElementById('divAmount').value='';
   openModal('modalDividend');
 }
 
-function saveManualDividend() {
-  const ticker = document.getElementById('divTicker').value;
-  const exDate = document.getElementById('divExDate').value;
-  const amount = parseFloat(document.getElementById('divAmount').value);
-  if (!exDate) { toast('Enter ex-dividend date','error'); return; }
-  if (isNaN(amount)||amount<=0) { toast('Enter valid DPU amount','error'); return; }
-  if (!state.dividends[ticker]) state.dividends[ticker]=[];
-  state.dividends[ticker] = state.dividends[ticker].filter(d=>d.exDate!==exDate);
-  state.dividends[ticker].push({exDate, amount, source:'manual'});
+function saveManualDividend(){
+  const ticker=document.getElementById('divTicker').value;
+  const exDate=document.getElementById('divExDate').value;
+  const amount=parseFloat(document.getElementById('divAmount').value);
+  if(!exDate){ toast('Enter ex-dividend date','error'); return; }
+  if(isNaN(amount)||amount<=0){ toast('Enter valid DPU amount','error'); return; }
+  if(!state.dividends[ticker]) state.dividends[ticker]=[];
+  state.dividends[ticker]=state.dividends[ticker].filter(d=>d.exDate!==exDate);
+  state.dividends[ticker].push({exDate,amount,source:'manual'});
   state.dividends[ticker].sort((a,b)=>a.exDate.localeCompare(b.exDate));
   saveState(); closeModal('modalDividend'); render();
-  toast(`Added: ${displayTicker(ticker)} DPU S$${amount.toFixed(4)} ex-date ${fmtDate(exDate)}`,'success');
+  toast(`Dividend added: ${shortTicker(ticker)} DPU $${amount.toFixed(4)} · ${fmtDate(exDate)}`,'success');
 }
 
-// ══════════════════════════════════════════
-// MODAL HELPERS
-// ══════════════════════════════════════════
-function openModal(id) { document.getElementById(id).classList.add('open'); }
-function closeModal(id) { document.getElementById(id).classList.remove('open'); }
+// ═══════════════════════════════════════════
+// MODAL HELPERS / EVENTS
+// ═══════════════════════════════════════════
+function openModal(id){ document.getElementById(id).classList.add('open'); }
+function closeModal(id){ document.getElementById(id).classList.remove('open'); }
 
-function toast(msg, type='info') {
-  const wrap = document.getElementById('toastWrap');
-  const el = document.createElement('div');
-  el.className = `toast ${type}`; el.textContent = msg;
-  wrap.appendChild(el);
-  setTimeout(()=>el.remove(), 4500);
+function toast(msg,type='info'){
+  const el=document.createElement('div');
+  el.className=`toast ${type}`; el.textContent=msg;
+  document.getElementById('toastWrap').appendChild(el);
+  setTimeout(()=>el.remove(),4500);
 }
 
-// ══════════════════════════════════════════
-// OFFLINE + SW
-// ══════════════════════════════════════════
-function updateOnlineStatus() {
-  document.body.classList.toggle('offline', !navigator.onLine);
-  if (!navigator.onLine) setSyncStatus('Offline','error');
-}
-window.addEventListener('online', updateOnlineStatus);
-window.addEventListener('offline', updateOnlineStatus);
+window.addEventListener('online',()=>{ document.body.classList.remove('offline'); });
+window.addEventListener('offline',()=>{ document.body.classList.add('offline'); setSyncStatus('Offline','error'); });
 
-document.addEventListener('DOMContentLoaded', () => {
-  document.querySelectorAll('.modal-overlay').forEach(o =>
-    o.addEventListener('click', e => { if(e.target===o) o.classList.remove('open'); })
+document.addEventListener('DOMContentLoaded',()=>{
+  document.querySelectorAll('.modal-overlay').forEach(o=>
+    o.addEventListener('click',e=>{ if(e.target===o) o.classList.remove('open'); })
   );
 });
 
-if ('serviceWorker' in navigator) {
-  navigator.serviceWorker.register(new URL('./sw.js', location.href).href, {scope:'./'}).catch(()=>{});
-}
+if('serviceWorker' in navigator)
+  navigator.serviceWorker.register(new URL('./sw.js',location.href).href,{scope:'./'}).catch(()=>{});
 
-// ══════════════════════════════════════════
+// ═══════════════════════════════════════════
 // INIT
-// ══════════════════════════════════════════
+// ═══════════════════════════════════════════
 loadState();
-updateOnlineStatus();
+document.body.classList.toggle('offline',!navigator.onLine);
 render();
-
-if (state.lastSync) {
-  const elapsed = Date.now() - new Date(state.lastSync).getTime();
-  setSyncStatus(`Synced ${Math.floor(elapsed/60000)}m ago`,'ok');
+if(state.lastSync){
+  const e=Date.now()-new Date(state.lastSync).getTime();
+  setSyncStatus(`Synced ${Math.floor(e/60000)}m ago`,'ok');
 }
-if (navigator.onLine && state.holdings.length) {
-  if (!state.lastSync || Date.now()-new Date(state.lastSync).getTime() > 4*3600*1000) {
-    setTimeout(syncAll, 1500);
-  }
+if(navigator.onLine&&state.holdings.length){
+  if(!state.lastSync||Date.now()-new Date(state.lastSync).getTime()>4*3600*1000)
+    setTimeout(syncAll,1500);
 }
 </script>
 </body>
