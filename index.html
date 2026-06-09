@@ -21,7 +21,7 @@
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:15px}
 
-/* Header */
+/* ── Header ── */
 header{background:var(--surface);border-bottom:1px solid var(--border);padding:14px 20px;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:100}
 .logo{display:flex;align-items:center;gap:10px}
 .logo-icon{width:36px;height:36px;background:linear-gradient(135deg,var(--accent),#0099aa);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:900;color:#0f1117}
@@ -31,10 +31,10 @@ header{background:var(--surface);border-bottom:1px solid var(--border);padding:1
 .sync-status{font-size:11px;color:var(--muted);text-align:right;line-height:1.4}
 .sync-status.ok{color:var(--accent)}.sync-status.error{color:var(--accent2)}
 
-/* Buttons */
-button{cursor:pointer;border:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;transition:all .15s}
+/* ── Buttons ── */
+button{cursor:pointer;border:none;border-radius:8px;font-family:inherit;font-size:13px;font-weight:600;transition:all .15s;-webkit-tap-highlight-color:transparent}
 .btn-primary{background:var(--accent);color:#0f1117;padding:8px 16px}
-.btn-primary:hover{background:#00bfa0}
+.btn-primary:hover,.btn-primary:active{background:#00bfa0}
 .btn-secondary{background:var(--surface2);color:var(--text);padding:8px 14px;border:1px solid var(--border)}
 .btn-secondary:hover{background:var(--border)}
 .btn-icon{background:var(--surface2);color:var(--text);padding:8px 10px;border:1px solid var(--border);font-size:16px}
@@ -43,12 +43,8 @@ button{cursor:pointer;border:none;border-radius:8px;font-family:inherit;font-siz
 .btn-xs{padding:3px 8px;font-size:11px;border-radius:6px}
 .btn-ghost{background:transparent;color:var(--muted);padding:3px 8px;border-radius:6px;font-size:13px}
 .btn-ghost:hover{background:var(--surface2);color:var(--text)}
-.btn-sell{background:rgba(252,129,129,.15);color:var(--red);border:1px solid rgba(252,129,129,.3);padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700}
-.btn-sell:hover{background:rgba(252,129,129,.25)}
-.btn-buy{background:rgba(0,212,170,.12);color:var(--accent);border:1px solid rgba(0,212,170,.3);padding:3px 8px;border-radius:6px;font-size:11px;font-weight:700}
-.btn-buy:hover{background:rgba(0,212,170,.2)}
 
-/* KPI cards */
+/* ── KPI cards ── */
 .summary{display:grid;grid-template-columns:1fr 1fr;gap:16px;padding:20px 20px 0}
 .kpi-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:20px;position:relative;overflow:hidden}
 .kpi-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
@@ -60,29 +56,25 @@ button{cursor:pointer;border:none;border-radius:8px;font-family:inherit;font-siz
 .kpi-sub{font-size:11px;color:var(--muted);margin-top:8px;line-height:1.5}
 .kpi-sub span{color:var(--text)}
 
-/* Tabs */
+/* ── Tabs ── */
 .tabs-wrapper{padding:16px 20px 0;border-bottom:1px solid var(--border);overflow-x:auto;-webkit-overflow-scrolling:touch}
 .tabs{display:flex;gap:2px;min-width:max-content}
 .tab{padding:8px 18px;font-size:13px;font-weight:600;color:var(--muted);background:transparent;border-radius:8px 8px 0 0;border:none;cursor:pointer;transition:all .15s;white-space:nowrap}
 .tab:hover{color:var(--text);background:var(--surface2)}
 .tab.active{color:var(--accent);background:var(--surface);border:1px solid var(--border);border-bottom:1px solid var(--surface);margin-bottom:-1px}
 
-/* Tab content */
+/* ── Tab content ── */
 .tab-content{padding:20px}
 .section-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:14px}
 .section-title{font-size:13px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)}
 
-/* Holdings list (cards, not table — mobile friendly) */
+/* ── Holding cards ── */
 .holdings-list{display:flex;flex-direction:column;gap:10px}
 .holding-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);overflow:hidden}
-
-/* Card header row */
-.card-header{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;cursor:pointer;user-select:none}
+.card-header{display:flex;align-items:flex-start;gap:12px;padding:14px 16px;cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent}
 .card-header:hover{background:rgba(255,255,255,.02)}
 .card-left{flex:1;min-width:0}
 .card-right{display:flex;flex-direction:column;align-items:flex-end;gap:4px;flex-shrink:0}
-
-/* Ticker */
 .ticker-badge{display:inline-flex;align-items:center;gap:5px;background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:4px 9px;font-size:12px;font-weight:700;font-family:monospace;letter-spacing:.5px;color:var(--accent3)}
 .expand-arrow{font-size:10px;color:var(--muted);transition:transform .2s;margin-left:2px}
 .card-header.expanded .expand-arrow{transform:rotate(90deg)}
@@ -91,32 +83,24 @@ button{cursor:pointer;border:none;border-radius:8px;font-family:inherit;font-siz
 .meta-avg{color:var(--accent3)}
 .meta-pnl-pos{color:var(--green);font-size:11px}
 .meta-pnl-neg{color:var(--red);font-size:11px}
-
-/* Dividend chips */
 .div-chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:7px}
 .div-chip{display:inline-block;background:rgba(0,212,170,.1);border:1px solid rgba(0,212,170,.2);border-radius:4px;padding:2px 7px;font-size:10px;color:var(--accent);font-variant-numeric:tabular-nums;white-space:nowrap}
 .div-chip.proj{background:rgba(246,173,85,.1);border-color:rgba(246,173,85,.2);color:var(--accent2)}
-
-/* Card right amounts */
 .card-ytd{font-size:15px;font-weight:800;color:var(--accent)}
 .card-proj{font-size:12px;color:var(--accent2)}
 .card-proj-label{font-size:10px;color:var(--muted);text-align:right}
 .card-actions{display:flex;gap:4px;margin-top:6px}
-
-/* Tags */
 .tag{display:inline-block;font-size:10px;font-weight:700;padding:2px 6px;border-radius:4px;text-transform:uppercase;letter-spacing:.5px}
 .tag-est{background:rgba(246,173,85,.15);color:var(--accent2)}
 .tag-conf{background:rgba(0,212,170,.12);color:var(--accent)}
 .tag-buy{background:rgba(0,212,170,.12);color:var(--accent);font-size:9px;padding:1px 5px;border-radius:3px}
 .tag-sell{background:rgba(252,129,129,.12);color:var(--red);font-size:9px;padding:1px 5px;border-radius:3px}
 
-/* Expanded detail */
+/* ── Expanded detail ── */
 .card-detail{border-top:1px solid var(--border);background:var(--surface2);padding:16px}
 .detail-section{margin-bottom:18px}
 .detail-section:last-child{margin-bottom:0}
-.detail-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:10px}
-
-/* Transactions list */
+.detail-title{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted);margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
 .txn-list{display:flex;flex-direction:column;gap:6px}
 .txn-item{display:flex;align-items:center;justify-content:space-between;background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:9px 12px;gap:8px}
 .txn-left{flex:1}
@@ -124,18 +108,12 @@ button{cursor:pointer;border:none;border-radius:8px;font-family:inherit;font-siz
 .txn-detail{font-size:11px;color:var(--muted)}
 .txn-right{text-align:right;flex-shrink:0}
 .txn-total{font-size:13px;font-weight:700}
-.txn-total.buy{color:var(--accent3)}
-.txn-total.sell{color:var(--red)}
-.txn-pnl{font-size:11px;margin-top:2px}
-
-/* FIFO summary box */
+.txn-total.buy{color:var(--accent3)}.txn-total.sell{color:var(--red)}
 .fifo-box{background:var(--surface);border:1px solid var(--border);border-radius:8px;padding:12px 14px;display:grid;grid-template-columns:1fr 1fr;gap:8px 16px}
 .fifo-item label{font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);display:block;margin-bottom:2px}
 .fifo-item .val{font-size:14px;font-weight:700}
 .fifo-item .val.green{color:var(--green)}.fifo-item .val.red{color:var(--red)}.fifo-item .val.teal{color:var(--accent)}
-
-/* Dividend history */
-.div-history{display:flex;flex-direction:column;gap:0}
+.div-history{display:flex;flex-direction:column}
 .div-event{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:8px 0;border-top:1px solid var(--border);font-size:12px}
 .div-event:first-child{border-top:none}
 .div-event-left{display:flex;flex-direction:column;gap:2px}
@@ -148,18 +126,18 @@ button{cursor:pointer;border:none;border-radius:8px;font-family:inherit;font-siz
 .yr-label{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.5px;color:var(--muted);padding:8px 0 4px;border-top:1px solid var(--border);margin-top:4px}
 .yr-label:first-child{border-top:none;margin-top:0}
 
-/* Past year card */
+/* ── Past year ── */
 .year-summary-card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px;text-align:center;margin-bottom:20px}
 .year-total-value{font-size:40px;font-weight:900;color:var(--accent);letter-spacing:-1.5px}
 .year-note{font-size:12px;color:var(--muted);margin-top:8px}
 
-/* Empty state */
+/* ── Empty state ── */
 .empty-state{text-align:center;padding:48px 20px;color:var(--muted)}
 .empty-state .icon{font-size:40px;margin-bottom:16px}
 .empty-state h3{font-size:17px;color:var(--text);margin-bottom:8px}
 .empty-state p{font-size:14px;line-height:1.6;margin-bottom:20px}
 
-/* Modals */
+/* ── Modals ── */
 .modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.7);z-index:200;align-items:center;justify-content:center;padding:20px}
 .modal-overlay.open{display:flex}
 .modal{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);width:100%;max-width:500px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow)}
@@ -169,49 +147,78 @@ button{cursor:pointer;border:none;border-radius:8px;font-family:inherit;font-siz
 .modal-close:hover{color:var(--text)}
 .modal-body{padding:20px}
 .modal-footer{padding:16px 20px;border-top:1px solid var(--border);display:flex;justify-content:flex-end;gap:10px}
-
-/* Forms */
 .form-group{margin-bottom:14px}
 label{display:block;font-size:12px;font-weight:600;color:var(--muted);margin-bottom:5px;text-transform:uppercase;letter-spacing:.5px}
-input,select{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:10px 12px;font-family:inherit;font-size:14px;transition:border-color .15s}
-input:focus,select:focus{outline:none;border-color:var(--accent)}
+input[type=text],input[type=date],select{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:10px 12px;font-family:inherit;font-size:14px;transition:border-color .15s}
+input[type=text]:focus,input[type=date]:focus,select:focus{outline:none;border-color:var(--accent)}
 .form-hint{font-size:11px;color:var(--muted);margin-top:4px;line-height:1.5}
 .form-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .form-row-3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
-
-/* Info boxes */
 .info-box{background:rgba(0,212,170,.08);border:1px solid rgba(0,212,170,.25);border-radius:8px;padding:12px 14px;font-size:12px;color:var(--text);line-height:1.6;margin-bottom:14px}
 .info-box.warning{background:rgba(246,173,85,.08);border-color:rgba(246,173,85,.25)}
 .info-box strong{color:var(--accent)}.info-box.warning strong{color:var(--accent2)}
 .divider{height:1px;background:var(--border);margin:16px 0}
-
-/* Modal transaction list */
 .modal-txn-list{display:flex;flex-direction:column;gap:6px;margin-bottom:12px;min-height:10px}
 .modal-txn-item{display:flex;align-items:center;justify-content:space-between;background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:8px 12px;gap:8px}
 .modal-txn-text{font-size:13px;color:var(--text)}
 .modal-txn-sub{font-size:11px;color:var(--muted);margin-top:2px}
 .no-txns{font-size:12px;color:var(--muted);padding:8px 0;text-align:center}
-
-/* Type toggle */
 .type-toggle{display:flex;gap:0;border:1px solid var(--border);border-radius:8px;overflow:hidden;margin-bottom:14px}
 .type-toggle button{flex:1;padding:9px;border:none;border-radius:0;font-size:13px;font-weight:700;background:var(--surface2);color:var(--muted)}
 .type-toggle button.active-buy{background:rgba(0,212,170,.2);color:var(--accent)}
 .type-toggle button.active-sell{background:rgba(252,129,129,.2);color:var(--red)}
 
-/* Spinner & toast */
+/* ── Numeric display field (tappable, opens numpad) ── */
+.num-field{width:100%;background:var(--surface2);border:1px solid var(--border);border-radius:8px;color:var(--text);padding:10px 12px;font-size:14px;cursor:pointer;display:flex;align-items:center;justify-content:space-between;min-height:42px;transition:border-color .15s;user-select:none;-webkit-tap-highlight-color:transparent}
+.num-field:hover,.num-field:focus{border-color:var(--accent);outline:none}
+.num-field.active{border-color:var(--accent);box-shadow:0 0 0 2px rgba(0,212,170,.15)}
+.num-field .placeholder{color:var(--muted)}
+.num-field .calc-icon{font-size:14px;color:var(--muted)}
+
+/* ── Numpad bottom sheet ── */
+.numpad-backdrop{display:none;position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:400}
+.numpad-backdrop.open{display:block}
+.numpad-sheet{position:fixed;bottom:0;left:0;right:0;background:var(--surface);border-radius:20px 20px 0 0;padding:0 0 env(safe-area-inset-bottom,16px);z-index:410;transform:translateY(100%);transition:transform .3s cubic-bezier(.4,0,.2,1);box-shadow:0 -8px 40px rgba(0,0,0,.5);max-width:480px;margin:0 auto}
+.numpad-sheet.open{transform:translateY(0)}
+.numpad-drag{width:40px;height:4px;background:var(--border);border-radius:2px;margin:12px auto 8px}
+.numpad-header{padding:8px 20px 12px;display:flex;align-items:center;justify-content:space-between}
+.numpad-field-label{font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)}
+.numpad-done{background:transparent;color:var(--accent);font-size:14px;font-weight:700;padding:4px 8px;border-radius:6px}
+.numpad-display{background:var(--surface2);border:2px solid var(--accent);border-radius:10px;padding:12px 16px;font-size:30px;font-weight:800;color:var(--text);text-align:right;font-variant-numeric:tabular-nums;letter-spacing:-0.5px;min-height:58px;line-height:1;display:flex;align-items:center;justify-content:flex-end;margin:0 16px 14px;word-break:break-all}
+.numpad-display .cursor{display:inline-block;width:2px;height:28px;background:var(--accent);margin-left:3px;animation:blink .8s infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.numpad-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:0 16px 8px}
+.np{background:var(--surface2);border:1px solid var(--border);border-radius:14px;padding:0;height:58px;font-size:24px;font-weight:600;color:var(--text);text-align:center;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .08s;-webkit-tap-highlight-color:transparent;user-select:none}
+.np:active{background:var(--surface3);transform:scale(.94)}
+.np.clear{color:var(--accent2);font-size:16px;font-weight:700}
+.np.back{color:var(--accent2);font-size:22px}
+.np.dec{color:var(--accent3)}
+.np.confirm{background:var(--accent);color:#0f1117;border-color:var(--accent);font-size:22px}
+.np.confirm:active{background:#00bfa0}
+.np.empty{background:transparent;border-color:transparent;pointer-events:none}
+
+/* ── Backup modal ── */
+.backup-option{display:flex;align-items:center;gap:14px;background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:16px;cursor:pointer;transition:all .15s;margin-bottom:10px;-webkit-tap-highlight-color:transparent}
+.backup-option:hover{border-color:var(--accent);background:var(--surface3)}
+.backup-option .bk-icon{font-size:28px;flex-shrink:0}
+.backup-option .bk-title{font-size:14px;font-weight:700;color:var(--text)}
+.backup-option .bk-desc{font-size:11px;color:var(--muted);margin-top:3px;line-height:1.4}
+
+/* ── Toast ── */
 @keyframes spin{to{transform:rotate(360deg)}}
 .spinner{display:inline-block;width:14px;height:14px;border:2px solid var(--border);border-top-color:var(--accent);border-radius:50%;animation:spin .7s linear infinite;vertical-align:middle;margin-right:6px}
-.toast-wrap{position:fixed;bottom:24px;right:20px;display:flex;flex-direction:column;gap:8px;z-index:300}
-.toast{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:13px;box-shadow:var(--shadow);max-width:320px;animation:slideIn .2s ease}
+.toast-wrap{position:fixed;bottom:24px;right:20px;display:flex;flex-direction:column;gap:8px;z-index:500}
+.toast{background:var(--surface2);border:1px solid var(--border);border-radius:10px;padding:12px 16px;font-size:13px;box-shadow:var(--shadow);max-width:320px}
 .toast.success{border-left:3px solid var(--accent)}.toast.error{border-left:3px solid var(--red)}.toast.info{border-left:3px solid var(--accent3)}
 @keyframes slideIn{from{transform:translateX(20px);opacity:0}to{transform:translateX(0);opacity:1}}
+.toast{animation:slideIn .2s ease}
 
-/* Offline */
+/* ── Offline ── */
 .offline-bar{display:none;background:rgba(246,173,85,.12);border-bottom:1px solid rgba(246,173,85,.3);padding:8px 20px;font-size:12px;color:var(--accent2);text-align:center}
 body.offline .offline-bar{display:block}
 .footer{padding:20px;text-align:center;font-size:11px;color:var(--muted);border-top:1px solid var(--border);margin-top:20px}
 
-/* Responsive */
+/* ── Responsive ── */
 @media(max-width:500px){
   .summary{gap:10px;padding:14px 14px 0}.kpi-value{font-size:22px}.kpi-card{padding:14px}
   .tab-content{padding:14px}.tabs-wrapper{padding:12px 14px 0}header{padding:12px 14px}
@@ -258,9 +265,35 @@ body.offline .offline-bar{display:block}
 <div class="footer" id="footer">Add holdings to get started</div>
 <div class="toast-wrap" id="toastWrap"></div>
 
-<!-- ═══════════════════════════════
-     Modal: Add / Edit Holding
-     ═══════════════════════════════ -->
+<!-- ═══ Numpad bottom sheet ═══ -->
+<div class="numpad-backdrop" id="numpadBackdrop" onclick="closeNumpad()"></div>
+<div class="numpad-sheet" id="numpadSheet">
+  <div class="numpad-drag"></div>
+  <div class="numpad-header">
+    <span class="numpad-field-label" id="numpadLabel">Enter value</span>
+    <button class="numpad-done" onclick="numpadConfirm()">Done</button>
+  </div>
+  <div class="numpad-display" id="numpadDisplay"><span class="cursor"></span></div>
+  <div class="numpad-grid">
+    <div class="np clear"  onclick="numpadKey('C')">C</div>
+    <div class="np empty"></div>
+    <div class="np back"   onclick="numpadKey('⌫')">⌫</div>
+    <div class="np" onclick="numpadKey('7')">7</div>
+    <div class="np" onclick="numpadKey('8')">8</div>
+    <div class="np" onclick="numpadKey('9')">9</div>
+    <div class="np" onclick="numpadKey('4')">4</div>
+    <div class="np" onclick="numpadKey('5')">5</div>
+    <div class="np" onclick="numpadKey('6')">6</div>
+    <div class="np" onclick="numpadKey('1')">1</div>
+    <div class="np" onclick="numpadKey('2')">2</div>
+    <div class="np" onclick="numpadKey('3')">3</div>
+    <div class="np dec" id="numpadDecBtn" onclick="numpadKey('.')">.</div>
+    <div class="np" onclick="numpadKey('0')">0</div>
+    <div class="np confirm" onclick="numpadConfirm()">✓</div>
+  </div>
+</div>
+
+<!-- ═══ Modal: Add/Edit Holding ═══ -->
 <div class="modal-overlay" id="modalHolding">
   <div class="modal">
     <div class="modal-header">
@@ -272,18 +305,16 @@ body.offline .offline-bar{display:block}
       <div class="form-row">
         <div class="form-group">
           <label>Ticker Symbol</label>
-          <input type="text" id="inputTicker" placeholder="e.g. CICT.SI" autocapitalize="characters">
+          <input type="text" id="inputTicker" placeholder="e.g. CICT.SI" autocapitalize="characters" autocorrect="off">
         </div>
         <div class="form-group">
           <label>Display Name</label>
-          <input type="text" id="inputName" placeholder="e.g. CICT">
+          <input type="text" id="inputName" placeholder="e.g. CICT" autocorrect="off">
         </div>
       </div>
 
       <div class="divider"></div>
       <div style="font-size:13px;font-weight:700;color:var(--text);margin-bottom:12px">Transactions</div>
-
-      <!-- Existing transactions -->
       <div class="modal-txn-list" id="modalTxnList"></div>
 
       <!-- Add transaction form -->
@@ -293,21 +324,29 @@ body.offline .offline-bar{display:block}
           <button id="btnBuy" class="active-buy" onclick="setTxnType('BUY')">BUY</button>
           <button id="btnSell" onclick="setTxnType('SELL')">SELL</button>
         </div>
-        <div class="form-row-3">
+        <div class="form-row-3" style="margin-bottom:10px">
           <div class="form-group" style="margin-bottom:0">
             <label>Units</label>
-            <input type="number" id="txnUnits" placeholder="5000" min="1">
+            <div class="num-field" id="fieldUnits" onclick="openNumpad('units','Units',false)" tabindex="0">
+              <span id="dispUnits" class="placeholder">Tap to enter</span>
+              <span class="calc-icon">⌨</span>
+            </div>
           </div>
           <div class="form-group" style="margin-bottom:0">
-            <label>Price/Unit ($)</label>
-            <input type="number" id="txnPrice" placeholder="1.85" step="0.001" min="0">
+            <label>Price / Unit ($)</label>
+            <div class="num-field" id="fieldPrice" onclick="openNumpad('price','Price per Unit',true)" tabindex="0">
+              <span id="dispPrice" class="placeholder">Tap to enter</span>
+              <span class="calc-icon">⌨</span>
+            </div>
           </div>
           <div class="form-group" style="margin-bottom:0">
             <label>Date</label>
             <input type="date" id="txnDate">
           </div>
         </div>
-        <button class="btn-secondary btn-sm" style="margin-top:10px" onclick="addTxnToModal()">+ Add Transaction</button>
+        <input type="hidden" id="txnUnits">
+        <input type="hidden" id="txnPrice">
+        <button class="btn-secondary btn-sm" onclick="addTxnToModal()">+ Add Transaction</button>
       </div>
     </div>
     <div class="modal-footer">
@@ -317,9 +356,7 @@ body.offline .offline-bar{display:block}
   </div>
 </div>
 
-<!-- ═══════════════════════════════
-     Modal: Manual Dividend Entry
-     ═══════════════════════════════ -->
+<!-- ═══ Modal: Manual Dividend ═══ -->
 <div class="modal-overlay" id="modalDividend">
   <div class="modal">
     <div class="modal-header">
@@ -327,9 +364,7 @@ body.offline .offline-bar{display:block}
       <button class="modal-close" onclick="closeModal('modalDividend')">✕</button>
     </div>
     <div class="modal-body">
-      <div class="info-box warning">
-        Enter the <strong>ex-dividend date</strong> and DPU as announced by SGX. Only ex-dates where you hold units will count.
-      </div>
+      <div class="info-box warning">Enter the <strong>ex-dividend date</strong> and DPU as announced by SGX.</div>
       <div class="form-group">
         <label>Stock</label>
         <select id="divTicker"></select>
@@ -341,7 +376,11 @@ body.offline .offline-bar{display:block}
         </div>
         <div class="form-group">
           <label>DPU / Dividend (SGD)</label>
-          <input type="number" id="divAmount" placeholder="0.0540" step="0.0001" min="0">
+          <div class="num-field" id="fieldDPU" onclick="openNumpad('dpu','DPU per Unit',true)">
+            <span id="dispDPU" class="placeholder">Tap to enter</span>
+            <span class="calc-icon">⌨</span>
+          </div>
+          <input type="hidden" id="divAmount">
         </div>
       </div>
     </div>
@@ -352,24 +391,148 @@ body.offline .offline-bar{display:block}
   </div>
 </div>
 
+<!-- ═══ Modal: Backup ═══ -->
+<div class="modal-overlay" id="modalBackup">
+  <div class="modal">
+    <div class="modal-header">
+      <div class="modal-title">Backup & Export</div>
+      <button class="modal-close" onclick="closeModal('modalBackup')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="info-box">
+        <strong>Save to iCloud Drive:</strong> After tapping an option below, tap <strong>Share</strong> in the iOS share sheet, then choose <strong>Save to Files → iCloud Drive</strong>.
+      </div>
+
+      <div class="backup-option" onclick="exportTransactions()">
+        <div class="bk-icon">📋</div>
+        <div>
+          <div class="bk-title">Export Transactions</div>
+          <div class="bk-desc">All holdings with buy/sell transactions, units, prices and dates</div>
+        </div>
+      </div>
+
+      <div class="backup-option" onclick="exportDividends()">
+        <div class="bk-icon">💰</div>
+        <div>
+          <div class="bk-title">Export Dividend History</div>
+          <div class="bk-desc">All dividend/DPU records per ticker with ex-dates and amounts</div>
+        </div>
+      </div>
+
+      <div class="backup-option" onclick="exportAll()">
+        <div class="bk-icon">📦</div>
+        <div>
+          <div class="bk-title">Export Everything (Combined)</div>
+          <div class="bk-desc">Transactions + dividend history in one CSV file</div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+      <div style="font-size:12px;color:var(--muted);text-align:center">
+        Files are saved as <strong style="color:var(--text)">.csv</strong> — openable in Excel, Numbers, or Google Sheets
+      </div>
+    </div>
+  </div>
+</div>
+
 <script>
 // ═══════════════════════════════════════════
 // STATE
 // ═══════════════════════════════════════════
-/*
-  holdings: [{
-    id, ticker, name,
-    transactions: [{id, type:'BUY'|'SELL', units, price, date}]
-  }]
-  dividends: { ticker: [{exDate, amount, source}] }
-*/
 let state = { holdings:[], dividends:{}, lastSync:null, syncErrors:{} };
-let modalTxns = [];   // working copy in modal
+let modalTxns = [];
 let modalTxnType = 'BUY';
 const TODAY = new Date();
 const CURRENT_YEAR = TODAY.getFullYear();
 let activeYear = CURRENT_YEAR;
 let expandedIds = new Set();
+
+// ═══════════════════════════════════════════
+// NUMPAD STATE
+// ═══════════════════════════════════════════
+let numpadTarget = null;   // 'units' | 'price' | 'dpu'
+let numpadDecimal = false; // whether decimal is allowed
+let numpadValue = '';
+
+function openNumpad(target, label, allowDecimal) {
+  numpadTarget = target;
+  numpadDecimal = allowDecimal;
+  // Pre-fill with existing value
+  const cur = target==='units' ? document.getElementById('txnUnits').value
+            : target==='price' ? document.getElementById('txnPrice').value
+            : document.getElementById('divAmount').value;
+  numpadValue = cur || '';
+  document.getElementById('numpadLabel').textContent = label;
+  document.getElementById('numpadDecBtn').classList.toggle('empty', !allowDecimal);
+  document.getElementById('numpadDecBtn').style.pointerEvents = allowDecimal ? '' : 'none';
+  updateNumpadDisplay();
+  document.getElementById('numpadBackdrop').classList.add('open');
+  document.getElementById('numpadSheet').classList.add('open');
+  // Mark field as active
+  ['fieldUnits','fieldPrice','fieldDPU'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.classList.remove('active');
+  });
+  const fieldMap = {units:'fieldUnits', price:'fieldPrice', dpu:'fieldDPU'};
+  if(fieldMap[target]) document.getElementById(fieldMap[target])?.classList.add('active');
+}
+
+function closeNumpad() {
+  document.getElementById('numpadBackdrop').classList.remove('open');
+  document.getElementById('numpadSheet').classList.remove('open');
+  ['fieldUnits','fieldPrice','fieldDPU'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.classList.remove('active');
+  });
+}
+
+function numpadKey(k) {
+  if (k === 'C') { numpadValue = ''; }
+  else if (k === '⌫') { numpadValue = numpadValue.slice(0,-1); }
+  else if (k === '.') {
+    if (!numpadDecimal) return;
+    if (numpadValue.includes('.')) return;
+    if (numpadValue === '') numpadValue = '0';
+    numpadValue += '.';
+  } else {
+    // Max digits guard
+    const [int, dec] = numpadValue.split('.');
+    if (dec !== undefined && dec.length >= 4) return; // max 4 decimal places
+    if (!numpadValue.includes('.') && (int||'').length >= 9) return; // max 9 integer digits
+    if (numpadValue === '0' && k !== '.') numpadValue = k;
+    else numpadValue += k;
+  }
+  updateNumpadDisplay();
+}
+
+function updateNumpadDisplay() {
+  const disp = document.getElementById('numpadDisplay');
+  disp.innerHTML = (numpadValue || '') + '<span class="cursor"></span>';
+}
+
+function numpadConfirm() {
+  const v = numpadValue.replace(/\.$/, ''); // strip trailing dot
+  if (numpadTarget === 'units') {
+    document.getElementById('txnUnits').value = v;
+    const el = document.getElementById('dispUnits');
+    el.textContent = v ? Number(v).toLocaleString() : '';
+    el.className = v ? '' : 'placeholder';
+    if(!v) el.textContent = 'Tap to enter';
+  } else if (numpadTarget === 'price') {
+    document.getElementById('txnPrice').value = v;
+    const el = document.getElementById('dispPrice');
+    el.textContent = v ? '$'+Number(v).toFixed(3) : '';
+    el.className = v ? '' : 'placeholder';
+    if(!v) el.textContent = 'Tap to enter';
+  } else if (numpadTarget === 'dpu') {
+    document.getElementById('divAmount').value = v;
+    const el = document.getElementById('dispDPU');
+    el.textContent = v ? '$'+Number(v).toFixed(4) : '';
+    el.className = v ? '' : 'placeholder';
+    if(!v) el.textContent = 'Tap to enter';
+  }
+  closeNumpad();
+}
 
 // ═══════════════════════════════════════════
 // PERSISTENCE + MIGRATION
@@ -379,15 +542,12 @@ function loadState() {
     const s = localStorage.getItem('sgdiv_state');
     if (!s) return;
     state = { ...state, ...JSON.parse(s) };
-    // Migrate tranches → transactions
     state.holdings = state.holdings.map(h => {
       if (h.tranches && !h.transactions) {
         h.transactions = h.tranches.map(tr => ({
-          id: tr.id || uid(),
-          type: 'BUY',
-          units: Number(tr.units) || 0,
-          price: 0,
-          date: tr.acquisitionDate || dateStr(new Date(CURRENT_YEAR-1,0,1))
+          id: tr.id||uid(), type:'BUY',
+          units: Number(tr.units)||0, price:0,
+          date: tr.acquisitionDate||dateStr(new Date(CURRENT_YEAR-1,0,1))
         }));
         delete h.tranches;
       }
@@ -434,174 +594,150 @@ function shortTicker(t) { return t.replace(/\.SI$/i,''); }
 // FIFO ENGINE
 // ═══════════════════════════════════════════
 function applyFIFO(transactions) {
-  // Sort by date asc
   const sorted = [...transactions].sort((a,b)=>a.date.localeCompare(b.date));
-  const buyLots = sorted
-    .filter(t=>t.type==='BUY')
-    .map(t=>({ ...t, remaining: Number(t.units) }));
-
+  const buyLots = sorted.filter(t=>t.type==='BUY').map(t=>({...t,remaining:Number(t.units)}));
   let realizedPnL = 0;
-  const sells = sorted.filter(t=>t.type==='SELL');
-
-  for (const sell of sells) {
+  for (const sell of sorted.filter(t=>t.type==='SELL')) {
     let toSell = Number(sell.units);
     for (const lot of buyLots) {
-      if (lot.remaining <= 0 || toSell <= 0) continue;
+      if(lot.remaining<=0||toSell<=0) continue;
       const qty = Math.min(lot.remaining, toSell);
-      realizedPnL += qty * (Number(sell.price) - Number(lot.price));
-      lot.remaining -= qty;
-      toSell -= qty;
+      realizedPnL += qty*(Number(sell.price)-Number(lot.price));
+      lot.remaining -= qty; toSell -= qty;
     }
   }
-
   const remaining = buyLots.filter(l=>l.remaining>0);
-  const totalUnits = remaining.reduce((s,l)=>s+l.remaining, 0);
-  const totalCost  = remaining.reduce((s,l)=>s+l.remaining*Number(l.price), 0);
-  const avgPrice   = totalUnits > 0 ? totalCost / totalUnits : 0;
-
+  const totalUnits = remaining.reduce((s,l)=>s+l.remaining,0);
+  const totalCost  = remaining.reduce((s,l)=>s+l.remaining*Number(l.price),0);
+  const avgPrice   = totalUnits>0 ? totalCost/totalUnits : 0;
   return { buyLots, remaining, totalUnits, avgPrice, realizedPnL };
 }
 
-// Units held on a given ex-date (for dividend eligibility)
-// Rule: BUY date <= exDate counts; SELL date < exDate reduces
 function unitsOnExDate(transactions, exDate) {
-  let units = 0;
-  for (const t of transactions) {
-    if (t.type==='BUY' && t.date<=exDate) units += Number(t.units);
-    if (t.type==='SELL' && t.date<exDate) units -= Number(t.units);
+  let u=0;
+  for(const t of transactions) {
+    if(t.type==='BUY' && t.date<=exDate) u+=Number(t.units);
+    if(t.type==='SELL'&& t.date<exDate)  u-=Number(t.units);
   }
-  return Math.max(0, units);
+  return Math.max(0,u);
 }
 
 // ═══════════════════════════════════════════
 // DIVIDEND CALCULATIONS
 // ═══════════════════════════════════════════
 function buildDivEvents(holding, allDivs, year) {
-  const todayStr = dateStr(TODAY);
-  const yearDivs = allDivs.filter(d=>new Date(d.exDate).getFullYear()===year);
-  const events = [];
-
-  for (const div of yearDivs) {
-    const units = unitsOnExDate(holding.transactions, div.exDate);
-    if (units <= 0) continue;
-    const amt = Number(div.amount) * units;
-    const isPast = div.exDate <= todayStr;
-    events.push({
-      exDate:div.exDate, amount:div.amount, source:div.source,
-      units, totalAmt:amt,
-      received: isPast ? amt : 0,
-      projected: isPast ? 0 : amt
-    });
-  }
-  return events;
+  const todayStr=dateStr(TODAY);
+  return allDivs
+    .filter(d=>new Date(d.exDate).getFullYear()===year)
+    .map(div => {
+      const units=unitsOnExDate(holding.transactions,div.exDate);
+      if(units<=0) return null;
+      const amt=Number(div.amount)*units;
+      const isPast=div.exDate<=todayStr;
+      return {exDate:div.exDate,amount:div.amount,source:div.source,units,totalAmt:amt,
+              received:isPast?amt:0,projected:isPast?0:amt};
+    }).filter(Boolean);
 }
 
 function getHoldingYearTotals(holding, year) {
-  const base = state.dividends[holding.ticker] || [];
-  const extra = year===CURRENT_YEAR ? estimateFuture(holding, base) : [];
-  const all = [...base, ...extra];
-  const events = buildDivEvents(holding, all, year);
+  const base=state.dividends[holding.ticker]||[];
+  const extra=year===CURRENT_YEAR?estimateFuture(holding,base):[];
+  const events=buildDivEvents(holding,[...base,...extra],year);
   return {
-    received: events.reduce((s,e)=>s+e.received, 0),
-    projected: events.reduce((s,e)=>s+e.projected, 0),
+    received:events.reduce((s,e)=>s+e.received,0),
+    projected:events.reduce((s,e)=>s+e.projected,0),
     events
   };
 }
 
 function estimateFuture(holding, baseDivs) {
-  const todayStr = dateStr(TODAY);
-  const lyDivs = baseDivs.filter(d=>new Date(d.exDate).getFullYear()===CURRENT_YEAR-1);
-  const tyDivs = baseDivs.filter(d=>new Date(d.exDate).getFullYear()===CURRENT_YEAR);
-  const extras = [];
-  for (const div of lyDivs) {
-    const m = new Date(div.exDate).getMonth();
-    if (tyDivs.some(d=>Math.abs(new Date(d.exDate).getMonth()-m)<=1)) continue;
-    const lyD = new Date(div.exDate);
-    const estDate = new Date(CURRENT_YEAR, m, Math.min(lyD.getDate(),28));
-    if (dateStr(estDate)>todayStr && unitsOnExDate(holding.transactions, dateStr(estDate))>0) {
-      extras.push({exDate:dateStr(estDate), amount:div.amount, source:'est'});
-    }
-  }
-  return extras;
+  const todayStr=dateStr(TODAY);
+  const lyDivs=baseDivs.filter(d=>new Date(d.exDate).getFullYear()===CURRENT_YEAR-1);
+  const tyDivs=baseDivs.filter(d=>new Date(d.exDate).getFullYear()===CURRENT_YEAR);
+  return lyDivs.flatMap(div=>{
+    const m=new Date(div.exDate).getMonth();
+    if(tyDivs.some(d=>Math.abs(new Date(d.exDate).getMonth()-m)<=1)) return [];
+    const lyD=new Date(div.exDate);
+    const estDate=new Date(CURRENT_YEAR,m,Math.min(lyD.getDate(),28));
+    const estStr=dateStr(estDate);
+    if(estStr<=todayStr||unitsOnExDate(holding.transactions,estStr)<=0) return [];
+    return [{exDate:estStr,amount:div.amount,source:'est'}];
+  });
 }
 
 function calcYear(year) {
-  let received=0, projected=0;
-  for (const h of state.holdings) {
-    const t = getHoldingYearTotals(h, year);
-    received += t.received; projected += t.projected;
+  let received=0,projected=0;
+  for(const h of state.holdings){
+    const t=getHoldingYearTotals(h,year);
+    received+=t.received; projected+=t.projected;
   }
-  return { received, projected };
+  return {received,projected};
 }
 
 // ═══════════════════════════════════════════
-// YAHOO FINANCE FETCH
+// YAHOO FINANCE
 // ═══════════════════════════════════════════
 function parseYFJson(json) {
-  const raw = json?.chart?.result?.[0]?.events?.dividends || {};
+  const raw=json?.chart?.result?.[0]?.events?.dividends||{};
   return Object.values(raw).map(d=>({
-    exDate:dateStr(new Date(d.date*1000)), amount:Number(d.amount), source:'api'
+    exDate:dateStr(new Date(d.date*1000)),amount:Number(d.amount),source:'api'
   })).sort((a,b)=>a.exDate.localeCompare(b.exDate));
 }
 
 async function fetchYFDividends(ticker) {
-  const p1 = Math.floor(Date.now()/1000 - 9*365.25*86400); // back to ~2017
-  const p2 = Math.floor(Date.now()/1000 + 365*86400);
-  const yfUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?events=dividends&interval=3mo&period1=${p1}&period2=${p2}`;
-  for (const url of [
-    yfUrl,
+  const p1=Math.floor(Date.now()/1000-9*365.25*86400);
+  const p2=Math.floor(Date.now()/1000+365*86400);
+  const yfUrl=`https://query1.finance.yahoo.com/v8/finance/chart/${encodeURIComponent(ticker)}?events=dividends&interval=3mo&period1=${p1}&period2=${p2}`;
+  for(const url of [yfUrl,
     `https://corsproxy.io/?${encodeURIComponent(yfUrl)}`,
-    `https://api.allorigins.win/get?url=${encodeURIComponent(yfUrl)}`
-  ]) {
-    try {
-      const r = await fetch(url, {headers:{'Accept':'application/json'}});
-      if (!r.ok) continue;
-      const j = url.includes('allorigins') ? JSON.parse((await r.json()).contents) : await r.json();
-      const divs = parseYFJson(j);
-      if (divs.length) return divs;
-    } catch(e) {}
+    `https://api.allorigins.win/get?url=${encodeURIComponent(yfUrl)}`]){
+    try{
+      const r=await fetch(url,{headers:{'Accept':'application/json'}});
+      if(!r.ok) continue;
+      const j=url.includes('allorigins')?JSON.parse((await r.json()).contents):await r.json();
+      const divs=parseYFJson(j);
+      if(divs.length) return divs;
+    }catch(e){}
   }
   throw new Error('All routes failed');
 }
 
 async function syncAll() {
-  if (!state.holdings.length) { toast('No holdings to sync','info'); return; }
+  if(!state.holdings.length){toast('No holdings to sync','info');return;}
   const btn=document.getElementById('syncBtn');
-  btn.innerHTML='<span class="spinner"></span>'; btn.disabled=true;
-  setSyncStatus('Syncing…','');
-  state.syncErrors={};
+  btn.innerHTML='<span class="spinner"></span>';btn.disabled=true;
+  setSyncStatus('Syncing…','');state.syncErrors={};
   const tickers=[...new Set(state.holdings.map(h=>h.ticker))];
   let ok=0,fail=0;
   await Promise.allSettled(tickers.map(async ticker=>{
-    try {
+    try{
       const divs=await fetchYFDividends(ticker);
       const manual=(state.dividends[ticker]||[]).filter(d=>d.source==='manual');
       const apiDates=new Set(divs.map(d=>d.exDate));
       state.dividends[ticker]=[...divs,...manual.filter(d=>!apiDates.has(d.exDate))]
         .sort((a,b)=>a.exDate.localeCompare(b.exDate));
       ok++;
-    } catch(e){ fail++; state.syncErrors[ticker]=e.message; }
+    }catch(e){fail++;state.syncErrors[ticker]=e.message;}
   }));
   state.lastSync=new Date().toISOString();
-  saveState(); btn.innerHTML='⟳'; btn.disabled=false;
+  saveState();btn.innerHTML='⟳';btn.disabled=false;
   if(ok>0&&fail===0) setSyncStatus(`Synced ${ok}`,'ok');
   else if(ok>0) setSyncStatus(`${ok} ok, ${fail} failed`,'error');
   else setSyncStatus('Sync failed','error');
   if(ok>0) toast(`Updated ${ok} stock${ok>1?'s':''}`,'success');
-  if(fail>0) toast(`${fail} failed — use + Dividend to add manually`,'error');
+  if(fail>0) toast(`${fail} failed — use + Dividend to enter manually`,'error');
   render();
 }
 
 function setSyncStatus(m,c){
-  const el=document.getElementById('syncStatus');
-  el.textContent=m; el.className='sync-status '+c;
+  const el=document.getElementById('syncStatus');el.textContent=m;el.className='sync-status '+c;
 }
 
 // ═══════════════════════════════════════════
 // RENDER
 // ═══════════════════════════════════════════
 function render() {
-  renderSummary(); renderTabs(); renderTabContent(); updateFooter();
+  renderSummary();renderTabs();renderTabContent();updateFooter();
 }
 
 function renderSummary() {
@@ -619,12 +755,9 @@ function renderSummary() {
 }
 
 function getYears() {
-  const minY=state.holdings.reduce((m,h)=>{
-    const y=h.transactions.reduce((my,t)=>{
-      return Math.min(my,t.date?new Date(t.date).getFullYear():CURRENT_YEAR);
-    },CURRENT_YEAR);
-    return Math.min(m,y);
-  },CURRENT_YEAR-1);
+  const minY=state.holdings.reduce((m,h)=>
+    Math.min(m,h.transactions.reduce((my,t)=>Math.min(my,new Date(t.date).getFullYear()),CURRENT_YEAR))
+  ,CURRENT_YEAR-1);
   const yrs=[];
   for(let y=CURRENT_YEAR;y>=Math.max(minY,2018);y--) yrs.push(y);
   return yrs;
@@ -635,10 +768,11 @@ function renderTabs() {
     getYears().map(y=>
       `<button class="tab${y===activeYear?' active':''}" onclick="setYear(${y})">${y===CURRENT_YEAR?y+' ★':y}</button>`
     ).join('')+
-    `<button class="tab" onclick="openDividendModal()" style="margin-left:8px">+ Dividend</button>`;
+    `<button class="tab" onclick="openDividendModal()" style="margin-left:8px">+ Dividend</button>`+
+    `<button class="tab" onclick="openModal('modalBackup')" style="margin-left:4px">⬇ Backup</button>`;
 }
 
-function setYear(y){ activeYear=y; renderTabs(); renderTabContent(); }
+function setYear(y){activeYear=y;renderTabs();renderTabContent();}
 
 function renderTabContent() {
   const el=document.getElementById('tabContent');
@@ -646,24 +780,22 @@ function renderTabContent() {
     el.innerHTML=`<div class="empty-state">
       <div class="icon">📊</div>
       <h3>No Holdings Yet</h3>
-      <p>Add stocks with buy/sell transactions to track dividend income.<br>Multiple tranches and FIFO accounting supported.</p>
+      <p>Add stocks with buy/sell transactions.<br>FIFO accounting, avg price &amp; dividend tracking built in.</p>
       <button class="btn-primary" onclick="openAddHolding()">+ Add First Holding</button>
-    </div>`;
-    return;
+    </div>`;return;
   }
-  activeYear===CURRENT_YEAR ? renderCurrentYear(el) : renderPastYear(el,activeYear);
+  activeYear===CURRENT_YEAR?renderCurrentYear(el):renderPastYear(el,activeYear);
 }
 
 function renderCurrentYear(el) {
-  const cards = state.holdings.map(h => buildHoldingCard(h)).join('');
   el.innerHTML=`
     <div class="section-header">
       <div class="section-title">Holdings — ${CURRENT_YEAR}</div>
     </div>
-    <div class="holdings-list">${cards}</div>
+    <div class="holdings-list">${state.holdings.map(buildHoldingCard).join('')}</div>
     <div style="font-size:11px;color:var(--muted);margin-top:14px;text-align:center">
-      Tap a card to expand tranches, P&amp;L &amp; dividend history ·
-      <a href="#" onclick="openDividendModal();return false" style="color:var(--accent);text-decoration:none">+ Add dividend</a>
+      Tap a card to expand · <a href="#" onclick="openDividendModal();return false" style="color:var(--accent);text-decoration:none">+ Add dividend</a>
+      · <a href="#" onclick="openModal('modalBackup');return false" style="color:var(--accent);text-decoration:none">⬇ Backup</a>
     </div>`;
 }
 
@@ -673,29 +805,20 @@ function buildHoldingCard(h) {
   const hasConf=events.some(e=>e.projected>0&&e.source==='api');
   const syncErr=state.syncErrors[h.ticker];
   const isExp=expandedIds.has(h.id);
-
-  // Chips: last 3 received + up to 2 projected
   const recEv=events.filter(e=>e.received>0).slice(-3);
   const prjEv=events.filter(e=>e.projected>0).slice(0,2);
   const chips=[
     ...recEv.map(e=>`<span class="div-chip">${fmtMonYr(e.exDate)} ${fmtSGDx(e.received)}</span>`),
     ...prjEv.map(e=>`<span class="div-chip proj">~${fmtMonYr(e.exDate)} ${fmtSGDx(e.projected)}</span>`)
   ].join('');
-
   const projTag=projected>0?(hasConf?`<span class="tag tag-conf">Conf</span>`:`<span class="tag tag-est">Est</span>`):'';
   const pnlHtml=realizedPnL!==0
-    ?`<span class="${realizedPnL>=0?'meta-pnl-pos':'meta-pnl-neg'}">${realizedPnL>=0?'+':''}${fmtSGDx(realizedPnL)} realized</span>`
-    :'';
-
-  const detail = isExp ? buildDetail(h) : '';
+    ?`<span class="${realizedPnL>=0?'meta-pnl-pos':'meta-pnl-neg'}">${realizedPnL>=0?'+':''}${fmtSGDx(realizedPnL)} realized</span>`:'';
 
   return `<div class="holding-card">
     <div class="card-header${isExp?' expanded':''}" onclick="toggleExpand('${h.id}')">
       <div class="card-left">
-        <span class="ticker-badge">
-          ${h.name||shortTicker(h.ticker)}
-          <span class="expand-arrow">▶</span>
-        </span>
+        <span class="ticker-badge">${h.name||shortTicker(h.ticker)} <span class="expand-arrow">▶</span></span>
         <div class="holding-meta">
           <span class="meta-units">${totalUnits>0?totalUnits.toLocaleString()+' units':'Fully sold'}</span>
           ${avgPrice>0?`<span class="meta-avg">avg ${fmtPrice(avgPrice)}</span>`:''}
@@ -713,21 +836,18 @@ function buildHoldingCard(h) {
         </div>
       </div>
     </div>
-    ${isExp?`<div class="card-detail">${detail}</div>`:''}
+    ${isExp?`<div class="card-detail">${buildDetail(h)}</div>`:''}
   </div>`;
 }
 
 function buildDetail(h) {
-  const {totalUnits,avgPrice,realizedPnL,buyLots}=applyFIFO(h.transactions);
+  const {totalUnits,avgPrice,realizedPnL}=applyFIFO(h.transactions);
   const todayStr=dateStr(TODAY);
-
-  // ── Transactions ──
   const sorted=[...h.transactions].sort((a,b)=>a.date.localeCompare(b.date));
-  let txnHtml='<div class="txn-list">';
-  for (const t of sorted) {
+  let txnHtml='<div class="txn-list">'+sorted.map(t=>{
     const total=Number(t.units)*Number(t.price);
     const isBuy=t.type==='BUY';
-    txnHtml+=`<div class="txn-item">
+    return `<div class="txn-item">
       <div class="txn-left">
         <div class="txn-type-date">
           <span class="tag ${isBuy?'tag-buy':'tag-sell'}">${t.type}</span>
@@ -739,10 +859,8 @@ function buildDetail(h) {
         <div class="txn-total ${isBuy?'buy':'sell'}">${isBuy?'':'-'}${fmtSGDx(total)}</div>
       </div>
     </div>`;
-  }
-  txnHtml+='</div>';
+  }).join('')+'</div>';
 
-  // ── FIFO Box ──
   const fifoHtml=`<div class="fifo-box">
     <div class="fifo-item"><label>Current Units</label><div class="val teal">${totalUnits.toLocaleString()}</div></div>
     <div class="fifo-item"><label>Avg Cost (FIFO)</label><div class="val">${avgPrice>0?fmtPrice(avgPrice):'—'}</div></div>
@@ -750,39 +868,27 @@ function buildDetail(h) {
     <div class="fifo-item"><label>YTD Dividends</label><div class="val teal">${fmtSGDx(getHoldingYearTotals(h,CURRENT_YEAR).received)}</div></div>
   </div>`;
 
-  // ── Dividend history ──
   const base=state.dividends[h.ticker]||[];
   const extra=estimateFuture(h,base);
   const allDivs=[...base,...extra].sort((a,b)=>b.exDate.localeCompare(a.exDate));
   const display=allDivs.filter(d=>new Date(d.exDate).getFullYear()>=2018);
-
-  let divHtml='';
+  let divHtml='',prevYr=null;
   if(display.length){
-    let prevYr=null;
     for(const div of display){
       const yr=new Date(div.exDate).getFullYear();
-      if(yr!==prevYr){
-        divHtml+=`<div class="yr-label">${yr}</div>`;
-        prevYr=yr;
-      }
+      if(yr!==prevYr){divHtml+=`<div class="yr-label">${yr}</div>`;prevYr=yr;}
       const units=unitsOnExDate(h.transactions,div.exDate);
       const amt=units*Number(div.amount);
       const isPast=div.exDate<=todayStr;
       const estBadge=div.source==='est'?' <span style="font-size:9px;color:var(--muted)">(est)</span>':'';
       if(units<=0){
         divHtml+=`<div class="div-event">
-          <div class="div-event-left">
-            <span class="div-event-date">${fmtDate(div.exDate)}</span>
-            <span class="div-event-dpu">DPU $${Number(div.amount).toFixed(4)}</span>
-          </div>
+          <div class="div-event-left"><span class="div-event-date">${fmtDate(div.exDate)}</span><span class="div-event-dpu">DPU $${Number(div.amount).toFixed(4)}</span></div>
           <div class="div-event-right"><span style="font-size:11px;color:var(--muted)">Not held</span></div>
         </div>`;
-      } else {
+      }else{
         divHtml+=`<div class="div-event">
-          <div class="div-event-left">
-            <span class="div-event-date">${fmtDate(div.exDate)}</span>
-            <span class="div-event-dpu">DPU $${Number(div.amount).toFixed(4)}${estBadge}</span>
-          </div>
+          <div class="div-event-left"><span class="div-event-date">${fmtDate(div.exDate)}</span><span class="div-event-dpu">DPU $${Number(div.amount).toFixed(4)}${estBadge}</span></div>
           <div class="div-event-right">
             <span class="${isPast?'div-event-total':'div-event-total proj'}">${fmtSGDx(amt)}</span>
             <span class="div-event-status">${isPast?'✓ received':'⏳ upcoming'}</span>
@@ -790,24 +896,21 @@ function buildDetail(h) {
         </div>`;
       }
     }
-  } else {
-    divHtml=`<div style="font-size:12px;color:var(--muted);padding:8px 0">No dividend data yet. Tap ⟳ to sync or use + Dividend.</div>`;
+  }else{
+    divHtml=`<div style="font-size:12px;color:var(--muted);padding:8px 0">No dividend data. Tap ⟳ to sync or use + Dividend.</div>`;
   }
 
   return `
     <div class="detail-section">
-      <div class="detail-title">FIFO Summary</div>
-      ${fifoHtml}
+      <div class="detail-title">FIFO Summary</div>${fifoHtml}
     </div>
     <div class="detail-section">
-      <div class="detail-title" style="display:flex;justify-content:space-between;align-items:center">
-        Transactions
+      <div class="detail-title">Transactions
         <button class="btn-ghost btn-xs" onclick="event.stopPropagation();openEditHolding('${h.id}')">+ Add</button>
-      </div>
-      ${txnHtml}
+      </div>${txnHtml}
     </div>
     <div class="detail-section">
-      <div class="detail-title">Dividend History</div>
+      <div class="detail-title">Dividend History (2018–${CURRENT_YEAR})</div>
       <div class="div-history">${divHtml}</div>
     </div>`;
 }
@@ -830,7 +933,7 @@ function updateFooter(){
   if(state.lastSync){
     const d=new Date(state.lastSync);
     el.textContent=`Last synced: ${d.toLocaleDateString('en-SG',{day:'numeric',month:'short',year:'numeric'})} ${d.toLocaleTimeString('en-SG',{hour:'2-digit',minute:'2-digit'})}`;
-  } else {
+  }else{
     el.textContent='Not synced · Tap ⟳ to fetch dividend data · Use + Dividend if sync fails';
   }
 }
@@ -846,34 +949,37 @@ function toggleExpand(id){
 // ═══════════════════════════════════════════
 // HOLDING MODAL
 // ═══════════════════════════════════════════
+function resetTxnForm(){
+  document.getElementById('txnUnits').value='';
+  document.getElementById('txnPrice').value='';
+  document.getElementById('txnDate').value=dateStr(TODAY);
+  document.getElementById('dispUnits').textContent='Tap to enter';
+  document.getElementById('dispUnits').className='placeholder';
+  document.getElementById('dispPrice').textContent='Tap to enter';
+  document.getElementById('dispPrice').className='placeholder';
+  setTxnType('BUY');
+}
+
 function openAddHolding(){
-  modalTxns=[]; modalTxnType='BUY';
+  modalTxns=[];
   document.getElementById('holdingModalTitle').textContent='Add Holding';
   document.getElementById('editHoldingId').value='';
   document.getElementById('inputTicker').value='';
   document.getElementById('inputName').value='';
-  document.getElementById('txnUnits').value='';
-  document.getElementById('txnPrice').value='';
-  document.getElementById('txnDate').value=dateStr(TODAY);
-  setTxnType('BUY');
+  resetTxnForm();
   renderModalTxns();
   openModal('modalHolding');
   setTimeout(()=>document.getElementById('inputTicker').focus(),100);
 }
 
 function openEditHolding(id){
-  const h=state.holdings.find(h=>h.id===id);
-  if(!h) return;
+  const h=state.holdings.find(h=>h.id===id);if(!h) return;
   modalTxns=h.transactions.map(t=>({...t}));
-  modalTxnType='BUY';
   document.getElementById('holdingModalTitle').textContent='Edit Holding';
   document.getElementById('editHoldingId').value=id;
   document.getElementById('inputTicker').value=h.ticker;
   document.getElementById('inputName').value=h.name||'';
-  document.getElementById('txnUnits').value='';
-  document.getElementById('txnPrice').value='';
-  document.getElementById('txnDate').value=dateStr(TODAY);
-  setTxnType('BUY');
+  resetTxnForm();
   renderModalTxns();
   openModal('modalHolding');
 }
@@ -886,74 +992,54 @@ function setTxnType(type){
 
 function renderModalTxns(){
   const el=document.getElementById('modalTxnList');
-  if(!modalTxns.length){
-    el.innerHTML='<div class="no-txns">No transactions yet — add one below</div>'; return;
-  }
-  const sorted=[...modalTxns].sort((a,b)=>a.date.localeCompare(b.date));
-  el.innerHTML=sorted.map((t,i)=>{
-    const orig=modalTxns.indexOf(t); // original index
-    return `<div class="modal-txn-item">
+  if(!modalTxns.length){el.innerHTML='<div class="no-txns">No transactions yet</div>';return;}
+  el.innerHTML=[...modalTxns].sort((a,b)=>a.date.localeCompare(b.date)).map(t=>`
+    <div class="modal-txn-item">
       <div>
-        <div class="modal-txn-text">
-          <span class="tag ${t.type==='BUY'?'tag-buy':'tag-sell'}">${t.type}</span>
-          &nbsp;${Number(t.units).toLocaleString()} units @ ${fmtPrice(t.price)}
-        </div>
+        <div class="modal-txn-text"><span class="tag ${t.type==='BUY'?'tag-buy':'tag-sell'}">${t.type}</span> &nbsp;${Number(t.units).toLocaleString()} units @ ${fmtPrice(t.price)}</div>
         <div class="modal-txn-sub">${fmtDate(t.date)}</div>
       </div>
       <button class="btn-ghost btn-xs" style="color:var(--red)" onclick="removeModalTxn('${t.id}')">✕</button>
-    </div>`;
-  }).join('');
+    </div>`).join('');
 }
 
 function addTxnToModal(){
   const units=parseInt(document.getElementById('txnUnits').value,10);
   const price=parseFloat(document.getElementById('txnPrice').value);
   const date=document.getElementById('txnDate').value;
-  if(!units||units<=0){ toast('Enter valid units','error'); return; }
-  if(isNaN(price)||price<0){ toast('Enter valid price','error'); return; }
-  if(!date){ toast('Enter a date','error'); return; }
-
-  // Validate sell doesn't exceed available units
+  if(!units||units<=0){toast('Enter units using the keypad','error');return;}
+  if(isNaN(price)||price<0){toast('Enter price using the keypad','error');return;}
+  if(!date){toast('Enter a date','error');return;}
   if(modalTxnType==='SELL'){
-    const {totalUnits}=applyFIFO([...modalTxns,{id:'__temp',type:'BUY',units:0,price:0,date}]);
-    const availBefore=applyFIFO(modalTxns.filter(t=>t.date<=date)).totalUnits;
-    if(units>availBefore){ toast(`Can only sell up to ${availBefore.toLocaleString()} units held by ${fmtDate(date)}`,'error'); return; }
+    const avail=applyFIFO([...modalTxns.filter(t=>t.date<=date)]).totalUnits;
+    if(units>avail){toast(`Only ${avail.toLocaleString()} units available by ${fmtDate(date)}`,'error');return;}
   }
-
   modalTxns.push({id:uid(),type:modalTxnType,units,price,date});
-  document.getElementById('txnUnits').value='';
-  document.getElementById('txnPrice').value='';
+  resetTxnForm();
   renderModalTxns();
-  toast(`${modalTxnType} added: ${units.toLocaleString()} @ ${fmtPrice(price)}`,'success');
+  toast(`${modalTxnType}: ${units.toLocaleString()} units @ ${fmtPrice(price)}`,'success');
 }
 
-function removeModalTxn(id){
-  modalTxns=modalTxns.filter(t=>t.id!==id);
-  renderModalTxns();
-}
+function removeModalTxn(id){modalTxns=modalTxns.filter(t=>t.id!==id);renderModalTxns();}
 
 function saveHolding(){
   const ticker=normalizeTicker(document.getElementById('inputTicker').value);
   const name=document.getElementById('inputName').value.trim()||shortTicker(ticker);
   const editId=document.getElementById('editHoldingId').value;
-
-  // Auto-add pending transaction if fields filled
   const pu=parseInt(document.getElementById('txnUnits').value,10);
   const pp=parseFloat(document.getElementById('txnPrice').value);
   const pd=document.getElementById('txnDate').value;
   if(pu>0&&!isNaN(pp)&&pp>=0&&pd) modalTxns.push({id:uid(),type:modalTxnType,units:pu,price:pp,date:pd});
-
-  if(!ticker){ toast('Enter a ticker','error'); return; }
-  if(!modalTxns.length){ toast('Add at least one transaction','error'); return; }
-  if(!modalTxns.some(t=>t.type==='BUY')){ toast('Add at least one BUY transaction','error'); return; }
-
+  if(!ticker){toast('Enter a ticker','error');return;}
+  if(!modalTxns.length){toast('Add at least one transaction','error');return;}
+  if(!modalTxns.some(t=>t.type==='BUY')){toast('Add at least one BUY','error');return;}
   if(editId){
     const idx=state.holdings.findIndex(h=>h.id===editId);
     if(idx!==-1) state.holdings[idx]={...state.holdings[idx],ticker,name,transactions:modalTxns};
-  } else {
+  }else{
     state.holdings.push({id:uid(),ticker,name,transactions:modalTxns});
   }
-  saveState(); closeModal('modalHolding'); render();
+  saveState();closeModal('modalHolding');render();
   toast(`${name} saved · Tap ⟳ to sync dividend data`,'success');
 }
 
@@ -962,7 +1048,7 @@ function deleteHolding(id){
   if(!h||!confirm(`Remove ${h.name||shortTicker(h.ticker)}?`)) return;
   state.holdings=state.holdings.filter(h=>h.id!==id);
   expandedIds.delete(id);
-  saveState(); render();
+  saveState();render();
   toast('Holding removed','info');
 }
 
@@ -970,11 +1056,13 @@ function deleteHolding(id){
 // DIVIDEND MODAL
 // ═══════════════════════════════════════════
 function openDividendModal(){
-  if(!state.holdings.length){ toast('Add holdings first','info'); return; }
+  if(!state.holdings.length){toast('Add holdings first','info');return;}
   document.getElementById('divTicker').innerHTML=
     state.holdings.map(h=>`<option value="${h.ticker}">${h.name||shortTicker(h.ticker)} (${h.ticker})</option>`).join('');
   document.getElementById('divExDate').value=dateStr(TODAY);
   document.getElementById('divAmount').value='';
+  document.getElementById('dispDPU').textContent='Tap to enter';
+  document.getElementById('dispDPU').className='placeholder';
   openModal('modalDividend');
 }
 
@@ -982,36 +1070,103 @@ function saveManualDividend(){
   const ticker=document.getElementById('divTicker').value;
   const exDate=document.getElementById('divExDate').value;
   const amount=parseFloat(document.getElementById('divAmount').value);
-  if(!exDate){ toast('Enter ex-dividend date','error'); return; }
-  if(isNaN(amount)||amount<=0){ toast('Enter valid DPU amount','error'); return; }
+  if(!exDate){toast('Enter ex-dividend date','error');return;}
+  if(isNaN(amount)||amount<=0){toast('Enter DPU using the keypad','error');return;}
   if(!state.dividends[ticker]) state.dividends[ticker]=[];
   state.dividends[ticker]=state.dividends[ticker].filter(d=>d.exDate!==exDate);
   state.dividends[ticker].push({exDate,amount,source:'manual'});
   state.dividends[ticker].sort((a,b)=>a.exDate.localeCompare(b.exDate));
-  saveState(); closeModal('modalDividend'); render();
-  toast(`Dividend added: ${shortTicker(ticker)} DPU $${amount.toFixed(4)} · ${fmtDate(exDate)}`,'success');
+  saveState();closeModal('modalDividend');render();
+  toast(`Dividend added: ${shortTicker(ticker)} $${amount.toFixed(4)} · ${fmtDate(exDate)}`,'success');
 }
 
 // ═══════════════════════════════════════════
-// MODAL HELPERS / EVENTS
+// BACKUP / EXPORT
 // ═══════════════════════════════════════════
-function openModal(id){ document.getElementById(id).classList.add('open'); }
-function closeModal(id){ document.getElementById(id).classList.remove('open'); }
+function csvRow(arr){ return arr.map(v=>'"'+String(v==null?'':v).replace(/"/g,'""')+'"').join(','); }
+
+function exportTransactions(){
+  const rows=[csvRow(['Ticker','Display Name','Type','Units','Price Per Unit','Date','Total Value'])];
+  for(const h of state.holdings){
+    const sorted=[...h.transactions].sort((a,b)=>a.date.localeCompare(b.date));
+    for(const t of sorted){
+      rows.push(csvRow([h.ticker,h.name||shortTicker(h.ticker),t.type,t.units,
+        Number(t.price).toFixed(4),t.date,(Number(t.units)*Number(t.price)).toFixed(2)]));
+    }
+  }
+  shareCSV(rows.join('\n'),'sg_transactions.csv');
+}
+
+function exportDividends(){
+  const rows=[csvRow(['Ticker','Ex-Dividend Date','DPU (SGD)','Source'])];
+  for(const [ticker,divs] of Object.entries(state.dividends)){
+    for(const d of [...divs].sort((a,b)=>a.exDate.localeCompare(b.exDate))){
+      rows.push(csvRow([ticker,d.exDate,Number(d.amount).toFixed(4),d.source]));
+    }
+  }
+  shareCSV(rows.join('\n'),'sg_dividends.csv');
+}
+
+function exportAll(){
+  const lines=[];
+  lines.push('TRANSACTIONS');
+  lines.push(csvRow(['Ticker','Display Name','Type','Units','Price Per Unit','Date','Total Value']));
+  for(const h of state.holdings){
+    for(const t of [...h.transactions].sort((a,b)=>a.date.localeCompare(b.date))){
+      lines.push(csvRow([h.ticker,h.name||shortTicker(h.ticker),t.type,t.units,
+        Number(t.price).toFixed(4),t.date,(Number(t.units)*Number(t.price)).toFixed(2)]));
+    }
+  }
+  lines.push('');
+  lines.push('DIVIDEND HISTORY');
+  lines.push(csvRow(['Ticker','Ex-Dividend Date','DPU (SGD)','Source']));
+  for(const [ticker,divs] of Object.entries(state.dividends)){
+    for(const d of [...divs].sort((a,b)=>a.exDate.localeCompare(b.exDate))){
+      lines.push(csvRow([ticker,d.exDate,Number(d.amount).toFixed(4),d.source]));
+    }
+  }
+  shareCSV(lines.join('\n'),'sg_dividend_tracker_backup.csv');
+}
+
+async function shareCSV(content, filename){
+  const blob=new Blob([content],{type:'text/csv;charset=utf-8;'});
+  const file=new File([blob],filename,{type:'text/csv'});
+  // iOS Share Sheet (Save to Files / iCloud Drive)
+  if(navigator.share && navigator.canShare && navigator.canShare({files:[file]})){
+    try{
+      await navigator.share({files:[file],title:'SG Dividend Tracker — '+filename});
+      toast('Share sheet opened — choose Save to Files → iCloud Drive','success');
+      return;
+    }catch(e){ if(e.name==='AbortError') return; }
+  }
+  // Fallback: direct download
+  const url=URL.createObjectURL(blob);
+  const a=document.createElement('a');
+  a.href=url;a.download=filename;
+  document.body.appendChild(a);a.click();
+  setTimeout(()=>{document.body.removeChild(a);URL.revokeObjectURL(url);},1000);
+  toast(`Downloaded: ${filename}`,'success');
+}
+
+// ═══════════════════════════════════════════
+// MODAL / EVENT HELPERS
+// ═══════════════════════════════════════════
+function openModal(id){document.getElementById(id).classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
 
 function toast(msg,type='info'){
   const el=document.createElement('div');
-  el.className=`toast ${type}`; el.textContent=msg;
+  el.className=`toast ${type}`;el.textContent=msg;
   document.getElementById('toastWrap').appendChild(el);
   setTimeout(()=>el.remove(),4500);
 }
 
-window.addEventListener('online',()=>{ document.body.classList.remove('offline'); });
-window.addEventListener('offline',()=>{ document.body.classList.add('offline'); setSyncStatus('Offline','error'); });
+window.addEventListener('online',()=>document.body.classList.remove('offline'));
+window.addEventListener('offline',()=>{document.body.classList.add('offline');setSyncStatus('Offline','error');});
 
 document.addEventListener('DOMContentLoaded',()=>{
   document.querySelectorAll('.modal-overlay').forEach(o=>
-    o.addEventListener('click',e=>{ if(e.target===o) o.classList.remove('open'); })
-  );
+    o.addEventListener('click',e=>{if(e.target===o)o.classList.remove('open');}));
 });
 
 if('serviceWorker' in navigator)
@@ -1027,10 +1182,9 @@ if(state.lastSync){
   const e=Date.now()-new Date(state.lastSync).getTime();
   setSyncStatus(`Synced ${Math.floor(e/60000)}m ago`,'ok');
 }
-if(navigator.onLine&&state.holdings.length){
-  if(!state.lastSync||Date.now()-new Date(state.lastSync).getTime()>4*3600*1000)
-    setTimeout(syncAll,1500);
-}
+if(navigator.onLine&&state.holdings.length&&
+  (!state.lastSync||Date.now()-new Date(state.lastSync).getTime()>4*3600*1000))
+  setTimeout(syncAll,1500);
 </script>
 </body>
 </html>

@@ -1,4 +1,4 @@
-const CACHE_VER = 'sgdiv-v5';
+const CACHE_VER = 'sgdiv-v6';
 const STATIC_CACHE = `${CACHE_VER}-static`;
 const DATA_CACHE = `${CACHE_VER}-data`;
 
