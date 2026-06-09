@@ -2,17 +2,29 @@
   "name": "SG Dividend Tracker",
   "short_name": "SG Dividends",
   "description": "Track Singapore stock dividend income YTD and projected",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
-  "background_color": "#0f1117",
+  "background_color": "#1a1f2e",
   "theme_color": "#0f1117",
   "orientation": "portrait-primary",
   "icons": [
     {
-      "src": "data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 192 192'><rect width='192' height='192' rx='24' fill='%231a1f2e'/><text x='96' y='130' text-anchor='middle' font-size='100' font-family='serif'>$</text></svg>",
+      "src": "icon-192.png",
       "sizes": "192x192",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
     }
   ]
 }
